@@ -1,0 +1,131 @@
+/* HeroesComponent's private CSS styles */
+
+
+.headsets {
+    margin: 2%;
+    list-style-type: none;
+    padding: 0;
+    max-width: 100%; /* Ensure the container doesn't overflow */
+    width: 90%; /* Adjusted width for responsiveness */
+  }
+  
+  .headsets button {
+    flex: 1;
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    background-color: #8f8f8f;
+    margin: .5em;
+    padding: 0;
+    border-radius: 45px; /* Rounds the corners of the buttons */
+    display: flex;
+    align-items: center; /* Centers content vertically */
+    height: 2.5em;
+    border: none; /* Removes default button border */
+    transition: background-color 0.3s, left 0.3s; /* Smooth transition for hover effects */
+  }
+  
+  .headsets li { /*Standard: Headset is offline*/
+    color: #868686;
+    background-color: #ffffff;
+  
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden; /* Ensures rounded corners contain child elements */
+    margin-bottom: 1em; /* Adds space between list items */
+    position: relative; /* Ensure positioning context for absolute children */
+  }
+  
+  .headsets .isOnline {
+    color: #000000;
+    font-weight: bold; /* or font-weight: 700; */
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden; /* Ensures rounded corners contain child elements */
+    margin-bottom: 1em; /* Adds space between list items */
+    position: relative; /* Ensure positioning context for absolute children */
+  }
+  
+  .headsets button:hover {
+    color: #2c3a41;
+    background-color: #e6e6e6;
+  }
+  
+  .headsets button:active {
+    background-color: #525252;
+    color: #fafafa;
+  }
+  
+  .headsets button.selected {
+    background-color: black;
+    color: rgb(255, 0, 0);
+    
+  }
+  
+  .headsets button.selected:hover {
+    background-color: #505050;
+    color: white;
+  }
+  
+  .headsets button.selected:active {
+    background-color: black;
+    color: white;
+  }
+  
+  .headsets .name {
+    align-self: center;
+    flex-grow: 1; /* Allows the name to take available space */
+    padding-left: 0.5em; /* Adds some padding to the left of the name */
+  }
+  
+  /* app.component.css */
+  .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5em;
+  }
+  
+  .image-container img {
+    border-radius: 75px;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensures the image fits within the container */
+  }
+  
+  .image-container-vr {
+    top: 0; /* Align to the top of the parent li */
+    left: 0; /* Align to the left of the parent li */
+    width: 8%; /* Changes width compared to parent li */
+    height: 8%; /* Changes width compared to parent li */
+    display: flex;
+    padding: 1em;
+  }
+  
+  .image-container-vr img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensures the image fits within the container */
+  }
+  
+  .image-container-button {
+    background-color: rgb(255, 255, 255);
+    top: 0; /* Align to the top of the parent li */
+    left: 0; /* Align to the left of the parent li */
+    width: 8%; /* Changes width compared to parent li */
+    height: 8%; /* Changes width compared to parent li */
+    display: flex;
+    padding: 1em;
+    border: 1px solid #ffffff;
+    border-radius: 30px; /* 15px radius */
+  }
+  
+  .image-container-button img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensures the image fits within the container */
+  }
+  
+  
+  

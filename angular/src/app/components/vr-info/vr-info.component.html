@@ -1,0 +1,71 @@
+<!--
+<h1> {{ vrinfo1.name }} Headset added</h1>
+
+
+<div>
+    <label for="">Name: </label>
+    <input type= "text" [(ngModel)] ="vrinfo1.name"> Two way data-binding
+    <br>
+    <label for="">IpAdress: </label>
+    <input type= "text" [(ngModel)] ="vrinfo1.ipAdress"> 
+    <br>
+    <label for="">Port: </label>
+    <input type= "text" [(ngModel)] ="vrinfo1.port"> 
+    <br>
+    <label for="">Status: </label>
+    <input type= "text" [(ngModel)] ="vrinfo1.currentStatusEnum"> 
+
+    <br>
+    <button (click)="sendOSC()"> Click me for OSC Message to {{ vrinfo1.name }}</button>
+
+</div>
+-->
+
+<h1>Saved VR List</h1>
+
+<ul class="headsets">
+    <li *ngFor="let headset of headsetsList" [ngClass]="{'isOnline': headset.isOnline}">
+        
+        <div class="image-container-vr">
+          <img [src]="headset.isOnline ? imagePathQuest3 : imagePathQuest3Grey" alt="MetaQuest3">
+        </div>
+        
+        <div>
+            <span class = "name" >Name: </span>
+            <input type="text" [(ngModel)]="headset.name">
+        </div>
+
+
+        <div>
+            <span>ipAddress: </span>
+            <input type="text" [(ngModel)]="headset.ipAddress">
+
+        </div>
+
+        <div>
+            <span>Port: </span>
+            <input type="text" [(ngModel)]="headset.port">
+        </div>
+
+        <div>
+            <!--We aply the select class to this item, whenever === --->
+            <span>Status: {{ headset.isOnline }}</span>
+            
+        </div>
+
+        <div class="image-container">
+            <button (click)="sendDownloadAssetsOSC(headset)">
+                <img [src]="imagePathDownload" alt="Click here to download VRHeadset assets">
+            </button>
+        </div>
+    </li>
+
+<!--
+    <div class="image-container-button">
+        <img [src]="imagePathPlay" alt="Click here to Start Experience">
+    </div>
+
+    Gestao do observable
+    <div>{{data$ | async | json}} </div>  -->
+
+</ul>
