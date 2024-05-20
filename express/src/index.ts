@@ -7,6 +7,7 @@ import SSE from "sse";
 import { Response } from 'express-serve-static-core';
 
 
+
 const app = express()
 const server = new Server(app)
 const sse = new SSE(server);
@@ -19,14 +20,83 @@ app.get('/', (req, res) => {
     res.send('Hi, im up');
 });
 
-// http://localhost:3000/DownloadAssets
-// JSON body has VR1_IP
-app.get('/VRHeadsets', (req, res) => {
-    const client = new Client('10.101.0.16', 8001);
-    client.send( new Message("/miau") , () => {
-        client.close();
-    });
-    res.send('Hello, the message was sent');
+// imports for JSON parsing
+const bodyParser = require('body-parser');
+app.use(bodyParser.json()); // Parse JSON bodies
+app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
+
+// Receives Angular command to retrieve the correct assets, from the server, for the specific VR specified with the IP.
+// Requirment: JSON body is not empty, and has VR_IP and port.
+app.post('/DownloadAssets', (req, res) => {
+  console.log(req.body);
+  // Extract ipAddress and port from the request body
+  const { ipAddress, port } = req.body;
+
+  if (!req.body || !ipAddress || !port) {
+      return res.status(400).send("Missing ipAddress or port in request body");
+  }
+
+  // Use the extracted ipAddress and port
+  const client = new Client(req.body.ipAddress, req.body.port);
+  client.send(new Message("/DownloadAssets"), () => {
+      client.close();
+  });
+  res.json({ message: "Hello, the message was sent" }); // Send JSON response
+});
+
+// Receives Angular command to start the experience for the specific VR specified with the IP.
+// Requirment: JSON body is not empty, and has VR_IP and port.
+app.post('/StartExperience', (req, res) => {
+  console.log(req.body);
+  // Extract ipAddress and port from the request body
+  const { ipAddress, port } = req.body;
+
+  if (!req.body || !ipAddress || !port) {
+      return res.status(400).send("Missing ipAddress or port in request body");
+  }
+
+  // Use the extracted ipAddress and port
+  const client = new Client(req.body.ipAddress, req.body.port);
+  client.send(new Message("/StartExperience"), () => {
+      client.close();
+  });
+  res.json({ message: "Hello, the message was sent" }); // Send JSON response
+});
+
+// Stop Experience
+app.post('/StopExperience', (req, res) => {
+  console.log(req.body);
+  // Extract ipAddress and port from the request body
+  const { ipAddress, port } = req.body;
+
+  if (!req.body || !ipAddress || !port) {
+      return res.status(400).send("Missing ipAddress or port in request body");
+  }
+
+  // Use the extracted ipAddress and port
+  const client = new Client(req.body.ipAddress, req.body.port);
+  client.send(new Message("/StartExperience"), () => {
+      client.close();
+  });
+  res.json({ message: "Hello, the message was sent" }); // Send JSON response
+});
+
+// Restart Experience
+app.post('/RestartExperience', (req, res) => {
+  console.log(req.body);
+  // Extract ipAddress and port from the request body
+  const { ipAddress, port } = req.body;
+
+  if (!req.body || !ipAddress || !port) {
+      return res.status(400).send("Missing ipAddress or port in request body");
+  }
+
+  // Use the extracted ipAddress and port
+  const client = new Client(req.body.ipAddress, req.body.port);
+  client.send(new Message("/StartExperience"), () => {
+      client.close();
+  });
+  res.json({ message: "Hello, the message was sent" }); // Send JSON response
 });
 
 // Starts sse connection to client
@@ -78,7 +148,7 @@ app.get('/osc', (req, res) => {
 
 
 // Setup OSC server to listen for incoming messages.  old: 192.168.1.248
-const oscServer = new OSCServer(3333, '192.168.1.196', () => {
+const oscServer = new OSCServer(3333, '127.0.0.1', () => {
   console.log('OSC Server is listening on port 3333');
 });
 
