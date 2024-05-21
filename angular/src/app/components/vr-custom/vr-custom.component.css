@@ -5,7 +5,7 @@
     margin: 2%;
     list-style-type: none;
     padding: 0;
-    max-width: 100%; /* Ensure the container doesn't overflow */
+    max-width: 1200px; /* Ensure the container doesn't get bigger then 1200px */
     width: 90%; /* Adjusted width for responsiveness */
   }
   
@@ -20,7 +20,6 @@
     border-radius: 45px; /* Rounds the corners of the buttons */
     display: flex;
     align-items: center; /* Centers content vertically */
-    height: 2.5em;
     border: none; /* Removes default button border */
     transition: background-color 0.3s, left 0.3s; /* Smooth transition for hover effects */
   }
@@ -34,7 +33,8 @@
     overflow: hidden; /* Ensures rounded corners contain child elements */
     margin-bottom: 1em; /* Adds space between list items */
     position: relative; /* Ensure positioning context for absolute children */
-  }
+    
+    }
   
   .headsets .isOnline {
     color: #000000;
@@ -101,6 +101,7 @@
     height: 8%; /* Changes width compared to parent li */
     display: flex;
     padding: 1em;
+
   }
   
   .image-container-vr img {

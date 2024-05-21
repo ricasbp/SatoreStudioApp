@@ -5,8 +5,7 @@
     margin: 2%;
     list-style-type: none;
     padding: 0;
-    max-width: 100%; /* Ensure the container doesn't overflow */
-    width: 90%; /* Adjusted width for responsiveness */
+    max-width: 1200px; /* Ensure the container doesn't get bigger then 1200px */
   }
   
   .headsets button {
@@ -20,7 +19,7 @@
     border-radius: 45px; /* Rounds the corners of the buttons */
     display: flex;
     align-items: center; /* Centers content vertically */
-    height: 2.5em;
+
     border: none; /* Removes default button border */
     transition: background-color 0.3s, left 0.3s; /* Smooth transition for hover effects */
   }
@@ -28,12 +27,16 @@
   .headsets li { /*Standard: Headset is offline*/
     color: #868686;
     background-color: #ffffff;
-  
     display: flex;
     border-radius: 10px;
     overflow: hidden; /* Ensures rounded corners contain child elements */
     margin-bottom: 1em; /* Adds space between list items */
     position: relative; /* Ensure positioning context for absolute children */
+  
+    /*Code to make all flex-containers centered*/
+    display: flex;
+    align-items: center; /* Centers divs horizontally */
+ 
   }
   
   .headsets .isOnline {
@@ -85,12 +88,14 @@
     align-items: center;
     justify-content: center;
     padding: 0.5em;
+
+    
   }
   
   .image-container img {
     border-radius: 75px;
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: contain; /* Ensures the image fits within the container */
   }
   
@@ -101,6 +106,8 @@
     height: 8%; /* Changes width compared to parent li */
     display: flex;
     padding: 1em;
+
+   
   }
   
   .image-container-vr img {

@@ -8,6 +8,8 @@ export const HEADSETS: vrInfo[] = [
         name: 'VR1',
         isOnline: false
     },
+
+    /*
     {   
         id: 2,
         ipAddress: '10.0.0.2',
@@ -30,4 +32,5 @@ export const HEADSETS: vrInfo[] = [
         name: 'VR4',
         isOnline: false
     },
+    */
 ]

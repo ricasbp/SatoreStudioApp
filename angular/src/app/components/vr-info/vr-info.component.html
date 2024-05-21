@@ -31,26 +31,20 @@
         </div>
         
         <div>
-            <span class = "name" >Name: </span>
-            <input type="text" [(ngModel)]="headset.name">
+            <span>Name: {{ headset.name }}</span>
         </div>
-
-
+        
         <div>
-            <span>ipAddress: </span>
-            <input type="text" [(ngModel)]="headset.ipAddress">
-
+            <span>IpAdress: {{ headset.ipAddress }}</span>
         </div>
 
         <div>
-            <span>Port: </span>
-            <input type="text" [(ngModel)]="headset.port">
+            <span>Port: {{ headset.port }}</span>
         </div>
 
         <div>
             <!--We aply the select class to this item, whenever === --->
-            <span>Status: {{ headset.isOnline }}</span>
-            
+            <span>Status: {{ headset.isOnline }}</span>    
         </div>
 
         <div class="image-container">
