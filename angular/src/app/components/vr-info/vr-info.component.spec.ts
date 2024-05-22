@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VrInfoComponent } from './vr-info.component';
+import { VRInfoComponent } from './vr-info.component';
 
 describe('VrInfoComponent', () => {
-  let component: VrInfoComponent;
-  let fixture: ComponentFixture<VrInfoComponent>;
+  let component: VRInfoComponent;
+  let fixture: ComponentFixture<VRInfoComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [VrInfoComponent]
+      declarations: [VRInfoComponent]
     });
-    fixture = TestBed.createComponent(VrInfoComponent);
+    fixture = TestBed.createComponent(VRInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

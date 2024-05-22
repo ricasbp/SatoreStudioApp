@@ -14,7 +14,6 @@
   border-radius: 10px;
   overflow: hidden; /* Ensures rounded corners contain child elements */
   position: relative; /* Positioning context for absolute children */
-  
 }
 
 .toggleButtons button {
@@ -35,29 +34,29 @@
     margin-right: 0; /* Remove the margin from the last item */
 }
   
-  .headsets button:hover {
-    color: #2c3a41;
-    background-color: #e6e6e6;
-  }
+.toggleButtons li:hover {
+  color: #2c3a41;
+  background-color: #e6e6e6;
+}
+
+.toggleButtons li:active {
+  background-color: #525252;
+  color: #fafafa;
+}
+
+.toggleButtons li.selected {
+  background-color: black;
+  color: rgb(255, 0, 0);
   
-  .headsets button:active {
-    background-color: #525252;
-    color: #fafafa;
-  }
-  
-  .headsets button.selected {
-    background-color: black;
-    color: rgb(255, 0, 0);
-    
-  }
-  
-  .headsets button.selected:hover {
-    background-color: #505050;
-    color: white;
-  }
-  
-  .headsets button.selected:active {
-    background-color: black;
-    color: white;
-  }
+}
+
+.toggleButtons li.selected:hover {
+  background-color: #505050;
+  color: white;
+}
+
+.toggleButtons li.selected:active {
+  background-color: black;
+  color: white;
+}
   
