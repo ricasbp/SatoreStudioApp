@@ -5,28 +5,32 @@
     margin: 0; /* Remove default margin */
 }
 
+/* Same code from vr-info.component.css .image-container-button */
 .toggleButtons li {
   background-color: #ffffff; /* Background color for the list items */
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  margin-right: 10px; /* Space between buttons */
   border-radius: 10px;
-  overflow: hidden; /* Ensures rounded corners contain child elements */
-  position: relative; /* Positioning context for absolute children */
+  padding: 1%;
+  margin-left: 2%;
+  box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* right, bottom, blur, color and alpha*/
 }
 
 .toggleButtons button {
   background: none; /* Remove default button background */
   border: none; /* Remove default button border */
   padding: 0; /* Remove default button padding */
-  cursor: pointer; /* Change cursor to pointer on hover */
-  padding-left: 15%;
+
+  /* CSS Center Guide*/
+  display: block;
+  margin: auto;  
 }
 
 .toggleButtons img {
-  width: 60px; /* Set a fixed width for the buttons */
-  height: 60px; /* Set a fixed height for the buttons */
+  width: 50px; /* Set a fixed width for the buttons */
+  height: 50px; /* Set a fixed height for the buttons */
+
+  /* CSS Center Guide*/
+  display: block;
+  margin: auto;  
 }
 
 
@@ -34,15 +38,16 @@
     margin-right: 0; /* Remove the margin from the last item */
 }
   
+
+/* Interaction Colors */
 .toggleButtons li:hover {
-  color: #2c3a41;
-  background-color: #e6e6e6;
+  background-color: #BCBCBC;
 }
 
 .toggleButtons li:active {
   background-color: #525252;
-  color: #fafafa;
 }
+
 
 .toggleButtons li.selected {
   background-color: black;

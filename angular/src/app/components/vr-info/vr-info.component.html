@@ -26,6 +26,12 @@
 <ul class="headsets">
     <li *ngFor="let headset of headsetsList" [ngClass]="{'isOnline': headset.isOnline}">
         
+        <div class="image-container-button-settings">
+            <button>
+                <img [src]="imagePathSettings" alt="Click here to download VRHeadset assets">
+            </button>
+        </div>
+
         <div class="image-container-vr">
           <img [src]="headset.isOnline ? imagePathQuest3 : imagePathQuest3Grey" alt="MetaQuest3">
         </div>
@@ -43,7 +49,6 @@
         </div>
 
         <div>
-            <!--We aply the select class to this item, whenever === --->
             <span>Status: {{ headset.isOnline }}</span>    
         </div>
 

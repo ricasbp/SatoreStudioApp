@@ -5,6 +5,13 @@
 
 <ul class="headsets">
     <li>
+
+        <div class="image-container-button-settings">
+            <button>
+                <img [src]="imagePathSettings" alt="Click here to download VRHeadset assets">
+            </button>
+        </div>
+
         <div class="image-container-vr">
           <img [src]="imagePathQuest3" alt="MetaQuest3">
         </div>
@@ -31,9 +38,9 @@
             <span>Status: {{ headset.isOnline }}</span>    
         </div>
 
-        <div class="image-container">
+        <div class="image-container-button">
             <button (click)="sendDownloadAssetsOSC()">
-                <img [src]="imagePathDownload" alt="Click here to download VRHeadset assets">
+                <img [src]="imagePathUpload" alt="Click here to download VRHeadset assets">
             </button>
         </div>
 

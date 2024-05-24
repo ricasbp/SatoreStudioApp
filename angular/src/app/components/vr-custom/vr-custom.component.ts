@@ -16,7 +16,9 @@ export class VrCustomComponent {
   };
 
   imagePathQuest3: string = 'assets/images/metaquest3.png';
-  imagePathDownload: string = 'assets/images/download_button.png';
+  imagePathUpload: string = 'assets/images/upload_button.png';
+  imagePathSettings: string = 'assets/images/settings_button.png';
+
 
   sendDownloadAssetsOSC() {
     const url = "http://localhost:3000/DownloadAssets";

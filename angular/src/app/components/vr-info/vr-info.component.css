@@ -18,6 +18,8 @@
   /*Code to make all flex-containers centered*/
   display: flex;
   align-items: center; /* Centers divs horizontally */
+
+  box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* right, bottom, blur, color and alpha*/
 }
 
 /* Write here .headsets li .isOnline { */
@@ -38,35 +40,80 @@
 }
 
 
-/* app.component.css */
+/* css for upload button */
 .image-container-button {
   background-color: #D9D9D9; /* Background color for the list items */
   border-radius: 10px;
   padding: 1%;
   margin: 2%;
+  margin-right: 3%;
+
   cursor: pointer; /* Change cursor to pointer on hover */
+  box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* right, bottom, blur, color and alpha*/
+}
+
+.image-container-button:hover {
+  background-color: #BCBCBC;
+}
+
+.image-container-button:active {
+  background-color: #525252;
 }
 
 .image-container-button button {
   background: none; /* Remove default button background */
   border: none; /* Remove default button border */
   padding: 0; /* Remove default button padding */
-  
   /* CSS Center Guide*/
   display: block;
-  margin: auto;
+  margin: auto;  
 }
 
 .image-container-button img {
   width: 45px; /* Set a fixed width for the buttons */
   height: 45px; /* Set a fixed height for the buttons */
-
   /* CSS Center Guide*/
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  display: block;  
+  margin: auto;
 }
 
+/* css for settings button */
+.image-container-button-settings {
+  background-color: #D9D9D9; /* Background color for the list items */
+  border-radius: 10px;
+  padding: 1%;
+  margin-left: 3%;
+  cursor: pointer; /* Change cursor to pointer on hover */
+  box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* right, bottom, blur, color and alpha*/
+}
+
+.image-container-button-settings:hover {
+  background-color: #BCBCBC;
+}
+
+.image-container-button-settings:active {
+  background-color: #525252;
+}
+
+.image-container-button-settings button {
+  background: none; /* Remove default button background */
+  border: none; /* Remove default button border */
+  padding: 0; /* Remove default button padding */
+  /* CSS Center Guide*/
+  display: block;
+  margin: auto;  
+}
+
+.image-container-button-settings img {
+  width: 25px; /* Set a fixed width for the buttons */
+  height: 25px; /* Set a fixed height for the buttons */
+  /* CSS Center Guide*/
+  display: block;  
+  margin: auto;
+}
+
+
+/* css for VR images */
 .image-container-vr {
   top: 0; /* Align to the top of the parent li */
   left: 0; /* Align to the left of the parent li */
