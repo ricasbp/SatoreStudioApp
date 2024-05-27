@@ -146,10 +146,13 @@ app.get('/osc', (req, res) => {
 });
 */
 
+const port2 = 3333;
+const ipOSCServer = '127.0.0.1';
 
 // Setup OSC server to listen for incoming messages.  old: 192.168.1.248
-const oscServer = new OSCServer(3333, '127.0.0.1', () => {
-  console.log('OSC Server is listening on port 3333');
+const oscServer = new OSCServer(port2, ipOSCServer, () => {
+  console.log('OSC Server is on IP: ' + ipOSCServer);
+  console.log('and on port:  ' + port2);
 });
 
 
