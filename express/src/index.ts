@@ -8,6 +8,7 @@ import { Response } from 'express-serve-static-core';
 
 
 
+
 const app = express()
 const server = new Server(app)
 const sse = new SSE(server);
@@ -33,7 +34,7 @@ app.post('/DownloadAssets', (req, res) => {
   const { ipAddress, port } = req.body;
 
   if (!req.body || !ipAddress || !port) {
-      return res.status(400).send("Missing ipAddress or port in request body");
+      return res.status(400).send("Missing pacakge, ipAddress, or port in request body");
   }
 
   // Use the extracted ipAddress and port
@@ -113,7 +114,7 @@ sse.on('connection', (client) => {
 });
 
 // Michael
-// Sends Example Message to Client
+// Sends Example Message to Angular Client
 let clients: Response<any, Record<string, any>, number>[] = [];
 app.get('/events', (req, res) => {
   res.setHeader('Content-Type', 'text/event-stream');
@@ -146,9 +147,9 @@ app.get('/osc', (req, res) => {
 });
 */
 
-const port2 = 3333;
-const ipOSCServer = '127.0.0.1';
 
+// '127.0.0.1';
+/*
 // Setup OSC server to listen for incoming messages.  old: 192.168.1.248
 const oscServer = new OSCServer(port2, ipOSCServer, () => {
   console.log('OSC Server is on IP: ' + ipOSCServer);
@@ -170,6 +171,53 @@ oscServer.on('message', (msg) => {
     // Process the message as needed
     // oscServer.close();
 });
+
+*/
+
+
+/*  CODE FOR UDP OSC.JS 
+
+const osc = require('osc') as any;
+
+// Create an osc.js UDP Port listening on port 57121.
+var udpPort = new osc.UDPPort({
+  localAddress: "0.0.0.0",
+  localPort: 57121,
+  metadata: true
+});
+
+// Listen for incoming OSC messages.
+udpPort.on("message", function (oscMsg: any, timeTag: any, info: any) {
+  console.log("An OSC message just arrived!", oscMsg);
+  console.log("Remote info is: ", info);
+});
+
+// Open the socket.
+udpPort.open();
+
+
+const portClient = 8001;
+const ipOSCClient = '192.168.1.53';
+
+
+// When the port is read, send an OSC message to, say, SuperCollider
+udpPort.on("ready", function () {
+  udpPort.send({
+      address: "/s_new",
+      args: [
+          {
+              type: "s",
+              value: "default"
+          },
+          {
+              type: "i",
+              value: 100
+          }
+      ]
+    }, ipOSCClient, portClient);
+});
+
+*/
 
 //server.listen(port, () => {
 //  console.log(`SSE server running at http://localhost:${port}`);

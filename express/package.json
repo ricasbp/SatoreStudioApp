@@ -14,6 +14,7 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "node-osc": "^9.1.1",
+    "osc": "^2.4.4",
     "sse": "^0.0.8"
   },
   "devDependencies": {
