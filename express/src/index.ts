@@ -147,13 +147,15 @@ app.get('/osc', (req, res) => {
 });
 */
 
+const oscServerPort = 3333;
+const oscServerIp = '127.0.0.1';
 
 // '127.0.0.1';
-/*
+
 // Setup OSC server to listen for incoming messages.  old: 192.168.1.248
-const oscServer = new OSCServer(port2, ipOSCServer, () => {
-  console.log('OSC Server is on IP: ' + ipOSCServer);
-  console.log('and on port:  ' + port2);
+const oscServer = new OSCServer(oscServerPort, oscServerIp, () => {
+  console.log('OSC Server is on IP: ' + oscServerIp);
+  console.log('and on port:  ' + oscServerPort);
 });
 
 
@@ -171,8 +173,6 @@ oscServer.on('message', (msg) => {
     // Process the message as needed
     // oscServer.close();
 });
-
-*/
 
 
 /*  CODE FOR UDP OSC.JS 
