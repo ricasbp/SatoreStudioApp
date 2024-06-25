@@ -35,21 +35,25 @@
         <div class="image-container-vr">
           <img [src]="headset.isOnline ? imagePathQuest3 : imagePathQuest3Grey" alt="MetaQuest3">
         </div>
-        
-        <div>
-            <span>Name: {{ headset.name }}</span>
-        </div>
-        
-        <div>
-            <span>IpAdress: {{ headset.ipAddress }}</span>
-        </div>
 
-        <div>
-            <span>Port: {{ headset.port }}</span>
+        <div class="vrinfo1">
+            <div class="name">
+                <span>{{ headset.name }}</span>
+            </div>
+            
+            <div class="ipadress">
+                <span>{{ headset.ipAddress }}</span>
+            </div>
+        
         </div>
-
-        <div>
-            <span>Status: {{ headset.isOnline }}</span>    
+        <div class="vrinfo2">
+            <div class="port">
+                <span>{{ headset.port }}</span>
+            </div>
+    
+            <div class="status">
+                <span>{{ headset.isOnline }}</span>    
+            </div>
         </div>
 
         <div class="image-container-button">
@@ -59,8 +63,8 @@
         </div>
     </li>
 
-    <!---
+<!---
 Log: 
 <div> {{data$ | async | json}} </div>  
-    -->
+-->
 </ul>

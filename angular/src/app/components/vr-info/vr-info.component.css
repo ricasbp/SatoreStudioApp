@@ -3,23 +3,22 @@
   margin: 2%;
   list-style-type: none;
   padding: 0;
-  max-width: 1200px; /* Ensure the container doesn't get bigger then 1200px */
+  max-width: 1000px; /* Ensure the container doesn't get bigger then 1200px */
 }
 
 .headsets li { /*Standard: Headset is offline*/
   color: #868686;
   background-color: #ffffff;
-  display: flex;
   border-radius: 10px;
   overflow: hidden; /* Ensures rounded corners contain child elements */
   margin-bottom: 1em; /* Adds space between list items */
   position: relative; /* Ensure positioning context for absolute children */
 
   /*Code to make all flex-containers centered*/
-  display: flex;
-  align-items: center; /* Centers divs horizontally */
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Centers divs vertically. Flex Y coordinate value for the containers inside it*/
 
-  box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* right, bottom, blur, color and alpha*/
+  box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* Shadow with: right, bottom, blur, color and alpha*/
 }
 
 /* Write here .headsets li .isOnline { */
@@ -33,20 +32,26 @@
   margin-bottom: 1em; /* Adds space between list items */
   position: relative; /* Ensure positioning context for absolute children */
 }
-.headsets .name {
-  align-self: center;
-  flex-grow: 1; /* Allows the name to take available space */
-  padding-left: 0.5em; /* Adds some padding to the left of the name */
+
+.headsets .vrinfo {
+
+}
+
+.headsets .vrinfo .name {
+
 }
 
 
 /* css for upload button */
 .image-container-button {
+
   background-color: #D9D9D9; /* Background color for the list items */
   border-radius: 10px;
   padding: 1%;
   margin: 2%;
   margin-right: 3%;
+  margin-left: auto;  /* Push button to the far-right */
+
 
   cursor: pointer; /* Change cursor to pointer on hover */
   box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* right, bottom, blur, color and alpha*/
