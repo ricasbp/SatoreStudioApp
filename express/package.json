@@ -13,6 +13,8 @@
     "@types/node-osc": "^6.0.3",
     "cors": "^2.8.5",
     "express": "^4.19.2",
+    "mongodb": "^6.7.0",
+    "mongoose": "^8.4.4",
     "node-osc": "^9.1.1",
     "osc": "^2.4.4",
     "sse": "^0.0.8"

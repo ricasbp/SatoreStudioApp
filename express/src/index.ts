@@ -3,23 +3,63 @@ import express from 'express';
 import cors from 'cors';
 import { Client, Message, Server as OSCServer } from 'node-osc';
 import { Server } from 'http';
-import SSE from "sse";
+import SSE, { errorMonitor } from "sse";
 import { Response } from 'express-serve-static-core';
-
-
 
 
 const app = express()
 const server = new Server(app)
-const sse = new SSE(server);
-app.use(cors())
+const sse = new SSE(server)
+app.use(cors()) // Cors disables express default configuration of disabling request of different domains or ports
 
-const port = 3000;
+const port = 3000
 
 app.get('/', (req, res) => {
-    console.log("App.name is " + app.name);
+    console.log("App.name is " + app.name)
     res.send('Hi, im up');
 });
+
+
+// ------------------------------
+// MongoDB Communication 
+// ------------------------------  
+
+// Get all VRHeadsets from DataBase
+import mongoose from 'mongoose';
+var CONNECTION_URL = "mongodb://localhost:27017/"
+var DATABASENAME = "SatoreDataBase"
+var database
+
+
+// Make connection to the MongoDB Server
+mongoose.connect('mongodb://0.0.0.0:27017/SatoreDataBase', {});
+
+// Define a schema for the VRHeadsets collection
+const vrHeadsetSchema = new mongoose.Schema({}, { collection: 'VRHeadsets' });
+
+// Create a model based on the schema
+const VRHeadset = mongoose.model('VRHeadset', vrHeadsetSchema);
+
+// Function to get all documents from the VRHeadsets collection
+const getAllVRHeadsets = async () => {
+  try {
+    const headsets = await VRHeadset.find({});
+    console.log(headsets);
+  } catch (error) {
+    console.error('Error retrieving VR headsets:', error);
+  } finally {
+    // Close the Mongoose connection
+    mongoose.connection.close();
+  }
+};
+// Call the function to retrieve the documents
+getAllVRHeadsets();
+
+
+// ------------------------------
+// Angular Communication
+// ------------------------------
+
 
 // imports for JSON parsing
 const bodyParser = require('body-parser');
@@ -225,5 +265,5 @@ udpPort.on("ready", function () {
 
 // Start the Express server
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Express server is running on http://localhost:${port}`);
 });
