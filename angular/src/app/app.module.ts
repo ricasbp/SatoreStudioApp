@@ -9,6 +9,7 @@ import { VrCustomComponent } from './components/vr-custom/vr-custom.component';
 import { VRInfoComponent } from './components/vr-info/vr-info.component';
 import { ToggleExperienceComponent } from './components/toggle-experience/toggle-experience.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
     AsyncPipe,

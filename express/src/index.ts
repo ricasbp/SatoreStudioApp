@@ -12,59 +12,91 @@ const server = new Server(app)
 const sse = new SSE(server)
 app.use(cors()) // Cors disables express default configuration of disabling request of different domains or ports
 
-const port = 3000
+// Imports for JSON parsing
+const bodyParser = require('body-parser');
+app.use(bodyParser.json()); // Parse JSON bodies
+app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
-app.get('/', (req, res) => {
-    console.log("App.name is " + app.name)
-    res.send('Hi, im up');
-});
+
+const port = 3000
 
 
 // ------------------------------
 // MongoDB Communication 
 // ------------------------------  
+// TODO: Timedout catch Error Code
 
 // Get all VRHeadsets from DataBase
 import mongoose from 'mongoose';
-var CONNECTION_URL = "mongodb://localhost:27017/"
-var DATABASENAME = "SatoreDataBase"
-var database
-
+var CONNECTION_URL = "mongodb://0.0.0.0:27017/SatoreDataBase"
 
 // Make connection to the MongoDB Server
-mongoose.connect('mongodb://0.0.0.0:27017/SatoreDataBase', {});
+mongoose.connect(CONNECTION_URL, {});
+mongoose.connection.on('connected', () => {
+  console.log('Connected to MongoDB');
+});
+mongoose.connection.on('error', (err) => {
+  console.error('Error connecting to MongoDB:', err.message);
+});
+mongoose.connection.on('disconnected', () => {
+  console.log('Disconnected from MongoDB');
+});
+
+// ------------------------------
+// Angular Get Communication
+// ------------------------------
 
 // Define a schema for the VRHeadsets collection
-const vrHeadsetSchema = new mongoose.Schema({}, { collection: 'VRHeadsets' });
+const vrHeadsetSchema = new mongoose.Schema({
+  id: { type: Number, required: false },
+  ipAddress: { type: String, required: true },
+  port: { type: String, required: true },
+  name: { type: String, required: true }
+}, { collection: 'VRHeadsets' });
 
 // Create a model based on the schema
 const VRHeadset = mongoose.model('VRHeadset', vrHeadsetSchema);
 
-// Function to get all documents from the VRHeadsets collection
-const getAllVRHeadsets = async () => {
+/*
+app.get('/', (req, res) => {
+  console.log("App.name is " + app.name)
+  res.send('Hi, im up');
+});
+*/
+
+//Endpoint to get all VRHeadsets
+app.get('/', async (req, res) => {
   try {
+    console.log("Retrieving VRHeadsets from MongoDB...");
     const headsets = await VRHeadset.find({});
-    console.log(headsets);
+    res.json(headsets);
   } catch (error) {
-    console.error('Error retrieving VR headsets:', error);
-  } finally {
-    // Close the Mongoose connection
-    mongoose.connection.close();
+    // Assert error as an Error type
+    const err = error as Error;
+    res.status(500).json({ message: 'Error retrieving VR headsets', error: err.message });
   }
-};
-// Call the function to retrieve the documents
-getAllVRHeadsets();
+});
+
+// Endpoint to add a new VRHeadset
+app.post('/vrheadsets', async (req, res) => {
+  try {
+    console.log("Added new VR Headset! It's info his: " + req.body);
+    const newHeadset = new VRHeadset(req.body);
+    await newHeadset.save();
+    res.status(201).json(newHeadset);
+  } catch (error) {
+    const err = error as Error;
+    res.status(400).json({ message: 'Error adding VR headset', error: err.message });
+  }
+});
+
+
 
 
 // ------------------------------
-// Angular Communication
+// Angular Post Communication
 // ------------------------------
 
-
-// imports for JSON parsing
-const bodyParser = require('body-parser');
-app.use(bodyParser.json()); // Parse JSON bodies
-app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // Receives Angular command to retrieve the correct assets, from the server, for the specific VR specified with the IP.
 // Requirment: JSON body is not empty, and has VR_IP and port.
