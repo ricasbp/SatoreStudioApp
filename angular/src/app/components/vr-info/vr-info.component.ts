@@ -12,7 +12,7 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
 export class VRInfoComponent implements OnInit {
 
   headsetsList: any;
-  newHeadset: vrInfo = { ipAddress: '', port: '', name: '', isOnline: false};
+  newHeadset: vrInfo = { ipAddress: '', port: '', name: '', status: 'offline'};
 
 
   imagePathQuest3: string = 'assets/images/metaquest3.png';
@@ -50,12 +50,23 @@ export class VRInfoComponent implements OnInit {
 
   }
 
+  getStatusClass(status: string): { [key: string]: boolean } {
+    return {
+      'offline-class': status === 'offline',
+      'online-class': status === 'online',
+      'ready-class': status === 'ready',
+      'error-class': status === 'error',
+      'running-experience-class': status === 'running experience'
+    };
+  }
+    
+
   addVRHeadset() {
     console.log('Submitting new headset:', this.newHeadset);
     this.vrHeadsetService.addVRHeadset(this.newHeadset).subscribe(
       data => {
         this.headsetsList.push(data);
-        this.newHeadset = { ipAddress: '', port: '', name: '', isOnline: false }; // Reset the form
+        this.newHeadset = { ipAddress: '', port: '', name: '', status: 'offline' }; // Reset the form
       },
       error => console.error('Error adding VR headset', error)
     );

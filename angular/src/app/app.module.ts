@@ -10,6 +10,7 @@ import { VRInfoComponent } from './components/vr-info/vr-info.component';
 import { ToggleExperienceComponent } from './components/toggle-experience/toggle-experience.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpClientModule } from '@angular/common/http';
+import { AddVRHeadsetComponent } from './components/add-vrheadset/add-vrheadset.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     ContainerComponent,
     VrCustomComponent,
     VRInfoComponent,
-    ToggleExperienceComponent
+    ToggleExperienceComponent,
+    AddVRHeadsetComponent
   ],
   imports: [
     BrowserModule,

@@ -21,26 +21,30 @@
   box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* Shadow with: right, bottom, blur, color and alpha*/
 }
 
-/* Write here .headsets li .isOnline { */
-.headsets .isOnline {
-  color: #000000;
-  font-weight: bold; /* or font-weight: 700; */
-  display: flex;
-  background-color: #ffffff;
-  border-radius: 10px;
-  overflow: hidden; /* Ensures rounded corners contain child elements */
-  margin-bottom: 1em; /* Adds space between list items */
-  position: relative; /* Ensure positioning context for absolute children */
+.headsets .offline-class .status{
+  color: rgb(255, 255, 255);
+  font-weight: bold;
 }
 
-.headsets .vrinfo {
-
+.headsets .online-class .status{
+  color: rgb(47, 255, 0); 
+  font-weight: bold; 
 }
 
-.headsets .vrinfo .name {
-
+.headsets .ready-class .status{
+  color: rgb(255, 106, 0); 
+  font-weight: bold; 
 }
 
+.headsets .error-class .status{
+  color: rgb(255, 0, 0);
+  font-weight: bold; 
+}
+
+.headsets .running-experience-class .status{
+  color: rgb(102, 0, 255);
+  font-weight: bold; 
+}
 
 /* css for upload button */
 .image-container-button {

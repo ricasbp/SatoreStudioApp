@@ -24,7 +24,7 @@
 <h1>Saved VR List</h1>
 
 <ul class="headsets">
-    <li *ngFor="let headset of headsetsList" [ngClass]="{'isOnline': headset.isOnline}">
+    <li *ngFor="let headset of headsetsList" [ngClass]="getStatusClass(headset.status)">
         
         <div class="image-container-button-settings">
             <button>
@@ -52,7 +52,7 @@
             </div>
     
             <div class="status">
-                <span>{{ headset.isOnline }}</span>    
+                <span>{{ headset.status }}</span>    
             </div>
         </div>
 

@@ -11,7 +11,7 @@ export class VrCustomComponent {
     ipAddress: '10.101.0.192',
     port: '8001',
     name: 'VR1',
-    isOnline: true
+    status: 'online'
   };
 
   imagePathQuest3: string = 'assets/images/metaquest3.png';

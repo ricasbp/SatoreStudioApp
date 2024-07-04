@@ -64,6 +64,7 @@
   background: none; /* Remove default button background */
   border: none; /* Remove default button border */
   padding: 0; /* Remove default button padding */
+  
   /* CSS Center Guide*/
   display: block;
   margin: auto;  

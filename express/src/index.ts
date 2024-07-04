@@ -51,7 +51,12 @@ const vrHeadsetSchema = new mongoose.Schema({
   id: { type: Number, required: false },
   ipAddress: { type: String, required: true },
   port: { type: String, required: true },
-  name: { type: String, required: true }
+  name: { type: String, required: true },
+  status: { 
+    type: String, 
+    enum: ['offline', 'online', 'ready', 'error', 'running experience'], 
+    required: true 
+  }
 }, { collection: 'VRHeadsets' });
 
 // Create a model based on the schema
@@ -80,7 +85,8 @@ app.get('/', async (req, res) => {
 // Endpoint to add a new VRHeadset
 app.post('/vrheadsets', async (req, res) => {
   try {
-    console.log("Added new VR Headset! It's info his: " + req.body);
+    console.log("Adding new VR Headset! It's info is: " );
+    console.log(req.body);
     const newHeadset = new VRHeadset(req.body);
     await newHeadset.save();
     res.status(201).json(newHeadset);

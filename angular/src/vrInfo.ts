@@ -2,5 +2,5 @@ export interface vrInfo{
     ipAddress: string;
     port: string;
     name: string;
-    isOnline: boolean;
+    status: 'offline' | 'online' | 'ready' | 'error' | 'running experience';
 }
