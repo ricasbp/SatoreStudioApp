@@ -7,11 +7,12 @@ import { vrInfo } from 'src/vrInfo';
   styleUrls: ['./vr-custom.component.css']
 })
 export class VrCustomComponent {
-  headset: vrInfo = {
+    headset: vrInfo = {
     ipAddress: '10.101.0.192',
     port: '8001',
     name: 'VR1',
-    status: 'online'
+    status: 'online',
+    id: undefined
   };
 
   imagePathQuest3: string = 'assets/images/metaquest3.png';

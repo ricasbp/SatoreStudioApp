@@ -1,4 +1,5 @@
 export interface vrInfo{
+    id: any;
     ipAddress: string;
     port: string;
     name: string;

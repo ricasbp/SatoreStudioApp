@@ -12,7 +12,7 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
 export class VRInfoComponent implements OnInit {
 
   headsetsList: any;
-  newHeadset: vrInfo = { ipAddress: '', port: '', name: '', status: 'offline'};
+  newHeadset: vrInfo = {ipAddress: '', port: '', name: '', status: 'offline', id: undefined};
 
 
   imagePathQuest3: string = 'assets/images/metaquest3.png';
@@ -24,6 +24,10 @@ export class VRInfoComponent implements OnInit {
   imagePathStopGrey: string = 'assets/images/stop_button_grey.png';
   imagePathRestartGrey: string = 'assets/images/restart_button_grey.png';
 
+  // Variables for handling edit modal
+  isEditModalOpen = true;
+  editedHeadset: vrInfo | any;
+
   //Refresh the DOM if receives value from event
   data$ = this.sseService.events$.pipe(
     tap((value) => {
@@ -31,14 +35,18 @@ export class VRInfoComponent implements OnInit {
       this.cdRef.detectChanges();
   }))
 
-  constructor(protected readonly sseService: SseService, 
+  constructor(
+    protected readonly sseService: SseService, 
     private cdRef: ChangeDetectorRef,
-    private vrHeadsetService: VRHeadsetService) {
-  }
+    private vrHeadsetService: VRHeadsetService
+  ) {}
   
   ngOnInit(): void {
-    //Get VRHeadsets from vrHeadsetService (FromMongoDB)
-     this.vrHeadsetService.getVRHeadsets().subscribe(
+    this.loadVRHeadsets();
+  }
+
+  loadVRHeadsets(): void {
+    this.vrHeadsetService.getVRHeadsets().subscribe(
       (data) => {
         this.headsetsList = data;
         console.log('VR Headsets:', this.headsetsList);
@@ -47,7 +55,6 @@ export class VRInfoComponent implements OnInit {
         console.error('Error retrieving VR headsets', error);
       }
     );
-
   }
 
   getStatusClass(status: string): { [key: string]: boolean } {
@@ -58,18 +65,6 @@ export class VRInfoComponent implements OnInit {
       'error-class': status === 'error',
       'running-experience-class': status === 'running experience'
     };
-  }
-    
-
-  addVRHeadset() {
-    console.log('Submitting new headset:', this.newHeadset);
-    this.vrHeadsetService.addVRHeadset(this.newHeadset).subscribe(
-      data => {
-        this.headsetsList.push(data);
-        this.newHeadset = { ipAddress: '', port: '', name: '', status: 'offline' }; // Reset the form
-      },
-      error => console.error('Error adding VR headset', error)
-    );
   }
 
   sendDownloadAssetsOSC(headset: vrInfo) {
@@ -92,4 +87,46 @@ export class VRInfoComponent implements OnInit {
     });
   }
 
+  
+  // Modal Code
+  openEditModal(headset: vrInfo): void {
+    // Open the edit modal and populate with the selected headset data
+    this.isEditModalOpen = true;
+    this.editedHeadset = { ...headset }; // Make a copy to prevent direct mutation
+  }
+
+  saveEditedHeadset(): void {
+    // Update the edited headset via the service
+    this.vrHeadsetService.addVRHeadset(this.editedHeadset).subscribe(
+      (updatedHeadset) => {
+        // Replace the original headset in the list with the updated one
+        const index = this.headsetsList.findIndex((h: { id: any; }) => h.id === updatedHeadset.id);
+        if (index !== -1) {
+          this.headsetsList[index] = updatedHeadset;
+        }
+        this.closeEditModal(); // Close the modal after successful update
+      },
+      (error) => {
+        console.error('Error updating headset:', error);
+      }
+    );
+  }
+
+  closeEditModal(): void {
+    // Close the edit modal without saving changes
+    this.isEditModalOpen = false;
+    this.editedHeadset = null;
+  }
+    
+
+  addVRHeadset() {
+    console.log('Submitting new headset:', this.newHeadset);
+    this.vrHeadsetService.addVRHeadset(this.newHeadset).subscribe(
+      data => {
+        this.headsetsList.push(data);
+        this.newHeadset = { ipAddress: '', port: '', name: '', status: 'offline' , id: ''}; // Reset the form
+      },
+      error => console.error('Error adding VR headset', error)
+    );
+  }
 }

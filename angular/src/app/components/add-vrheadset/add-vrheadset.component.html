@@ -1,5 +1,42 @@
-<div>
+<div >
     <button>
         <img [src]="imagePathAdd" alt="Click here to add a new VRHeadset to the DataBase.">
     </button>
 </div>
+
+<ul class="headsets">
+    <li>
+
+        <div class="image-container-vr">
+          <img [src]="imagePathQuest3" alt="MetaQuest3">
+        </div>
+
+        <div>
+            <span class = "name" >Name: </span>
+            <input type="text" [(ngModel)]="headset.name">
+        </div>
+
+
+        <div>
+            <span>IpAddress: </span>
+            <input type="text" [(ngModel)]="headset.ipAddress">
+
+        </div>
+
+        <div>
+            <span>Port: </span>
+            <input type="text" [(ngModel)]="headset.port">
+        </div>
+
+        <div>
+            <!--We aply the select class to this item, whenever === --->
+            <span>Status: {{ headset.status }}</span>    
+        </div>
+
+        <div class="image-container-button">
+            ADD
+        </div>
+
+        
+    </li>
+</ul>
