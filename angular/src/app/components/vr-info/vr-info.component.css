@@ -6,6 +6,7 @@
   max-width: 1000px; /* Ensure the container doesn't get bigger then 1200px */
 }
 
+
 .headsets li { /*Standard: Headset is offline*/
   color: #868686;
   background-color: #ffffff;
@@ -18,7 +19,51 @@
   display: flex; /* Use flexbox for layout */
   align-items: center; /* Centers divs vertically. Flex Y coordinate value for the containers inside it*/
 
-  box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* Shadow with: right, bottom, blur, color and alpha*/
+  /* Shadow with: right, bottom, blur, color and alpha*/
+  box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); 
+
+  /* Fade-In Animation */
+  opacity: 0; /* Ensure the items are initially invisible */
+  animation: vrFadeIn 1.5s ease-in-out forwards; /* Duration and easing function */
+  animation-delay: 0s; /* No delay for the first item */
+  animation-fill-mode: forwards; /* Keep the end state */
+}
+
+/* KeyFrames Animation */
+@keyframes vrFadeIn{
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+/* TODO: This should be done dinamically*/
+/* Here is a good tutorial: https://www.youtube.com/watch?v=l_sRhY3uRYQ&ab_channel=CSSDevandUX */
+/* Apply a staggered delay to each li element */
+.headsets li:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.headsets li:nth-child(2) {
+  animation-delay: 0.5s; /* 0.5 seconds delay */
+}
+
+.headsets li:nth-child(3) {
+  animation-delay: 1s; /* 1 second delay */
+}
+
+.headsets li:nth-child(4) {
+  animation-delay: 1.5s; /* 1.5 seconds delay */
+}
+
+.headsets li:nth-child(5) {
+  animation-delay: 2s; /* 2 seconds delay */
+}
+
+.headsets li:nth-child(6) {
+  animation-delay: 2.5s; /* 2.5 seconds delay */
 }
 
 .headsets .offline-class .status{
