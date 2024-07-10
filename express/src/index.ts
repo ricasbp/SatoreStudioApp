@@ -22,6 +22,21 @@ const port = 3000
 
 
 // ------------------------------
+// Express to Angular Communication Test (Simulates Unreal Sending Packages to application)
+// ------------------------------  
+app.get('/osc', (req, res) => {
+  const data = {
+    message: 'Online',
+    timestamp: new Date().toISOString()
+  };
+
+  const formattedData = `data: ${JSON.stringify(data)}\n\n`;
+  clients.forEach(client => client.write(formattedData));
+  res.send('Hello, the message was sent');
+});
+
+
+// ------------------------------
 // MongoDB Communication 
 // ------------------------------  
 // TODO: Timedout catch Error Code
@@ -33,7 +48,7 @@ var CONNECTION_URL = "mongodb://0.0.0.0:27017/SatoreDataBase"
 // Make connection to the MongoDB Server
 mongoose.connect(CONNECTION_URL, {});
 mongoose.connection.on('connected', () => {
-  console.log('Connected to MongoDB');
+  console.log('MongoDB connection successful');
 });
 mongoose.connection.on('error', (err) => {
   console.error('Error connecting to MongoDB:', err.message);
@@ -72,9 +87,9 @@ app.get('/', (req, res) => {
 //Endpoint to get all VRHeadsets
 app.get('/', async (req, res) => {
   try {
-    console.log("Retrieving VRHeadsets from MongoDB...");
     const headsets = await VRHeadset.find({});
     res.json(headsets);
+    console.log("Angular Request: Retrieved VRHeadsets from MongoDB.");
   } catch (error) {
     // Assert error as an Error type
     const err = error as Error;
@@ -232,8 +247,7 @@ const oscServerIp = '127.0.0.1';
 
 // Setup OSC server to listen for incoming messages.  old: 192.168.1.248
 const oscServer = new OSCServer(oscServerPort, oscServerIp, () => {
-  console.log('OSC Server is on IP: ' + oscServerIp);
-  console.log('and on port:  ' + oscServerPort);
+  console.log('OSC Server is on : ' + oscServerIp + ':' + oscServerPort);
 });
 
 

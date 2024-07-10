@@ -1,0 +1,144 @@
+* [33mcommit d4264e2a05d7809c86ff009dcd4eb79090318a0e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mAnimationCode[m[33m, [m[1;31morigin/AnimationCode[m[33m)[m
+[31m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[31m|[m Date:   Tue Jul 9 17:44:01 2024 +0100
+[31m|[m 
+[31m|[m     Feat: Animation when bootin up Applciation
+[31m|[m 
+* [33mcommit 02f5bd6eab0ecd1279663a1a9cb4e2344ef477f3[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+[31m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[31m|[m Date:   Thu Jul 4 17:04:56 2024 +0100
+[31m|[m 
+[31m|[m     feat: Added add button. Added Enum Status. Added CSS color based on Enum.
+[31m|[m 
+* [33mcommit 7196aca90f83d5e072a2954bbfde288553e63bc0[m
+[31m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[31m|[m Date:   Mon Jul 1 19:02:10 2024 +0100
+[31m|[m 
+[31m|[m     feat: added MongoDB retrieval and addition of VrHeadsets
+[31m|[m 
+* [33mcommit ef8c5664a32fe4dc2f847d0151c5a288c6eda7df[m
+[31m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[31m|[m Date:   Thu Jun 27 17:59:42 2024 +0100
+[31m|[m 
+[31m|[m     feat: Added MongoDB Connection
+[31m|[m   
+*   [33mcommit 2bf223123ec0388a457135a858a47c948100dfdb[m
+[32m|[m[33m\[m  Merge: bf615a2d 3e1945db
+[32m|[m [33m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[32m|[m [33m|[m Date:   Tue Jun 25 19:00:36 2024 +0100
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     Merge branch 'main' of github.com:ricasbp/SatoreApp
+[32m|[m [33m|[m 
+[32m|[m * [33mcommit 3e1945db93af268f97482220d76723d4cdb0e17a[m
+[32m|[m [33m|[m Author: ricasbp <59062659+ricasbp@users.noreply.github.com>
+[32m|[m [33m|[m Date:   Tue Jun 18 18:36:04 2024 +0100
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     Create README.md
+[32m|[m [33m|[m 
+* [33m|[m [33mcommit bf615a2da0bb1de2ffe65200bba24061222fe4b1[m
+[33m|[m[33m/[m  Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[33m|[m   Date:   Tue Jun 25 19:00:16 2024 +0100
+[33m|[m   
+[33m|[m       Feat: UI buttons to the right
+[33m|[m 
+* [33mcommit 2417c4117cf368395add9c3edb7fdef985fa8f06[m
+[33m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[33m|[m Date:   Mon Jun 10 16:39:07 2024 +0100
+[33m|[m 
+[33m|[m     Added Ipad and Android PWA
+[33m|[m 
+* [33mcommit a6cdf7c2dd03e1868d43c96b04e12ec0373013aa[m
+[33m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[33m|[m Date:   Mon Jun 10 13:53:59 2024 +0100
+[33m|[m 
+[33m|[m     Improved Code Readbility, Only 1 UDP package, Removed TCP Code
+[33m|[m 
+* [33mcommit 67f3733a2cf7cb4e91ec9f4d2eb0f4264d3b8ff0[m
+[33m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[33m|[m Date:   Wed May 29 14:49:38 2024 +0100
+[33m|[m 
+[33m|[m     feat: added osc.js libray UDP code. Not able to use TCP version yet
+[33m|[m 
+* [33mcommit b59130b069568733e64ea0ff96d0aeabaafeed67[m
+[33m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[33m|[m Date:   Mon May 27 16:51:32 2024 +0100
+[33m|[m 
+[33m|[m     MVP: Improved UI + Receiving OSC packages + Sending 5 UDP packages
+[33m|[m 
+* [33mcommit cc52be4dc300fe2d1ce56c75cc0f88e0c74c1944[m[33m ([m[1;32mreleases[m[33m, [m[1;32m9cc95a5ffb0c57d2838a098e2f982d90c64bfd4f[m[33m)[m
+[33m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[33m|[m Date:   Fri May 24 17:36:27 2024 +0100
+[33m|[m 
+[33m|[m     Updated vr-custom Css
+[33m|[m 
+* [33mcommit 269db92d549cfb77f65ac4d667d311bb416b4f42[m
+[33m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[33m|[m Date:   Wed May 22 22:39:58 2024 +0100
+[33m|[m 
+[33m|[m     UI: improved buttons look
+[33m|[m 
+* [33mcommit dff89836afc4b3cb2de49250cd5ae88b3cf6cc94[m
+[33m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[33m|[m Date:   Tue May 21 18:15:01 2024 +0100
+[33m|[m 
+[33m|[m     feat CSS: Centered flex-containers
+[33m|[m 
+* [33mcommit 9cc95a5ffb0c57d2838a098e2f982d90c64bfd4f[m
+[33m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[33m|[m Date:   Tue May 21 00:56:07 2024 +0100
+[33m|[m 
+[33m|[m     Cleaning project
+[33m|[m   
+[33m|[m * [33mcommit 472a1ac64c4b72a96684427e0b547df6938034b2[m[33m ([m[1;31morigin/release[m[33m, [m[1;32mrelease[m[33m)[m
+[33m|[m[33m/[m  Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[33m|[m   Date:   Fri May 24 17:42:07 2024 +0100
+[33m|[m   
+[33m|[m       MVP version
+[33m|[m 
+* [33mcommit 360d3cc51514acac55c6fc34dadc2e8cd7eaa86b[m
+[34m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[34m|[m Date:   Tue May 21 00:55:48 2024 +0100
+[34m|[m 
+[34m|[m     Cleaning project v3
+[34m|[m 
+* [33mcommit b233c0e1a4f251f69f08bd6bde34be6ccb41ba89[m
+[34m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[34m|[m Date:   Tue May 21 00:54:58 2024 +0100
+[34m|[m 
+[34m|[m     Cleaning project v2
+[34m|[m 
+* [33mcommit adf74b327d7ef1bf52a112e50e8c5007d82627b9[m
+[34m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[34m|[m Date:   Tue May 21 00:54:33 2024 +0100
+[34m|[m 
+[34m|[m     Cleaning project v1
+[34m|[m 
+* [33mcommit 270eb6f4ae111add0a5fc55a01da2b04c64f2eba[m[33m ([m[1;31morigin/develop[m[33m)[m
+[34m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[34m|[m Date:   Tue May 21 00:41:33 2024 +0100
+[34m|[m 
+[34m|[m     Cleaning Project
+[34m|[m 
+* [33mcommit 5c9dd47640617704dd2ada2fc420508542801358[m
+[34m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[34m|[m Date:   Mon May 20 18:07:54 2024 +0100
+[34m|[m 
+[34m|[m     feat: Toggle Experience Component Created and Working.
+[34m|[m 
+* [33mcommit fbbea3b1834238110a25432471e7a12c6c10e470[m
+[34m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[34m|[m Date:   Thu May 16 18:26:24 2024 +0100
+[34m|[m 
+[34m|[m     feat: Added buttons on UI. Express JSON Object to angular in progress
+[34m|[m 
+* [33mcommit 682da8be2d280d1b5ae5808b035eb1c4253cd1c9[m
+[34m|[m Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+[34m|[m Date:   Wed May 15 17:49:53 2024 +0100
+[34m|[m 
+[34m|[m     feat: OSC working. VRLists Mock Working. Developing Sse Server
+[34m|[m 
+* [33mcommit b3a3a2be8d0187edb536c54b9af4fab502eddb38[m
+  Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+  Date:   Tue May 14 18:33:17 2024 +0100
+  
+      First Commit. OSC working

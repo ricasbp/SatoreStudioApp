@@ -10,13 +10,12 @@ import { tap } from 'rxjs';
 export class AppComponent {
   title = 'SatoreGUI';
 
-  
   //Refresh the DOM if receives value from event
   data$ = this.sseService.events$.pipe(
     tap((value) => {
       console.log(value);
       this.cdRef.detectChanges();
-    }))
+  }))
 
   constructor(protected readonly sseService: SseService, private cdRef: ChangeDetectorRef) {
   }

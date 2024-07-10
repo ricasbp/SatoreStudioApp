@@ -7,5 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AddVRHeadsetComponent {
   imagePathAdd: string = 'assets/images/add_button.png';
-
 }

@@ -11,8 +11,8 @@ export class SseService {
 
   constructor() {
     const sse = new EventSource("http://localhost:3000/events");
-    sse.onmessage = e => {
-      this.eventsService.next(JSON.parse(e.data));
-    }
+    sse.addEventListener('message', (event: MessageEvent) => {
+      this.eventsService.next(JSON.parse(event.data));
+    });
   }
 }
