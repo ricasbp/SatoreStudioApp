@@ -6,7 +6,6 @@ import { Server } from 'http';
 import SSE, { errorMonitor } from "sse";
 import { Response } from 'express-serve-static-core';
 
-
 const app = express()
 const server = new Server(app)
 const sse = new SSE(server)
@@ -18,11 +17,29 @@ app.use(bodyParser.json()); // Parse JSON bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 
+// ------------------------------
+// Start Express over HTTPs
+// ------------------------------  
+import fs from 'fs';
+import http from 'http';
+import https from 'https';
+
+// Read SSL certificate and private key
+const privateKey = fs.readFileSync('sslcert/server.key', 'utf8');
+const certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+const httpPort = 8080;
+const httpsPort = 8443;
+// Create HTTP and HTTPS servers
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(credentials, app);
+
+
 const port = 3000
 
 
 // ------------------------------
-// Express to Angular Communication Test (Simulates Unreal Sending Packages to application)
+// Express to Angular Package Test (Simulates Unreal Sending Packages to application)
 // ------------------------------  
 app.get('/osc', (req, res) => {
   const data = {
@@ -37,7 +54,7 @@ app.get('/osc', (req, res) => {
 
 
 // ------------------------------
-// MongoDB Communication 
+// MongoDB Setup Connection 
 // ------------------------------  
 // TODO: Timedout catch Error Code
 
@@ -58,7 +75,7 @@ mongoose.connection.on('disconnected', () => {
 });
 
 // ------------------------------
-// Angular Get Communication
+// Angular GET Commands
 // ------------------------------
 
 // Define a schema for the VRHeadsets collection
@@ -84,7 +101,7 @@ app.get('/', (req, res) => {
 });
 */
 
-//Endpoint to get all VRHeadsets
+// Endpoint to get all VRHeadsets
 app.get('/', async (req, res) => {
   try {
     const headsets = await VRHeadset.find({});
@@ -96,6 +113,10 @@ app.get('/', async (req, res) => {
     res.status(500).json({ message: 'Error retrieving VR headsets', error: err.message });
   }
 });
+
+// ------------------------------
+// Angular POST Commands
+// ------------------------------
 
 // Endpoint to add a new VRHeadset
 app.post('/vrheadsets', async (req, res) => {
@@ -110,14 +131,6 @@ app.post('/vrheadsets', async (req, res) => {
     res.status(400).json({ message: 'Error adding VR headset', error: err.message });
   }
 });
-
-
-
-
-// ------------------------------
-// Angular Post Communication
-// ------------------------------
-
 
 // Receives Angular command to retrieve the correct assets, from the server, for the specific VR specified with the IP.
 // Requirment: JSON body is not empty, and has VR_IP and port.
@@ -193,6 +206,12 @@ app.post('/RestartExperience', (req, res) => {
   res.json({ message: "Hello, the message was sent" }); // Send JSON response
 });
 
+
+// ------------------------------
+// SSE Code
+// ------------------------------
+
+
 // Starts sse connection to client
 sse.on('connection', (client) => {
   const sendEvent = () => {
@@ -226,24 +245,15 @@ app.get('/events', (req, res) => {
   });
 });
 
-//Michael
-/*
-app.get('/osc', (req, res) => {
-  const data = {
-    message: 'Online',
-    timestamp: new Date().toISOString()
-  };
 
-  const formattedData = `data: ${JSON.stringify(data)}\n\n`;
-  clients.forEach(client => client.write(formattedData));
-  res.send('Hello, the message was sent');
-});
-*/
+
+// ------------------------------
+// OSC Code
+// ------------------------------
+
 
 const oscServerPort = 3333;
 const oscServerIp = '127.0.0.1';
-
-// '127.0.0.1';
 
 // Setup OSC server to listen for incoming messages.  old: 192.168.1.248
 const oscServer = new OSCServer(oscServerPort, oscServerIp, () => {
@@ -267,55 +277,22 @@ oscServer.on('message', (msg) => {
 });
 
 
-/*  CODE FOR UDP OSC.JS 
-
-const osc = require('osc') as any;
-
-// Create an osc.js UDP Port listening on port 57121.
-var udpPort = new osc.UDPPort({
-  localAddress: "0.0.0.0",
-  localPort: 57121,
-  metadata: true
-});
-
-// Listen for incoming OSC messages.
-udpPort.on("message", function (oscMsg: any, timeTag: any, info: any) {
-  console.log("An OSC message just arrived!", oscMsg);
-  console.log("Remote info is: ", info);
-});
-
-// Open the socket.
-udpPort.open();
-
-
-const portClient = 8001;
-const ipOSCClient = '192.168.1.53';
-
-
-// When the port is read, send an OSC message to, say, SuperCollider
-udpPort.on("ready", function () {
-  udpPort.send({
-      address: "/s_new",
-      args: [
-          {
-              type: "s",
-              value: "default"
-          },
-          {
-              type: "i",
-              value: 100
-          }
-      ]
-    }, ipOSCClient, portClient);
-});
-
-*/
-
-//server.listen(port, () => {
-//  console.log(`SSE server running at http://localhost:${port}`);
-//});
+// ------------------------------
+// Others
+// ------------------------------
 
 // Start the Express server
 app.listen(port, () => {
   console.log(`Express server is running on http://localhost:${port}`);
+});
+
+
+// Start the HTTP server
+httpServer.listen(httpPort, () => {
+  console.log(`HTTP Server running on port ${httpPort}`);
+});
+
+// Start the HTTPS server
+httpsServer.listen(httpsPort, () => {
+  console.log(`HTTPS Server running on port ${httpsPort}`);
 });
