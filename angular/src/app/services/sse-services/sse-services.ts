@@ -15,4 +15,4 @@ export class SseService {
       this.eventsService.next(JSON.parse(event.data));
     });
   }
-}
+} 

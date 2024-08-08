@@ -1,5 +1,5 @@
 
-<h1>Saved VR List</h1>
+<h1>VR List Management</h1>
 
 <ul class="headsets">
     <li *ngFor="let headset of headsetsList" [ngClass]="getStatusClass(headset.status)">
@@ -46,8 +46,7 @@ Log:
 <div> {{data$ | async | json}} </div>  
 </ul>
 
-  
-<h2>Add a New VR Headset</h2>
+<h1>Add a New VR Headset</h1>
 <form (ngSubmit)="addVRHeadset()">
     <label for="ipAddress">IP Address:</label>
     <input type="text" id="ipAddress" [(ngModel)]="newHeadset.ipAddress" name="ipAddress" required>
@@ -60,4 +59,11 @@ Log:
     <br>
     <button type="submit">Add VR Headset</button>
 </form>
-  
+
+<!--
+<div>
+    <button>
+        <img [src]="imagePathAdd" alt="Click here to add a new VRHeadset to the DataBase.">
+    </button>
+</div>
+-->

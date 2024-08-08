@@ -14,7 +14,7 @@ export class VRInfoComponent implements OnInit {
   headsetsList: any;
   newHeadset: vrInfo = { ipAddress: '', port: '', name: '', status: 'offline'};
 
-
+  imagePathAdd: string = 'assets/images/add_button.png';
   imagePathQuest3: string = 'assets/images/metaquest3.png';
   imagePathQuest3Grey: string = 'assets/images/metaquest3_grey.png';
   imagePathSettings: string = 'assets/images/settings_button.png';
@@ -35,10 +35,14 @@ export class VRInfoComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private vrHeadsetService: VRHeadsetService) {
   }
-  
+      
   ngOnInit(): void {
+    this.loadVRHeadsets();
+  }
+
+  private loadVRHeadsets(): void {
     //Get VRHeadsets from vrHeadsetService (FromMongoDB)
-     this.vrHeadsetService.getVRHeadsets().subscribe(
+    this.vrHeadsetService.getVRHeadsets().subscribe(
       (data) => {
         this.headsetsList = data;
         console.log('VR Headsets:', this.headsetsList);
@@ -47,19 +51,7 @@ export class VRInfoComponent implements OnInit {
         console.error('Error retrieving VR headsets', error);
       }
     );
-
   }
-
-  getStatusClass(status: string): { [key: string]: boolean } {
-    return {
-      'offline-class': status === 'offline',
-      'online-class': status === 'online',
-      'ready-class': status === 'ready',
-      'error-class': status === 'error',
-      'running-experience-class': status === 'running experience'
-    };
-  }
-    
 
   addVRHeadset() {
     console.log('Submitting new headset:', this.newHeadset);
@@ -70,6 +62,16 @@ export class VRInfoComponent implements OnInit {
       },
       error => console.error('Error adding VR headset', error)
     );
+  }
+
+  getStatusClass(status: string): { [key: string]: boolean } {
+    return {
+      'offline-class': status === 'offline',
+      'online-class': status === 'online',
+      'ready-class': status === 'ready',
+      'error-class': status === 'error',
+      'running-experience-class': status === 'running experience'
+    };
   }
 
   sendDownloadAssetsOSC(headset: vrInfo) {
