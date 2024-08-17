@@ -8,6 +8,7 @@ import { vrInfo } from 'src/vrInfo';
 })
 export class VrCustomComponent {
   headset: vrInfo = {
+    _id: '',
     ipAddress: '10.101.0.192',
     port: '8001',
     name: 'VR1',

@@ -12,7 +12,7 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
 export class VRInfoComponent implements OnInit {
 
   headsetsList: any;
-  newHeadset: vrInfo = { ipAddress: '', port: '', name: '', status: 'offline'};
+  newHeadset: vrInfo = { _id: '', ipAddress: '', port: '', name: '', status: 'offline'};
 
   imagePathAdd: string = 'assets/images/add_button.png';
   imagePathQuest3: string = 'assets/images/metaquest3.png';
@@ -24,7 +24,7 @@ export class VRInfoComponent implements OnInit {
   imagePathStopGrey: string = 'assets/images/stop_button_grey.png';
   imagePathRestartGrey: string = 'assets/images/restart_button_grey.png';
 
-  //Refresh the DOM if receives value from event
+  // Refresh the DOM if receives value from event
   data$ = this.sseService.events$.pipe(
     tap((value) => {
       console.log(value);
@@ -40,8 +40,43 @@ export class VRInfoComponent implements OnInit {
     this.loadVRHeadsets();
   }
 
+  onEdit(item : any){
+    item.isEdit = true;
+  }
+
+  updateVRHeadset(headset: any): void {
+    console.log(headset)
+    // Update VRHeadset from vrHeadsetService (FromMongoDB)
+    this.vrHeadsetService.updateVRHeadset(headset).subscribe(
+      (response) => {
+        console.log('Headset updated successfully', response);
+        // Optionally, you can refresh the headset list or update the UI
+        this.loadVRHeadsets();
+      },
+      (error) => {
+        console.error('Error updating headset', error);
+      }
+    );
+  }
+
+  deleteHeadset(headset: vrInfo): void {
+    console.log(headset);
+    if (confirm(`Are you sure you want to delete the VR Headset: ${headset.name}?`)) {
+      this.vrHeadsetService.deleteVRHeadset(headset._id!).subscribe(
+        response => {
+          console.log('VR Headset deleted:', response);
+          // Remove the deleted headset from the list in the UI
+          this.headsetsList = this.headsetsList.filter((h: { _id: string | undefined; }) => h._id !== headset._id);
+        },
+        error => {
+          console.error('Error deleting VR Headset:', error);
+        }
+      );
+    }
+  }
+
   private loadVRHeadsets(): void {
-    //Get VRHeadsets from vrHeadsetService (FromMongoDB)
+    // Get VRHeadsets from vrHeadsetService (FromMongoDB)
     this.vrHeadsetService.getVRHeadsets().subscribe(
       (data) => {
         this.headsetsList = data;
@@ -58,7 +93,7 @@ export class VRInfoComponent implements OnInit {
     this.vrHeadsetService.addVRHeadset(this.newHeadset).subscribe(
       data => {
         this.headsetsList.push(data);
-        this.newHeadset = { ipAddress: '', port: '', name: '', status: 'offline' }; // Reset the form
+        this.newHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline' }; // Reset the form
       },
       error => console.error('Error adding VR headset', error)
     );

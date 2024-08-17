@@ -3,23 +3,34 @@
 
 <ul class="headsets">
     <li *ngFor="let headset of headsetsList" [ngClass]="getStatusClass(headset.status)">
-        
-        <div class="image-container-button-settings">
-            <button>
-                <img [src]="imagePathSettings" alt="Click here to download VRHeadset assets">
-            </button>
-        </div>
+
+        <button *ngIf="!headset.isEdit" class="image-container-button-settings" (click)="onEdit(headset)">
+            <img [src]="imagePathSettings" alt="Click here to edit this VrHeadset">
+        </button>
+
+        <button *ngIf="headset.isEdit" class="image-container-button-settings" (click)="headset.isEdit = false">
+            <img [src]="imagePathSettings" alt="Click here to edit this VrHeadset">
+        </button>
+
 
         <div class="image-container-vr">
           <img [src]="headset.isOnline ? imagePathQuest3 : imagePathQuest3Grey" alt="MetaQuest3">
         </div>
 
+        
+
         <div class="vrinfo1">
-            <div class="name">
+            <div *ngIf="headset.isEdit" class="name">
+                <input type="text" [(ngModel)]="headset.name">
+            </div>
+            <div *ngIf="!headset.isEdit" class="name">
                 <span>{{ headset.name }}</span>
             </div>
-            
-            <div class="ipadress">
+
+            <div *ngIf="headset.isEdit" class="ipAddress">
+                <input type="text" [(ngModel)]="headset.ipAddress">
+            </div>
+            <div *ngIf="!headset.isEdit" class="ipAddress">
                 <span>{{ headset.ipAddress }}</span>
             </div>
         
@@ -33,12 +44,19 @@
                 <span>{{ headset.status }}</span>    
             </div>
         </div>
+        
 
-        <div class="image-container-button">
-            <button (click)="sendDownloadAssetsOSC(headset)">
-                <img [src]="imagePathUpload" alt="Click here to download VRHeadset assets">
-            </button>
-        </div>
+        <button *ngIf="!headset.isEdit" class="image-container-button" (click)="sendDownloadAssetsOSC(headset)">
+            <img [src]="imagePathUpload" alt="Click here to download VRHeadset assets">
+        </button>
+        
+        <button *ngIf="headset.isEdit" class="image-container-button" (click)="updateVRHeadset(headset)">
+            Confirm
+        </button>
+        <button *ngIf="headset.isEdit" class="image-container-button" (click)="deleteHeadset(headset)">
+            Delete
+        </button>
+
     </li>
 
 

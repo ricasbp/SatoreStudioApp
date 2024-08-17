@@ -17,24 +17,6 @@ app.use(bodyParser.json()); // Parse JSON bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 
-// ------------------------------
-// Start Express over HTTPs
-// ------------------------------  
-import fs from 'fs';
-import http from 'http';
-import https from 'https';
-
-// Read SSL certificate and private key
-const privateKey = fs.readFileSync('sslcert/server.key', 'utf8');
-const certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
-const credentials = { key: privateKey, cert: certificate };
-const httpPort = 8080;
-const httpsPort = 8443;
-// Create HTTP and HTTPS servers
-const httpServer = http.createServer(app);
-const httpsServer = https.createServer(credentials, app);
-
-
 const port = 3000
 
 
@@ -80,7 +62,7 @@ mongoose.connection.on('disconnected', () => {
 
 // Define a schema for the VRHeadsets collection
 const vrHeadsetSchema = new mongoose.Schema({
-  id: { type: Number, required: false },
+  id: { type: Number, required: true },
   ipAddress: { type: String, required: true },
   port: { type: String, required: true },
   name: { type: String, required: true },
@@ -93,13 +75,6 @@ const vrHeadsetSchema = new mongoose.Schema({
 
 // Create a model based on the schema
 const VRHeadset = mongoose.model('VRHeadset', vrHeadsetSchema);
-
-/*
-app.get('/', (req, res) => {
-  console.log("App.name is " + app.name)
-  res.send('Hi, im up');
-});
-*/
 
 // Endpoint to get all VRHeadsets
 app.get('/', async (req, res) => {
@@ -131,6 +106,53 @@ app.post('/vrheadsets', async (req, res) => {
     res.status(400).json({ message: 'Error adding VR headset', error: err.message });
   }
 });
+
+// Endpoint to update an existing VRHeadset
+app.put('/vrheadsets/:id', async (req, res) => {
+  console.log();
+  console.log(`Updating VR Headset...`);
+
+  try {
+    const headsetId = req.params.id;
+    console.log(`Updating VR Headset with ID: ${headsetId}`);
+    console.log("New data: ", req.body);
+
+    // Find the VR headset by ID and update it with the new data
+    const updatedHeadset = await VRHeadset.findByIdAndUpdate(headsetId, req.body, { new: true });
+
+    if (!updatedHeadset) {
+      return res.status(404).json({ message: 'VR Headset not found' });
+    }
+
+    res.status(200).json(updatedHeadset);
+  } catch (error) {
+    const err = error as Error;
+    res.status(400).json({ message: 'Error updating VR headset', error: err.message });
+  }
+});
+
+// Endpoint to delete a VR headset by ID
+app.delete('/vrheadsets/:id', async (req, res) => {
+  console.log();
+  console.log(`Deleting VR Headset...`);
+  try {
+    const headsetId = req.params.id;
+    console.log(`Deleting VR Headset with ID: ${headsetId}`);
+
+    // Find the VR headset by ID and delete it
+    const deletedHeadset = await VRHeadset.findByIdAndDelete(headsetId);
+
+    if (!deletedHeadset) {
+      return res.status(404).json({ message: 'VR Headset not found' });
+    }
+
+    res.status(200).json({ message: 'VR Headset deleted successfully', deletedHeadset });
+  } catch (error) {
+    const err = error as Error;  // Assert that error is of type 'Error'
+    res.status(400).json({ message: 'Error deleting VR headset', error: err.message });
+  }
+});
+
 
 // Receives Angular command to retrieve the correct assets, from the server, for the specific VR specified with the IP.
 // Requirment: JSON body is not empty, and has VR_IP and port.
@@ -286,13 +308,3 @@ app.listen(port, () => {
   console.log(`Express server is running on http://localhost:${port}`);
 });
 
-
-// Start the HTTP server
-httpServer.listen(httpPort, () => {
-  console.log(`HTTP Server running on port ${httpPort}`);
-});
-
-// Start the HTTPS server
-httpsServer.listen(httpsPort, () => {
-  console.log(`HTTPS Server running on port ${httpsPort}`);
-});
