@@ -1,12 +1,4 @@
-Container works!
 
-<div>
-  {{ current | json }}
-</div>
+<h1> OSC Log </h1>
 
-
-<button (click)="runRandom()">Fetch Data</button>
-
-<div>
-  {{ random }}
-</div>
+<div> {{data$ | async | json}} </div>  

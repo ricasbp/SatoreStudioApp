@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { SseService } from 'src/app/services/sse-services/sse-services';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-container',
@@ -11,7 +13,18 @@ export class ContainerComponent {
   title = 'angular-tour-of-heroes';
   random = 1;
 
-  runRandom() {
-    this.random = Math.random();
+  
+  // Refresh the DOM if receives value from event
+  // Build Here VR Connection Logic.
+  data$ = this.sseService.events$.pipe(
+    tap((value) => {
+      console.log(value);
+      this.cdRef.detectChanges();
+  }))
+
+  constructor(protected readonly sseService: SseService, private cdRef: ChangeDetectorRef) {
+  }
+  
+  ngOnInit(): void {
   }
 }

@@ -33,10 +33,14 @@
             <div *ngIf="!headset.isEdit" class="ipAddress">
                 <span>{{ headset.ipAddress }}</span>
             </div>
-        
+            
         </div>
         <div class="vrinfo2">
-            <div class="port">
+
+            <div *ngIf="headset.isEdit" class="port">
+                <input type="text" [(ngModel)]="headset.port">
+            </div>
+            <div *ngIf="!headset.isEdit" class="port">
                 <span>{{ headset.port }}</span>
             </div>
     
@@ -59,10 +63,6 @@
 
     </li>
 
-
-Log: 
-<div> {{data$ | async | json}} </div>  
-</ul>
 
 <h1>Add a New VR Headset</h1>
 <form (ngSubmit)="addVRHeadset()">

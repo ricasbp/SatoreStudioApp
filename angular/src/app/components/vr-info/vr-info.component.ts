@@ -24,16 +24,8 @@ export class VRInfoComponent implements OnInit {
   imagePathStopGrey: string = 'assets/images/stop_button_grey.png';
   imagePathRestartGrey: string = 'assets/images/restart_button_grey.png';
 
-  // Refresh the DOM if receives value from event
-  data$ = this.sseService.events$.pipe(
-    tap((value) => {
-      console.log(value);
-      this.cdRef.detectChanges();
-  }))
 
-  constructor(protected readonly sseService: SseService, 
-    private cdRef: ChangeDetectorRef,
-    private vrHeadsetService: VRHeadsetService) {
+  constructor(private vrHeadsetService: VRHeadsetService) {
   }
       
   ngOnInit(): void {
