@@ -5,11 +5,11 @@ import { tap } from 'rxjs';
 import { VRHeadsetService } from '../../services/vrheadset-service.service';
 
 @Component({
-  selector: 'app-vr-info',
-  templateUrl: './vr-info.component.html',
-  styleUrls: ['./vr-info.component.css']
+  selector: 'app-vrHeadsets',
+  templateUrl: './vrHeadsets.component.html',
+  styleUrls: ['./vrHeadsets.component.css']
 })
-export class VRInfoComponent implements OnInit {
+export class vrHeadsetsComponent implements OnInit {
 
   headsetsList: any;
   newHeadset: vrInfo = { _id: '', ipAddress: '', port: '', name: '', status: 'offline'};

@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ContainerComponent } from './components/container/container/container.component';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { VRInfoComponent } from './components/vr-info/vr-info.component';
+import { vrHeadsetsComponent } from './components/vrHeadsets/vrHeadsets.component';
 import { ToggleExperienceComponent } from './components/toggle-experience/toggle-experience.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     ContainerComponent,
-    VRInfoComponent,
+    vrHeadsetsComponent,
     ToggleExperienceComponent
   ],
   imports: [

@@ -14,7 +14,7 @@ export class ContainerComponent {
   random = 1;
 
   
-  // Refresh the DOM if receives value from event
+  // Refresh the DOM if receives value from event.
   // Build Here VR Connection Logic.
   data$ = this.sseService.events$.pipe(
     tap((value) => {
