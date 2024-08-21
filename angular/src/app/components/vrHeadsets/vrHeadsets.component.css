@@ -6,6 +6,13 @@
   max-width: 1000px; /* Ensure the container doesn't get bigger then 1200px */
 }
 
+.headsets {
+  margin: 2%;
+  list-style-type: none;
+  padding: 0;
+  max-width: 1000px; /* Ensure the container doesn't get bigger then 1200px */
+}
+
 
 .headsets li { /*Standard: Headset is offline*/
   color: #868686;
@@ -91,7 +98,10 @@
   font-weight: bold; 
 }
 
-/* css for upload button */
+
+/* 
+  CSS for the Upload Button
+*/
 .image-container-button {
 
   background-color: #D9D9D9; /* Background color for the list items */
@@ -131,7 +141,11 @@
   margin: auto;
 }
 
-/* css for settings button */
+
+/* 
+  CSS for the Settings Button
+*/
+
 .image-container-button-settings {
   background-color: #D9D9D9; /* Background color for the list items */
   border-radius: 10px;
@@ -167,7 +181,54 @@
 }
 
 
-/* css for VR images */
+
+/* 
+  CSS for the Add button 
+*/
+
+.image-container-button-add {
+  background-color: #D9D9D9; /* Background color for the list items */
+  border-radius: 10px;
+  padding: 1%;
+  margin-left: 3%;
+  cursor: pointer; /* Change cursor to pointer on hover */
+  box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* right, bottom, blur, color and alpha*/
+  
+  /* CSS Center Guide*/
+  display: block;
+  margin: auto;  
+}
+
+.image-container-button-add:hover {
+  background-color: #BCBCBC;
+}
+
+.image-container-button-add:active {
+  background-color: #525252;
+}
+
+.image-container-button-add button {
+  background: none; /* Remove default button background */
+  border: none; /* Remove default button border */
+  padding: 0; /* Remove default button padding */
+  /* CSS Center Guide*/
+  display: block;
+  margin: auto;  
+}
+
+.image-container-button-add img {
+  width: 45px; /* Set a fixed width for the buttons */
+  height: 45px; /* Set a fixed height for the buttons */
+  /* CSS Center Guide*/
+  display: block;  
+  margin: auto;
+}
+
+
+/* 
+  CSS for the VRHeadset Images 
+*/
+
 .image-container-vr {
   top: 0; /* Align to the top of the parent li */
   left: 0; /* Align to the left of the parent li */
@@ -181,3 +242,76 @@
   max-height: 100%;
   object-fit: contain; /* Ensures the image fits within the container */
 }
+
+
+
+/* 
+    CSS for the Switch 
+*/
+
+ /* The switch - the box around the slider */
+ .switch {
+  margin-left: auto;  /* Push button to the far-right */
+  margin-right: 3%;
+
+
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+} 

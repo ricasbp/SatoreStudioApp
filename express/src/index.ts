@@ -70,7 +70,8 @@ const vrHeadsetSchema = new mongoose.Schema({
     type: String, 
     enum: ['offline', 'online', 'ready', 'error', 'running experience'], 
     required: true 
-  }
+  },
+  directingMode: { type: Boolean, required: true, default: false } 
 }, { collection: 'VRHeadsets' });
 
 // Create a model based on the schema
@@ -210,25 +211,7 @@ app.post('/StopExperience', (req, res) => {
 
   // Use the extracted ipAddress and port
   const client = new Client(req.body.ipAddress, req.body.port);
-  client.send(new Message("/StartExperience"), () => {
-      client.close();
-  });
-  res.json({ message: "Hello, the message was sent" }); // Send JSON response
-});
-
-// Restart Experience
-app.post('/RestartExperience', (req, res) => {
-  console.log(req.body);
-  // Extract ipAddress and port from the request body
-  const { ipAddress, port } = req.body;
-
-  if (!req.body || !ipAddress || !port) {
-      return res.status(400).send("Missing ipAddress or port in request body");
-  }
-
-  // Use the extracted ipAddress and port
-  const client = new Client(req.body.ipAddress, req.body.port);
-  client.send(new Message("/StartExperience"), () => {
+  client.send(new Message("/StopExperience"), () => {
       client.close();
   });
   res.json({ message: "Hello, the message was sent" }); // Send JSON response

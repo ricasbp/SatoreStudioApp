@@ -4,4 +4,5 @@ export interface vrInfo{
     port: string;
     name: string;
     status: 'offline' | 'online' | 'ready' | 'error' | 'running experience';
+    directingMode: boolean; 
 }

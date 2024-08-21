@@ -50,38 +50,69 @@
         </div>
         
 
-        <button *ngIf="!headset.isEdit" class="image-container-button" (click)="sendDownloadAssetsOSC(headset)">
-            <img [src]="imagePathUpload" alt="Click here to download VRHeadset assets">
-        </button>
+
+        <!-- Rounded switch -->
+        <label class="switch">
+            <input 
+                type="checkbox" 
+                [checked]="headset.directingMode" 
+                (change)="activateDirectorMode(headset)"
+            >
+            <span class="slider round"></span>
+        </label>  
+
         
         <button *ngIf="headset.isEdit" class="image-container-button" (click)="updateVRHeadset(headset)">
             Confirm
         </button>
-        <button *ngIf="headset.isEdit" class="image-container-button" (click)="deleteHeadset(headset)">
+        <button *ngIf="headset.isEdit" class="image-container-button" (click)="deleteVRHeadset(headset)">
             Delete
         </button>
 
     </li>
 
-
-<h1>Add a New VR Headset</h1>
-<form (ngSubmit)="addVRHeadset()">
-    <label for="ipAddress">IP Address:</label>
-    <input type="text" id="ipAddress" [(ngModel)]="newHeadset.ipAddress" name="ipAddress" required>
-    <br>
-    <label for="port">Port:</label>
-    <input type="text" id="port" [(ngModel)]="newHeadset.port" name="port" required>
-    <br>
-    <label for="name">Name:</label>
-    <input type="text" id="name" [(ngModel)]="newHeadset.name" name="name" required>
-    <br>
-    <button type="submit">Add VR Headset</button>
-</form>
-
-<!--
+    
 <div>
-    <button>
-        <img [src]="imagePathAdd" alt="Click here to add a new VRHeadset to the DataBase.">
-    </button>
+    <div *ngIf="isUserAddingNewVRHeadset">
+        <li>
+            <form (ngSubmit)="addVRHeadset()">
+
+                <div class="vrinfo1">
+                    
+                <label for="ipAddress">IP Address:</label>
+                <input type="text" id="ipAddress" [(ngModel)]="newHeadset.ipAddress" name="ipAddress" required>
+                
+                <label for="port">Port:</label>
+                <input type="text" id="port" [(ngModel)]="newHeadset.port" name="port" required>
+               
+                <label for="name">Name:</label>
+                <input type="text" id="name" [(ngModel)]="newHeadset.name" name="name" required>
+                    
+                </div>
+
+                <button class="image-container-button" (click)="isUserAddingNewVRHeadset = false">
+                    Cancel
+                </button>
+                
+                <button type="submit">
+                    Add VR Headset
+                </button>
+                
+            </form>
+        </li>
+    </div>
+
+    <div *ngIf="!isUserAddingNewVRHeadset">
+        <button (click)="isUserAddingNewVRHeadset = true" class="image-container-button-add">
+            <img [src]="imagePathAdd" alt="Click here to add a new VRHeadset to the DataBase.">
+        </button>
+    </div>
+    
+    
 </div>
--->
+
+<!-- Master switch to control all others -->
+<label class="switch">
+    <input type="checkbox" (change)="activateDirectorModeAll($event)">
+    <span class="slider round"></span>
+</label>

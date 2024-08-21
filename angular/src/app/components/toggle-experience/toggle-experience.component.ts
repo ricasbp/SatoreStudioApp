@@ -9,7 +9,10 @@ export class ToggleExperienceComponent {
 
   imagePathPlay: string = 'assets/images/play_button.png';
   imagePathStop: string = 'assets/images/stop_button.png';
-  imagePathRestart: string = 'assets/images/restart_button.png';
+
+  imagePathPlayGrey: string = '';
+  imagePathStopGrey: string = 'assets/images/stop_button_grey.png';
+
 
   sendOSC(action: string) {
     console.log(`Action: ${action}`);
@@ -19,9 +22,6 @@ export class ToggleExperienceComponent {
 
     if(action == 'Stop'){
       url = "http://localhost:3000/StopExperience";
-    }
-    if(action == 'Restart'){
-      url = "http://localhost:3000/RestartExperience";
     }
     
     const data = { action: action };
