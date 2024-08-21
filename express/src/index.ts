@@ -271,15 +271,15 @@ const oscServer = new OSCServer(oscServerPort, oscServerIp, () => {
   console.log('OSC Server is on : ' + oscServerIp + ':' + oscServerPort);
 });
 
-
 // Handle incoming OSC messages
 oscServer.on('message', (msg) => {
     console.log(`Received OSC message: ${msg}`);
 
     const data = {
       message: msg,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
+    
     const formattedData = `data: ${JSON.stringify(data)}\n\n`;
     clients.forEach(client => client.write(formattedData));
 

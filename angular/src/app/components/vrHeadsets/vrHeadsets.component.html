@@ -14,7 +14,7 @@
 
 
         <div class="image-container-vr">
-          <img [src]="headset.isOnline ? imagePathQuest3 : imagePathQuest3Grey" alt="MetaQuest3">
+            <img [src]="headset.status === 'offline' || headset.status === 'error'? imagePathQuest3Grey : imagePathQuest3" alt="MetaQuest3">
         </div>
 
         
@@ -25,34 +25,22 @@
             </div>
             <div *ngIf="!headset.isEdit" class="name">
                 <span>{{ headset.name }}</span>
+                <span class="status">{{ headset.status }}</span>
             </div>
 
             <div *ngIf="headset.isEdit" class="ipAddress">
                 <input type="text" [(ngModel)]="headset.ipAddress">
-            </div>
-            <div *ngIf="!headset.isEdit" class="ipAddress">
-                <span>{{ headset.ipAddress }}</span>
-            </div>
-            
-        </div>
-        <div class="vrinfo2">
-
-            <div *ngIf="headset.isEdit" class="port">
                 <input type="text" [(ngModel)]="headset.port">
             </div>
-            <div *ngIf="!headset.isEdit" class="port">
-                <span>{{ headset.port }}</span>
+            <div *ngIf="!headset.isEdit" class="ipAddress">
+                <span>{{ headset.ipAddress }} : {{ headset.port }}</span>
             </div>
-    
-            <div class="status">
-                <span>{{ headset.status }}</span>    
-            </div>
+
         </div>
-        
 
 
         <!-- Rounded switch -->
-        <label class="switch">
+        <label *ngIf="!headset.isEdit && headset.status !== 'offline'" class="switch">
             <input 
                 type="checkbox" 
                 [checked]="headset.directingMode" 
@@ -94,7 +82,7 @@
                     Cancel
                 </button>
                 
-                <button type="submit">
+                <button class="image-container-button" type="submit">
                     Add VR Headset
                 </button>
                 
@@ -102,17 +90,20 @@
         </li>
     </div>
 
-    <div *ngIf="!isUserAddingNewVRHeadset">
-        <button (click)="isUserAddingNewVRHeadset = true" class="image-container-button-add">
-            <img [src]="imagePathAdd" alt="Click here to add a new VRHeadset to the DataBase.">
-        </button>
+    <div class= "container-for-addButton-and-switch">
+        <img *ngIf="!isUserAddingNewVRHeadset" 
+            (click)="isUserAddingNewVRHeadset = true" 
+            class="image-container-button-add" 
+            [src]="imagePathAdd" 
+            alt="Click here to add a new VRHeadset to the DataBase.">
+        
+        <!-- Master switch to control all others -->
+        <label class="switch" >
+            <input type="checkbox" (change)="activateDirectorModeAll($event)">
+            <span class="slider round"></span>
+        </label>
     </div>
     
     
+    
 </div>
-
-<!-- Master switch to control all others -->
-<label class="switch">
-    <input type="checkbox" (change)="activateDirectorModeAll($event)">
-    <span class="slider round"></span>
-</label>

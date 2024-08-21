@@ -46,6 +46,8 @@
   }
 }
 
+
+
 /* TODO: This should be done dinamically*/
 /* Here is a good tutorial: https://www.youtube.com/watch?v=l_sRhY3uRYQ&ab_channel=CSSDevandUX */
 /* Apply a staggered delay to each li element */
@@ -73,29 +75,33 @@
   animation-delay: 2.5s; /* 2.5 seconds delay */
 }
 
-.headsets .offline-class .status{
-  color: rgb(102, 102, 102);
-  font-weight: bold;
+/* 
+  CSS for the Satuts Text
+*/
+
+.headsets .status{
+  margin-left: 8%;
 }
 
+
 .headsets .online-class .status{
-  color: rgb(47, 255, 0); 
-  font-weight: bold; 
+  color: #289900;
+  font-weight: bold;
 }
 
 .headsets .ready-class .status{
   color: rgb(255, 106, 0); 
-  font-weight: bold; 
+  font-weight: bold;
 }
 
 .headsets .error-class .status{
   color: rgb(255, 0, 0);
-  font-weight: bold; 
+  font-weight: bold;
 }
 
 .headsets .running-experience-class .status{
   color: rgb(102, 0, 255);
-  font-weight: bold; 
+  font-weight: bold;
 }
 
 
@@ -187,43 +193,22 @@
 */
 
 .image-container-button-add {
-  background-color: #D9D9D9; /* Background color for the list items */
-  border-radius: 10px;
-  padding: 1%;
-  margin-left: 3%;
-  cursor: pointer; /* Change cursor to pointer on hover */
+  border-radius: 50px;
   box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* right, bottom, blur, color and alpha*/
   
-  /* CSS Center Guide*/
-  display: block;
-  margin: auto;  
-}
-
-.image-container-button-add:hover {
-  background-color: #BCBCBC;
-}
-
-.image-container-button-add:active {
-  background-color: #525252;
-}
-
-.image-container-button-add button {
-  background: none; /* Remove default button background */
-  border: none; /* Remove default button border */
-  padding: 0; /* Remove default button padding */
-  /* CSS Center Guide*/
-  display: block;
-  margin: auto;  
-}
-
-.image-container-button-add img {
   width: 45px; /* Set a fixed width for the buttons */
   height: 45px; /* Set a fixed height for the buttons */
+  cursor: pointer; /* Change cursor to pointer on hover */
+
+
   /* CSS Center Guide*/
   display: block;  
   margin: auto;
 }
 
+.image-container-button-add:hover {
+  background-color: #BCBCBC;
+}
 
 /* 
   CSS for the VRHeadset Images 
@@ -245,6 +230,9 @@
 
 
 
+
+
+
 /* 
     CSS for the Switch 
 */
@@ -253,7 +241,8 @@
  .switch {
   margin-left: auto;  /* Push button to the far-right */
   margin-right: 3%;
-
+  box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* right, bottom, blur, color and alpha*/
+  border-radius: 25px;
 
   position: relative;
   display: inline-block;
@@ -315,3 +304,14 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 } 
+
+
+
+/* 
+    CSS for the container for addButton and Switch 
+*/
+
+.container-for-addButton-and-switch{
+  display: flex;
+  align-items: center; /* Align items vertically centered */
+}
