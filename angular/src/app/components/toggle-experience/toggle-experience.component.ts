@@ -16,8 +16,6 @@ export class ToggleExperienceComponent {
 
   sendOSC(action: string) {
     console.log(`Action: ${action}`);
-    // You can add more logic based on the action parameter here
-
     let url = "http://localhost:3000/StartExperience";
 
     if(action == 'Stop'){
@@ -27,7 +25,7 @@ export class ToggleExperienceComponent {
     const data = { action: action };
 
     fetch(url, {
-        method: 'POST', // or 'PUT'
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -40,6 +38,5 @@ export class ToggleExperienceComponent {
     .catch((error) => {
         console.error('Error:', error);
     });
-}
-
+  }
 }

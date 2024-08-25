@@ -52,7 +52,7 @@ export class vrHeadsetsComponent implements OnInit {
     }
 }
 
-  activateDirectorModeAll(event: Event): void {
+  activateDirectorModeOnAll(event: Event): void {
     const isChecked = (event.target as HTMLInputElement).checked;
     
     // Toggle directingMode for all headsets based on master switch's state
