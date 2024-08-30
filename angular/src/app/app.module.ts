@@ -9,15 +9,17 @@ import { vrHeadsetsComponent } from './components/vrHeadsets/vrHeadsets.componen
 import { ToggleExperienceComponent } from './components/toggle-experience/toggle-experience.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpClientModule } from '@angular/common/http';
+import { DirectorModeComponent } from './components/director-mode/director-mode.component';
+import { DirectorModeModule } from './components/director-mode/director-mode.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContainerComponent,
-    vrHeadsetsComponent,
-    ToggleExperienceComponent
+    ContainerComponent
   ],
   imports: [
+    DirectorModeModule,
+    
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
