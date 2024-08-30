@@ -1,9 +1,16 @@
-<h1>Welcome</h1>
-
-<ul>
-    <li><a routerLink='operator-mode' routerLinkActive="active"> Operator-Mode </a></li>
-    <li><a routerLink='director-mode' routerLinkActive="active"> Director-Mode </a></li>
-</ul>
+<nav>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <img class= "satoreStudio" [src]="imagePathLogo" alt="Satore Logo"/>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a routerLink='operator-mode' > Operator Mode </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a routerLink='director-mode' > Director Mode </a>
+        </li>
+    </ul>
+</nav>
 
 
 <router-outlet></router-outlet>

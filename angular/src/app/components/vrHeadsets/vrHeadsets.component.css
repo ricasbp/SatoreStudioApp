@@ -14,8 +14,8 @@
 }
 
 
-.headsets li { /*Standard: Headset is offline*/
-  color: #868686;
+.headsets li {
+  color: #000000;
   background-color: #ffffff;
   border-radius: 10px;
   overflow: hidden; /* Ensures rounded corners contain child elements */
@@ -86,6 +86,10 @@
 .headsets .online-class .status{
   color: #289900;
   font-weight: bold;
+}
+
+.headsets .offline-class{
+  color: #868686;
 }
 
 .headsets .ready-class .status{

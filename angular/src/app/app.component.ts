@@ -10,6 +10,8 @@ import { tap } from 'rxjs';
 export class AppComponent {
   title = 'SatoreGUI';
 
+  imagePathLogo: string = 'assets/images/SatoreStudio.png';
+
   //Refresh the DOM if receives value from event
   data$ = this.sseService.events$.pipe(
     tap((value) => {

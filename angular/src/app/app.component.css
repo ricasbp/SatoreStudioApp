@@ -1,3 +1,42 @@
 div{
     padding-top: 25px;
 }
+
+.navbar-nav {
+    flex-direction: row;     /* Ensure items are in a row */
+}
+
+/*
+    Routes Style
+*/
+li{
+    font-size: 1.4em;  /* Slightly increase text size (10% larger) */
+
+    white-space: nowrap; /* Prevents text from wrapping */
+    
+    padding-left: 2%;
+    padding-right: 2%;
+
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Centers divs vertically. Flex Y coordinate value for the containers inside it*/
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+.satoreStudio{
+    max-width: 85px;
+}
+
+nav{
+    background-color: #ffffff;
+}
+
+/* 
+    Style for the active <li> element 
+*/
+.active {
+    background-color: #D9D9D9;
+}
