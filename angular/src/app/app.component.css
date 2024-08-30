@@ -11,7 +11,6 @@ div{
 */
 li{
     font-size: 1.4em;  /* Slightly increase text size (10% larger) */
-
     white-space: nowrap; /* Prevents text from wrapping */
     
     padding-left: 2%;
