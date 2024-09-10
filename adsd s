@@ -1,0 +1,42 @@
+* [34mfcc27ff4[m [[32m19 seconds ago[m] Feat: Added Online Switch and Operator Window[33m (HEAD -> UserTest, origin/UserTest)[m
+* [34mcb481f93[m [[32m11 days ago[m] Removed Bootstrap[33m (origin/main, main)[m
+* [34mef642d47[m [[32m11 days ago[m] Feat: Added Director and Operator CSS logic + Changed overall text style in Style.css + added Bootstrap[33m[m
+* [34mc2e09750[m [[32m11 days ago[m] feat: Added Director and Operator Routes[33m[m
+* [34m8862839b[m [[32m2 weeks ago[m] fix: Cleaned up code in VRHeadsetService[33m[m
+* [34m5c2ff3bc[m [[32m3 weeks ago[m] Improvement: Added VRHeadset logic[33m[m
+* [34me716d330[m [[32m3 weeks ago[m] Multiple Features: Added Add button + Added Directing Switch Buttons and logic[33m[m
+* [34m1bcc79eb[m [[32m3 weeks ago[m] Update: Refactored components name[33m[m
+* [34m8f0ca2fb[m [[32m3 weeks ago[m] Cleaned Up UI and removed uncessary components. Fixed bug on adding new VR Headsets[33m[m
+* [34mc0066c0d[m [[32m4 weeks ago[m] feat: Added Delete and Update feature. Fixed UI bug: Click not working on specific part of buttons.[33m[m
+* [34mb90eba85[m [[32m5 weeks ago[m] Cleaned up some code in Express.js[33m[m
+* [34m25eaee39[m [[32m5 weeks ago[m] feat: added batch file to run Angular, Express and MongoDB at the same time, in windows[33m[m
+* [34m4a371569[m [[32m9 weeks ago[m] Feat: DOM Event auto-update. Express Console Improved.[33m[m
+* [34me5b84f4e[m [[32m9 weeks ago[m] feat: Added animation on boot-up[33m[m
+[31m|[m * [34md4264e2a[m [[32m9 weeks ago[m] Feat: Animation when bootin up Applciation[33m (origin/AnimationCode, AnimationCode)[m
+[31m|[m[31m/[m  
+* [34m02f5bd6e[m [[32m10 weeks ago[m] feat: Added add button. Added Enum Status. Added CSS color based on Enum.[33m[m
+* [34m7196aca9[m [[32m2 months ago[m] feat: added MongoDB retrieval and addition of VrHeadsets[33m[m
+* [34mef8c5664[m [[32m3 months ago[m] feat: Added MongoDB Connection[33m[m
+*   [34m2bf22312[m [[32m3 months ago[m] Merge branch 'main' of github.com:ricasbp/SatoreApp[33m[m
+[33m|[m[34m\[m  
+[33m|[m * [34m3e1945db[m [[32m3 months ago[m] Create README.md[33m[m
+* [34m|[m [34mbf615a2d[m [[32m3 months ago[m] Feat: UI buttons to the right[33m[m
+[34m|[m[34m/[m  
+* [34m2417c411[m [[32m3 months ago[m] Added Ipad and Android PWA[33m[m
+* [34ma6cdf7c2[m [[32m3 months ago[m] Improved Code Readbility, Only 1 UDP package, Removed TCP Code[33m[m
+* [34m67f3733a[m [[32m3 months ago[m] feat: added osc.js libray UDP code. Not able to use TCP version yet[33m[m
+* [34mb59130b0[m [[32m4 months ago[m] MVP: Improved UI + Receiving OSC packages + Sending 5 UDP packages[33m[m
+* [34mcc52be4d[m [[32m4 months ago[m] Updated vr-custom Css[33m (releases, 9cc95a5ffb0c57d2838a098e2f982d90c64bfd4f)[m
+* [34m269db92d[m [[32m4 months ago[m] UI: improved buttons look[33m[m
+* [34mdff89836[m [[32m4 months ago[m] feat CSS: Centered flex-containers[33m[m
+* [34m9cc95a5f[m [[32m4 months ago[m] Cleaning project[33m[m
+[34m|[m * [34m472a1ac6[m [[32m4 months ago[m] MVP version[33m (origin/release, release)[m
+[34m|[m[34m/[m  
+* [34m360d3cc5[m [[32m4 months ago[m] Cleaning project v3[33m[m
+* [34mb233c0e1[m [[32m4 months ago[m] Cleaning project v2[33m[m
+* [34madf74b32[m [[32m4 months ago[m] Cleaning project v1[33m[m
+* [34m270eb6f4[m [[32m4 months ago[m] Cleaning Project[33m (origin/develop)[m
+* [34m5c9dd476[m [[32m4 months ago[m] feat: Toggle Experience Component Created and Working.[33m[m
+* [34mfbbea3b1[m [[32m4 months ago[m] feat: Added buttons on UI. Express JSON Object to angular in progress[33m[m
+* [34m682da8be[m [[32m4 months ago[m] feat: OSC working. VRLists Mock Working. Developing Sse Server[33m[m
+* [34mb3a3a2be[m [[32m4 months ago[m] First Commit. OSC working[33m[m

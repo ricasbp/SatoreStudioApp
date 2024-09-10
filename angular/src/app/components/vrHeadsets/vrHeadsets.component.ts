@@ -11,8 +11,7 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
 })
 export class vrHeadsetsComponent implements OnInit {
 
-  headsetsList: any;
-  newHeadset: vrInfo = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false};
+  
 
   isUserAddingNewVRHeadset: boolean = false;
 
@@ -22,10 +21,43 @@ export class vrHeadsetsComponent implements OnInit {
   imagePathSettings: string = 'assets/images/settings_button.png';
   imagePathAddButton: string = 'assets/image/add_button.png';
 
+  headsetsList: vrInfo[] = [];
+  newHeadset: vrInfo = {
+    _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false,
+    isEdit: false
+  };
 
   constructor(private vrHeadsetService: VRHeadsetService) {
   }
-      
+
+  
+  // Add VR Headset (local, no external service call)
+  addVRHeadset() {
+    console.log('Submitting new headset:')
+
+    // Push the new headset to the headsetsList
+    this.headsetsList.push(this.newHeadset);
+
+    // Reset the form by setting newHeadset back to default
+    this.newHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false, isEdit: false };
+  }
+
+  // Update VR Headset (local, no external service call)
+  updateVRHeadset(updatedHeadset: vrInfo): void {
+    console.log('Updating headset:', updatedHeadset);
+
+    // Find the index of the headset to be updated in headsetsList
+    const index = this.headsetsList.findIndex(headset => headset._id === updatedHeadset._id);
+
+    // Update the headset if it exists in the list
+    if (index !== -1) {
+      this.headsetsList[index] = updatedHeadset;
+      console.log('Headset updated successfully:', updatedHeadset);
+    } else {
+      console.error('Headset not found in the list');
+    }
+  }
+  
   ngOnInit(): void {
     this.loadVRHeadsets();
   }
@@ -50,7 +82,7 @@ export class vrHeadsetsComponent implements OnInit {
         // Similarly, an API call to deactivate directing mode could be made:
         // this.vrService.deactivateDirectingMode(headset.id).subscribe();
     }
-}
+  }
 
   activateDirectorModeOnAll(event: Event): void {
     const isChecked = (event.target as HTMLInputElement).checked;
@@ -64,36 +96,6 @@ export class vrHeadsetsComponent implements OnInit {
     });
   }
 
-  updateVRHeadset(headset: any): void {
-    console.log(headset)
-    // Update VRHeadset from vrHeadsetService (FromMongoDB)
-    this.vrHeadsetService.updateVRHeadset(headset).subscribe(
-      (response) => {
-        console.log('Headset updated successfully', response);
-        // Optionally, you can refresh the headset list or update the UI
-        this.loadVRHeadsets();
-      },
-      (error) => {
-        console.error('Error updating headset', error);
-      }
-    );
-  }
-
-  deleteVRHeadset(headset: vrInfo): void {
-    console.log(headset);
-    if (confirm(`Are you sure you want to delete the VR Headset: ${headset.name}?`)) {
-      this.vrHeadsetService.deleteVRHeadset(headset._id!).subscribe(
-        response => {
-          console.log('VR Headset deleted:', response);
-          // Remove the deleted headset from the list in the UI
-          this.headsetsList = this.headsetsList.filter((h: { _id: string | undefined; }) => h._id !== headset._id);
-        },
-        error => {
-          console.error('Error deleting VR Headset:', error);
-        }
-      );
-    }
-  }
 
   loadVRHeadsets(): void {
     // Get VRHeadsets from vrHeadsetService (FromMongoDB)
@@ -108,16 +110,6 @@ export class vrHeadsetsComponent implements OnInit {
     );
   }
 
-  addVRHeadset() {
-    console.log('Submitting new headset:', this.newHeadset);
-    this.vrHeadsetService.addVRHeadset(this.newHeadset).subscribe(
-      data => {
-        this.headsetsList.push(data);
-        this.newHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false}; // Reset the form
-      },
-      error => console.error('Error adding VR headset', error)
-    );
-  }
 
   getStatusClass(status: string): { [key: string]: boolean } {
     return {

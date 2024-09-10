@@ -5,4 +5,5 @@ export interface vrInfo{
     name: string;
     status: 'offline' | 'online' | 'ready' | 'error' | 'running experience';
     directingMode: boolean; 
+    isEdit: boolean;
 }
