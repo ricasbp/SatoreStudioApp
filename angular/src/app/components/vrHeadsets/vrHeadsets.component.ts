@@ -97,7 +97,7 @@ export class vrHeadsetsComponent implements OnInit {
 
   loadVRHeadsets(): void {
     // Get VRHeadsets from vrHeadsetService (FromMongoDB)
-    this.vrHeadsetService.getVRHeadsets().subscribe(
+    this.vrHeadsetService.getAllVRHeadsets().subscribe(
       (data) => {
         this.headsetsList = data;
         console.log('VR Headsets:', this.headsetsList);

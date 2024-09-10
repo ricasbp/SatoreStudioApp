@@ -31,15 +31,19 @@
             <div *ngIf="headset.isEdit" class="ipAddress">
                 <input type="text" [(ngModel)]="headset.ipAddress">
                 <input type="text" [(ngModel)]="headset.port">
+                <input type="text" [(ngModel)]="headset.status">
             </div>
+
             <div *ngIf="!headset.isEdit" class="ipAddress">
                 <span>{{ headset.ipAddress }}:{{ headset.port }}</span>
             </div>
 
+            
+
         </div>
 
 
-        <!-- Rounded switch -->
+        <!-- Rounded switch 
         <label *ngIf="!headset.isEdit && headset.status !== 'offline'" class="switch">
             <input 
                 type="checkbox" 
@@ -47,7 +51,7 @@
                 (change)="activateDirectorMode(headset)"
             >
             <span class="slider round"></span>
-        </label>  
+        </label>  -->
 
         
         <button *ngIf="headset.isEdit" class="image-container-button" (click)="updateVRHeadset(headset)">

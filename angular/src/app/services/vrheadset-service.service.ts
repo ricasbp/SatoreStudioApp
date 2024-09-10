@@ -12,7 +12,7 @@ export class VRHeadsetService {
 
   constructor(private http: HttpClient) { }
 
-  getVRHeadsets(): Observable<any> {
+  getAllVRHeadsets(): Observable<any> {
     return this.http.get<any>(`${this.expressURL}/`);
   }
 
