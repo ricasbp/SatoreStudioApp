@@ -5,7 +5,7 @@ import { FormsModule } from "@angular/forms";
 import { OperatorModeComponent } from "./operator-mode.component";
 import { VrHeadsetsOperatorComponent } from "../vr-headsets-operator/vr-headsets-operator.component";
 import { ToggleExperienceComponent } from "../toggle-experience/toggle-experience.component";
-import { ContainerComponent } from "../container/container/container.component";
+import { OSCContainerComponent } from "src/app/container/osccontainer/osccontainer.component";
 
 
 @NgModule({
@@ -13,7 +13,7 @@ import { ContainerComponent } from "../container/container/container.component";
         OperatorModeComponent,
         ToggleExperienceComponent,
         VrHeadsetsOperatorComponent,
-        ContainerComponent
+        OSCContainerComponent
     ],
     exports: [
         OperatorModeComponent,

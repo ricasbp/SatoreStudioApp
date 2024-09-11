@@ -1,13 +1,14 @@
+
 import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { SseService } from 'src/app/services/sse-services/sse-services';
 import { tap } from 'rxjs';
 
 @Component({
-  selector: 'app-container',
-  templateUrl: './container.component.html',
-  styleUrls: ['./container.component.css']
+  selector: 'app-osccontainer',
+  templateUrl: './osccontainer.component.html',
+  styleUrls: ['./osccontainer.component.css']
 })
-export class ContainerComponent {
+export class OSCContainerComponent {
 
   @Input() current: any;
   title = 'angular-tour-of-heroes';
