@@ -5,21 +5,25 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ContainerComponent } from './components/container/container/container.component';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { vrHeadsetsComponent } from './components/vrHeadsets/vrHeadsets.component';
-import { ToggleExperienceComponent } from './components/toggle-experience/toggle-experience.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpClientModule } from '@angular/common/http';
-import { DirectorModeComponent } from './components/director-mode/director-mode.component';
-import { DirectorModeModule } from './components/director-mode/director-mode.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+import { DirectorModeModule } from './components/director-mode/director-mode.module';
+import { VrHeadsetsDirectorComponent } from './components/vr-headsets-director/vr-headsets-director.component';
+
+import { OperatorModeModule } from './components/operator-mode/operator-mode.module';
+import { VrHeadsetsOperatorComponent } from './components/vr-headsets-operator/vr-headsets-operator.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ContainerComponent
+    AppComponent
   ],
   imports: [
     DirectorModeModule,
+    OperatorModeModule,
     
     BrowserModule,
     HttpClientModule,

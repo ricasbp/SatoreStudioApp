@@ -1,0 +1,106 @@
+
+<h1>Director VR List Management</h1>
+
+<ul class="headsets">
+    <li *ngFor="let headset of headsetsList" [ngClass]="getStatusClass(headset.status)">
+
+        <button *ngIf="!headset.isEdit" class="image-container-button-settings" (click)="onEdit(headset)">
+            <img [src]="imagePathSettings" alt="Click here to edit this VrHeadset">
+        </button>
+
+        <button *ngIf="headset.isEdit" class="image-container-button-settings" (click)="headset.isEdit = false">
+            <img [src]="imagePathSettings" alt="Click here to edit this VrHeadset">
+        </button>
+
+        <div class="image-container-vr">
+            <img [src]="headset.status === 'offline' || headset.status === 'error'? imagePathQuest3Grey : imagePathQuest3" alt="MetaQuest3">
+        </div>       
+
+        <div class="vrinfo1">
+            <div *ngIf="headset.isEdit" class="name">
+                <input type="text" [(ngModel)]="headset.name">
+            </div>
+            <div *ngIf="!headset.isEdit" class="name">
+                <span>{{ headset.name }}</span>
+                <span class="status">{{ headset.status }}</span>
+            </div>
+
+            <div *ngIf="headset.isEdit" class="ipAddress">
+                <input type="text" [(ngModel)]="headset.ipAddress">
+                <input type="text" [(ngModel)]="headset.port">
+            </div>
+            <div *ngIf="!headset.isEdit" class="ipAddress">
+                <span>{{ headset.ipAddress }}:{{ headset.port }}</span>
+            </div>
+
+        </div>
+
+
+        <!-- Rounded switch -->
+        <label *ngIf="!headset.isEdit && headset.status !== 'offline'" class="switch">
+            <input 
+                type="checkbox" 
+                [checked]="headset.directingMode" 
+                (change)="activateDirectorMode(headset)"
+            >
+            <span class="slider round"></span>
+        </label>  
+
+        
+        <button *ngIf="headset.isEdit" class="image-container-button" (click)="updateVRHeadset(headset)">
+            Confirm
+        </button>
+        <button *ngIf="headset.isEdit" class="image-container-button" (click)="deleteVRHeadset(headset)">
+            Delete
+        </button>
+
+    </li>
+
+    
+<div>
+    <div *ngIf="isUserAddingNewVRHeadset">
+        <li>
+            <form (ngSubmit)="addVRHeadset()">
+
+                <div class="vrinfo1">
+                    
+                <label for="ipAddress">IP Address:</label>
+                <input type="text" id="ipAddress" [(ngModel)]="newHeadset.ipAddress" name="ipAddress" required>
+                
+                <label for="port">Port:</label>
+                <input type="text" id="port" [(ngModel)]="newHeadset.port" name="port" required>
+               
+                <label for="name">Name:</label>
+                <input type="text" id="name" [(ngModel)]="newHeadset.name" name="name" required>
+                    
+                </div>
+
+                <button class="image-container-button" (click)="isUserAddingNewVRHeadset = false">
+                    Cancel
+                </button>
+                
+                <button class="image-container-button" type="submit">
+                    Add VR Headset
+                </button>
+                
+            </form>
+        </li>
+    </div>
+
+    <div class= "container-for-addButton-and-switch">
+        <img *ngIf="!isUserAddingNewVRHeadset" 
+            (click)="isUserAddingNewVRHeadset = true" 
+            class="image-container-button-add" 
+            [src]="imagePathAdd" 
+            alt="Click here to add a new VRHeadset to the DataBase.">
+        
+        <!-- Master switch to control all others -->
+        <label class="switch" >
+            <input type="checkbox" (change)="activateDirectorModeOnAll($event)">
+            <span class="slider round"></span>
+        </label>
+    </div>
+    
+    
+    
+</div>

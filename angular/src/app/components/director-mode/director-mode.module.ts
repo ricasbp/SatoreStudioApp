@@ -1,20 +1,19 @@
 import { NgModule } from "@angular/core";
-import { ToggleExperienceComponent } from "../toggle-experience/toggle-experience.component";
-import { vrHeadsetsComponent } from "../vrHeadsets/vrHeadsets.component";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+
 import { DirectorModeComponent } from "./director-mode.component";
+import { VrHeadsetsDirectorComponent } from "../vr-headsets-director/vr-headsets-director.component";
+
 
 @NgModule({
     declarations: [
         DirectorModeComponent,
-        ToggleExperienceComponent,
-        vrHeadsetsComponent
+        VrHeadsetsDirectorComponent
     ],
     exports: [
         DirectorModeComponent,
-        ToggleExperienceComponent,
-        vrHeadsetsComponent
+        VrHeadsetsDirectorComponent
     ],
     imports: [
         CommonModule,
