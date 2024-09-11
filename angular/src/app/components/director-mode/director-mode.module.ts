@@ -4,6 +4,8 @@ import { FormsModule } from "@angular/forms";
 
 import { DirectorModeComponent } from "./director-mode.component";
 import { VrHeadsetsDirectorComponent } from "../vr-headsets-director/vr-headsets-director.component";
+import { ToggleExperienceModule } from "../toggle-experience/toggle-experience.module";
+import { OSCContainerModule } from "src/app/container/osccontainer/osccontainer.module";
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { VrHeadsetsDirectorComponent } from "../vr-headsets-director/vr-headsets
     ],
     imports: [
         CommonModule,
-        FormsModule
+        FormsModule,
+        ToggleExperienceModule,
+        OSCContainerModule
     ]
   })
   export class DirectorModeModule { }

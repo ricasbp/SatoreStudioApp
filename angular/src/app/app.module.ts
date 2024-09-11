@@ -10,10 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { DirectorModeModule } from './components/director-mode/director-mode.module';
-import { VrHeadsetsDirectorComponent } from './components/vr-headsets-director/vr-headsets-director.component';
-
 import { OperatorModeModule } from './components/operator-mode/operator-mode.module';
-import { VrHeadsetsOperatorComponent } from './components/vr-headsets-operator/vr-headsets-operator.component';
 
 
 @NgModule({
