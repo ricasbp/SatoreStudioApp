@@ -39,17 +39,6 @@
 
         </div>
 
-
-        <!-- Rounded switch -->
-        <label *ngIf="!headset.isEdit && headset.status !== 'offline'" class="switch">
-            <input 
-                type="checkbox" 
-                [checked]="headset.directingMode" 
-                (change)="activateDirectorMode(headset)"
-            >
-            <span class="slider round"></span>
-        </label>  
-
         
         <button *ngIf="headset.isEdit" class="image-container-button" (click)="updateVRHeadset(headset)">
             Confirm
@@ -98,11 +87,6 @@
             [src]="imagePathAdd" 
             alt="Click here to add a new VRHeadset to the DataBase.">
         
-        <!-- Master switch to control all others -->
-        <label class="switch" >
-            <input type="checkbox" (change)="activateDirectorModeOnAll($event)">
-            <span class="slider round"></span>
-        </label>
     </div>
     
     

@@ -13,7 +13,6 @@ export class OSCContainerComponent {
   @Input() current: any;
   title = 'angular-tour-of-heroes';
   random = 1;
-
   
   // Refresh the DOM if receives value from event.
   // Build Here VR Connection Logic.

@@ -1,16 +1,12 @@
-/* HeroesComponent's private CSS styles */
-.headsets {
+  .headsets{
     margin: 2%;
     list-style-type: none;
     padding: 0;
-    max-width: 1000px; /* Ensure the container doesn't get bigger then 1200px */
-  }
-  
-  .headsets {
-    margin: 2%;
-    list-style-type: none;
-    padding: 0;
-    max-width: 1000px; /* Ensure the container doesn't get bigger then 1200px */
+
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
   }
   
   
@@ -21,6 +17,10 @@
     overflow: hidden; /* Ensures rounded corners contain child elements */
     margin-bottom: 1em; /* Adds space between list items */
     position: relative; /* Ensure positioning context for absolute children */
+
+    /* Set width and height */
+    width: 400px;
+    height: 300px;
   
     /*Code to make all flex-containers centered*/
     display: flex; /* Use flexbox for layout */

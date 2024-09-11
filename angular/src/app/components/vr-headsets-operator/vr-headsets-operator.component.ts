@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { vrInfo } from 'src/vrInfo';
+import { vrHeadset } from 'src/vrHeadset';
 import { SseService } from 'src/app/services/sse-services/sse-services';
 import { tap } from 'rxjs';
 import { VRHeadsetService } from '../../services/vrheadset-service.service';
@@ -12,7 +12,7 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
 export class VrHeadsetsOperatorComponent {
 
   headsetsList: any;
-  newHeadset: vrInfo = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false};
+  newHeadset: vrHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false};
 
   isUserAddingNewVRHeadset: boolean = false;
 
@@ -34,36 +34,6 @@ export class VrHeadsetsOperatorComponent {
     item.isEdit = true;
   }
 
-  activateDirectorMode(headset: vrInfo): void {
-    // Toggle the directingMode for the given headset
-    headset.directingMode = !headset.directingMode;
-
-    // You can add additional logic here if needed
-    if (headset.directingMode) {
-        // Logic when directing mode is turned ON
-        console.log(`${headset.name} is now in directing mode.`);
-        // You could also make an API call to update the server, e.g.:
-        // this.vrService.activateDirectingMode(headset.id).subscribe();
-    } else {
-        // Logic when directing mode is turned OFF
-        console.log(`${headset.name} has exited directing mode.`);
-        // Similarly, an API call to deactivate directing mode could be made:
-        // this.vrService.deactivateDirectingMode(headset.id).subscribe();
-    }
-}
-
-  activateDirectorModeOnAll(event: Event): void {
-    const isChecked = (event.target as HTMLInputElement).checked;
-    
-    // Toggle directingMode for all headsets based on master switch's state
-    this.headsetsList.forEach((headset: {
-      name: any; directingMode: boolean; 
-}) => {
-        headset.directingMode = isChecked;
-        console.log(`${headset.name} is now in directing mode.`);
-    });
-  }
-
   updateVRHeadset(headset: any): void {
     console.log(headset)
     // Update VRHeadset from vrHeadsetService (FromMongoDB)
@@ -79,7 +49,7 @@ export class VrHeadsetsOperatorComponent {
     );
   }
 
-  deleteVRHeadset(headset: vrInfo): void {
+  deleteVRHeadset(headset: vrHeadset): void {
     console.log(headset);
     if (confirm(`Are you sure you want to delete the VR Headset: ${headset.name}?`)) {
       this.vrHeadsetService.deleteVRHeadset(headset._id!).subscribe(
@@ -129,7 +99,7 @@ export class VrHeadsetsOperatorComponent {
     };
   }
   
-  sendDownloadAssetsOSC(headset: vrInfo) {
+  sendDownloadAssetsOSC(headset: vrHeadset) {
     const url = "http://localhost:3000/DownloadAssets";
     const data = { ipAddress: headset.ipAddress,  port: headset.port};
 

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { vrInfo } from 'src/vrInfo';
+import { vrHeadset } from 'src/vrHeadset';
 import { SseService } from 'src/app/services/sse-services/sse-services';
 import { tap } from 'rxjs';
 import { VRHeadsetService } from '../../services/vrheadset-service.service';
@@ -12,7 +12,7 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
 export class VrHeadsetsDirectorComponent {
 
   headsetsList: any;
-  newHeadset: vrInfo = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false};
+  newHeadset: vrHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false};
 
   isUserAddingNewVRHeadset: boolean = false;
 
@@ -21,7 +21,6 @@ export class VrHeadsetsDirectorComponent {
   imagePathQuest3Grey: string = 'assets/images/metaquest3_grey.png';
   imagePathSettings: string = 'assets/images/settings_button.png';
   imagePathAddButton: string = 'assets/image/add_button.png';
-
 
   constructor(private vrHeadsetService: VRHeadsetService) {
   }
@@ -34,7 +33,7 @@ export class VrHeadsetsDirectorComponent {
     item.isEdit = true;
   }
 
-  activateDirectorMode(headset: vrInfo): void {
+  activateDirectorMode(headset: vrHeadset): void {
     // Toggle the directingMode for the given headset
     headset.directingMode = !headset.directingMode;
 
@@ -79,7 +78,7 @@ export class VrHeadsetsDirectorComponent {
     );
   }
 
-  deleteVRHeadset(headset: vrInfo): void {
+  deleteVRHeadset(headset: vrHeadset): void {
     console.log(headset);
     if (confirm(`Are you sure you want to delete the VR Headset: ${headset.name}?`)) {
       this.vrHeadsetService.deleteVRHeadset(headset._id!).subscribe(
@@ -129,7 +128,7 @@ export class VrHeadsetsDirectorComponent {
     };
   }
   
-  sendDownloadAssetsOSC(headset: vrInfo) {
+  sendDownloadAssetsOSC(headset: vrHeadset) {
     const url = "http://localhost:3000/DownloadAssets";
     const data = { ipAddress: headset.ipAddress,  port: headset.port};
 

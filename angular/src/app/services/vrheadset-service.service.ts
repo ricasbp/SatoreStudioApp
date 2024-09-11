@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { vrInfo } from '../../vrInfo'; 
+import { vrHeadset } from '../../vrHeadset'; 
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,8 @@ export class VRHeadsetService {
     return this.http.get<any>(`${this.expressURL}/`);
   }
 
-  addVRHeadset(vrInfo: vrInfo): Observable<vrInfo> {
-    return this.http.post<vrInfo>(`${this.expressURL}/vrheadsets`, vrInfo);
+  addVRHeadset(vrInfo: vrHeadset): Observable<vrHeadset> {
+    return this.http.post<vrHeadset>(`${this.expressURL}/vrheadsets`, vrInfo);
   }
   
   updateVRHeadset(headset: any): Observable<any> {
