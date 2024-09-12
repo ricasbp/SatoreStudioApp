@@ -3,11 +3,12 @@
     list-style-type: none;
     padding: 0;
 
-    height: 700px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-  }
+    display: grid; /* Grid is flexbox but in 2d */
+    grid-template-columns:  400px 400px; /* Two clumns, each with X px */
+    column-gap: 20px;
+    row-gap: 20px;
+
+    }
   
   
   .headsets li {
@@ -17,15 +18,20 @@
     overflow: hidden; /* Ensures rounded corners contain child elements */
     margin-bottom: 1em; /* Adds space between list items */
     position: relative; /* Ensure positioning context for absolute children */
+    
 
     /* Set width and height */
     width: 400px;
     height: 300px;
-  
-    /*Code to make all flex-containers centered*/
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Centers divs vertically. Flex Y coordinate value for the containers inside it*/
-  
+
+    display: grid; /* Grid is flexbox but in 2d */
+    grid-template-columns:  120px 110px; /* Two clumns, each with X px */
+
+    /*The align-self and align-items properties control alignment on the block axis.*/
+    align-items: end; 
+    /*justify-items and justify-self do the same job on the inline axis*/
+    
+
     /* Shadow with: right, bottom, blur, color and alpha*/
     box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); 
   
@@ -35,6 +41,8 @@
     animation-delay: 0s; /* No delay for the first item */
     animation-fill-mode: forwards; /* Keep the end state */
   }
+
+
   
   /* KeyFrames Animation */
   @keyframes vrFadeIn{
@@ -74,9 +82,11 @@
   .headsets li:nth-child(6) {
     animation-delay: 2.5s; /* 2.5 seconds delay */
   }
+
+
   
   /* 
-    CSS for the Satuts Text
+    CSS for the Status Text
   */
   
   .headsets .status{
@@ -87,6 +97,11 @@
     color: #289900;
     font-weight: bold;
   }
+
+  .headsets li.online-class {
+    background-color: #C3FFC5;
+  }
+  
   
   .headsets .offline-class{
     color: #868686;
@@ -112,7 +127,6 @@
     CSS for the Upload Button
   */
   .image-container-button {
-  
     background-color: #D9D9D9; /* Background color for the list items */
     border-radius: 10px;
     padding: 1%;
@@ -120,7 +134,7 @@
     margin-right: 3%;
     margin-left: auto;  /* Push button to the far-right */
   
-  
+ 
     cursor: pointer; /* Change cursor to pointer on hover */
     box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* right, bottom, blur, color and alpha*/
   }
@@ -156,13 +170,21 @@
   */
   
   .image-container-button-settings {
+
     background-color: #D9D9D9; /* Background color for the list items */
     border-radius: 10px;
     padding: 1%;
     margin-left: 3%;
     cursor: pointer; /* Change cursor to pointer on hover */
     box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* right, bottom, blur, color and alpha*/
-  }
+    
+    align-self: start; 
+    justify-self: end;
+    margin: 15px;
+
+    width: 60px; 
+    height: 60px;
+}
   
   .image-container-button-settings:hover {
     background-color: #BCBCBC;
@@ -176,23 +198,43 @@
     background: none; /* Remove default button background */
     border: none; /* Remove default button border */
     padding: 0; /* Remove default button padding */
-    /* CSS Center Guide*/
-    display: block;
-    margin: auto;  
+    width: 25px; 
+    height: 25px; 
   }
-  
-  .image-container-button-settings img {
-    width: 25px; /* Set a fixed width for the buttons */
-    height: 25px; /* Set a fixed height for the buttons */
-    /* CSS Center Guide*/
-    display: block;  
-    margin: auto;
-  }
-  
   
   
   /* 
-    CSS for the Add button 
+    CSS for the VR Text 
+  */
+
+  .vrinfo1{
+    margin: 10px;
+  }
+
+  /* 
+    CSS for the VRHeadset Images 
+  */
+  
+  .image-container-vr {
+    width: 100px;
+    height: 65px;
+
+    justify-self: end;
+    margin: 10px;
+  }
+
+  
+  /* 
+    CSS for the container for the Add VR Button and Switch 
+  */
+  
+  .container-for-addButton-and-switch{
+    display: flex;
+    align-items: center; /* Align items vertically centered */
+  }
+
+  /* 
+    CSS for the Add VR Button
   */
   
   .image-container-button-add {
@@ -212,32 +254,9 @@
   .image-container-button-add:hover {
     background-color: #BCBCBC;
   }
-  
+
   /* 
-    CSS for the VRHeadset Images 
-  */
-  
-  .image-container-vr {
-    top: 0; /* Align to the top of the parent li */
-    left: 0; /* Align to the left of the parent li */
-    width: 8%; /* Changes width compared to parent li */
-    height: 8%; /* Changes width compared to parent li */
-    display: flex;
-    padding: 1em;
-  }
-  .image-container-vr img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* Ensures the image fits within the container */
-  }
-  
-  
-  
-  
-  
-  
-  /* 
-      CSS for the Switch 
+    CSS for the Switch 
   */
   
    /* The switch - the box around the slider */
@@ -249,8 +268,13 @@
   
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 150px;
+    height: 50px;
+
+
+    align-self: start; 
+    margin: 10px;
+
   }
   
   /* Hide default HTML checkbox */
@@ -276,8 +300,8 @@
   .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
+    height: 40px;
+    width: 40px;
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -294,9 +318,9 @@
   }
   
   input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(100px);
+    -ms-transform: translateX(100px);
+    transform: translateX(100px);
   }
   
   /* Rounded sliders */
@@ -310,11 +334,3 @@
   
   
   
-  /* 
-      CSS for the container for addButton and Switch 
-  */
-  
-  .container-for-addButton-and-switch{
-    display: flex;
-    align-items: center; /* Align items vertically centered */
-  }
