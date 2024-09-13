@@ -272,8 +272,12 @@ const oscServer = new OSCServer(oscServerPort, oscServerIp, () => {
 });
 
 // Handle incoming OSC messages
-oscServer.on('message', (msg) => {
+oscServer.on('message', (msg, rinfo) => {
     console.log(`Received OSC message: ${msg}`);
+
+    console.log(`Received OSC from: ${rinfo.address}`);
+
+    
 
     const data = {
       message: msg,
