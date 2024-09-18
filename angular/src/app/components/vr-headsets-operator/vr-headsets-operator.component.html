@@ -5,11 +5,11 @@
 <ul class="headsets">
     <li *ngFor="let headset of headsetsList" [ngClass]="getStatusClass(headset.status)">
 
-        <button *ngIf="!headset.isEdit" class="image-container-button-settings" (click)="onEdit(headset)">
+        <button *ngIf="!headset.isInEditMode" class="image-container-button-settings" (click)="onEdit(headset)">
             <img [src]="imagePathSettings" alt="Click here to edit this VrHeadset">
         </button>
 
-        <button *ngIf="headset.isEdit" class="image-container-button-settings" (click)="headset.isEdit = false">
+        <button *ngIf="headset.isInEditMode" class="image-container-button-settings" (click)="headset.isInEditMode = false">
             <img [src]="imagePathSettings" alt="Click here to edit this VrHeadset">
         </button>
 
@@ -21,29 +21,29 @@
         
 
         <div class="vrinfo1">
-            <div *ngIf="headset.isEdit" class="name">
+            <div *ngIf="headset.isInEditMode" class="name">
                 <input type="text" [(ngModel)]="headset.name">
             </div>
-            <div *ngIf="!headset.isEdit" class="name">
+            <div *ngIf="!headset.isInEditMode" class="name">
                 <span>{{ headset.name }}</span>
                 <span class="status">{{ headset.status }}</span>
             </div>
 
-            <div *ngIf="headset.isEdit" class="ipAddress">
+            <div *ngIf="headset.isInEditMode" class="ipAddress">
                 <input type="text" [(ngModel)]="headset.ipAddress">
                 <input type="text" [(ngModel)]="headset.port">
             </div>
-            <div *ngIf="!headset.isEdit" class="ipAddress">
+            <div *ngIf="!headset.isInEditMode" class="ipAddress">
                 <span>{{ headset.ipAddress }}:{{ headset.port }}</span>
             </div>
 
         </div>
 
         
-        <button *ngIf="headset.isEdit" class="image-container-button" (click)="updateVRHeadset(headset)">
+        <button *ngIf="headset.isInEditMode" class="image-container-button" (click)="updateVRHeadset(headset)">
             Confirm
         </button>
-        <button *ngIf="headset.isEdit" class="image-container-button" (click)="deleteVRHeadset(headset)">
+        <button *ngIf="headset.isInEditMode" class="image-container-button" (click)="deleteVRHeadset(headset)">
             Delete
         </button>
 

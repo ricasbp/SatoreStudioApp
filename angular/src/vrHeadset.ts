@@ -5,4 +5,5 @@ export interface vrHeadset{
     name: string;
     status: 'offline' | 'online' | 'ready' | 'error' | 'running experience';
     directingMode: boolean; 
+    isInEditMode: boolean;
 }

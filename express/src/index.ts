@@ -80,7 +80,6 @@ const VRHeadset = mongoose.model('VRHeadset', vrHeadsetSchema);
 // Endpoint to get all VRHeadsets
 app.get('/', async (req, res) => {
   try {
-    const newHeadset = new VRHeadset(req.body);
     const headsets = await VRHeadset.find({});
     res.json(headsets);
     console.log("Angular Request: Retrieved VRHeadsets from MongoDB.");
@@ -98,11 +97,9 @@ app.get('/', async (req, res) => {
 // Endpoint to add a new VRHeadset
 app.post('/vrheadsets', async (req, res) => {
   try {
-    
     if (req.body._id === "") {
       delete req.body._id;  // Remove _id if it's an empty string
     }
-    
     console.log("Adding new VR Headset! It's info is: " );
     console.log(req.body);
     const newHeadset = new VRHeadset(req.body);
@@ -274,10 +271,7 @@ const oscServer = new OSCServer(oscServerPort, oscServerIp, () => {
 // Handle incoming OSC messages
 oscServer.on('message', (msg, rinfo) => {
     console.log(`Received OSC message: ${msg}`);
-
     console.log(`Received OSC from: ${rinfo.address}`);
-
-    
 
     const data = {
       message: msg,

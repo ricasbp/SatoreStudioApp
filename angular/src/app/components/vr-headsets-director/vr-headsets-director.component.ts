@@ -11,8 +11,8 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
 })
 export class VrHeadsetsDirectorComponent {
 
-  headsetsList: any;
-  newHeadset: vrHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false};
+  headsetsList: vrHeadset[] = [];
+  newHeadset: vrHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false, isInEditMode: false};
 
   isUserAddingNewVRHeadset: boolean = false;
 
@@ -30,7 +30,7 @@ export class VrHeadsetsDirectorComponent {
   }
 
   onEdit(item : any){
-    item.isEdit = true;
+    item.isInEditMode = true;
   }
 
   activateDirectorMode(headset: vrHeadset): void {
@@ -85,7 +85,7 @@ export class VrHeadsetsDirectorComponent {
         response => {
           console.log('VR Headset deleted:', response);
           // Remove the deleted headset from the list in the UI
-          this.headsetsList = this.headsetsList.filter((h: { _id: string | undefined; }) => h._id !== headset._id);
+          this.headsetsList = this.headsetsList.filter((h: vrHeadset) => h._id !== headset._id);        
         },
         error => {
           console.error('Error deleting VR Headset:', error);
@@ -112,7 +112,7 @@ export class VrHeadsetsDirectorComponent {
     this.vrHeadsetService.addVRHeadset(this.newHeadset).subscribe(
       data => {
         this.headsetsList.push(data);
-        this.newHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false}; // Reset the form
+        this.newHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false, isInEditMode: false}; // Reset the form
       },
       error => console.error('Error adding VR headset', error)
     );

@@ -7,26 +7,26 @@
         <img class="image-container-vr" [src]="headset.status === 'offline' || headset.status === 'error'? imagePathQuest3Grey : imagePathQuest3" alt="MetaQuest3">
 
         <div class="vrinfo1">
-            <div *ngIf="headset.isEdit" class="name">
+            <div *ngIf="headset.isInEditMode" class="name">
                 <input type="text" [(ngModel)]="headset.name">
             </div>
-            <div *ngIf="!headset.isEdit" class="name">
+            <div *ngIf="!headset.isInEditMode" class="name">
                 <span>{{ headset.name }}</span>
                 <span class="status">{{ headset.status }}</span>
             </div>
 
-            <div *ngIf="headset.isEdit" class="ipAddress">
+            <div *ngIf="headset.isInEditMode" class="ipAddress">
                 <input type="text" [(ngModel)]="headset.ipAddress">
                 <input type="text" [(ngModel)]="headset.port">
             </div>
-            <div *ngIf="!headset.isEdit" class="ipAddress">
+            <div *ngIf="!headset.isInEditMode" class="ipAddress">
                 <span>{{ headset.ipAddress }}:{{ headset.port }}</span>
             </div>
 
         </div>
 
         <img 
-        *ngIf="!headset.isEdit" 
+        *ngIf="!headset.isInEditMode" 
         class="image-container-button-settings" 
         (click)="onEdit(headset)" 
         [src]="imagePathSettings" 
@@ -34,14 +34,14 @@
         
 
         <img 
-            *ngIf="headset.isEdit" 
+            *ngIf="headset.isInEditMode" 
             class="image-container-button-settings" 
-            (click)="headset.isEdit = false"
+            (click)="headset.isInEditMode = false"
             [src]="imagePathSettings" 
             alt="Click here to edit this VrHeadset">
 
         <!-- Rounded switch -->
-        <label *ngIf="!headset.isEdit && headset.status !== 'offline'" class="switch">
+        <label *ngIf="!headset.isInEditMode && headset.status !== 'offline'" class="switch">
             <input 
                 type="checkbox" 
                 [checked]="headset.directingMode" 
@@ -51,10 +51,10 @@
         </label>  
 
         
-        <button *ngIf="headset.isEdit" class="image-container-button" (click)="updateVRHeadset(headset)">
+        <button *ngIf="headset.isInEditMode" class="image-container-button" (click)="updateVRHeadset(headset)">
             Confirm
         </button>
-        <button *ngIf="headset.isEdit" class="image-container-button" (click)="deleteVRHeadset(headset)">
+        <button *ngIf="headset.isInEditMode" class="image-container-button" (click)="deleteVRHeadset(headset)">
             Delete
         </button>
 

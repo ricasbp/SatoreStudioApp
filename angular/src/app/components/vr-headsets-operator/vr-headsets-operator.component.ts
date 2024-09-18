@@ -11,8 +11,8 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
 })
 export class VrHeadsetsOperatorComponent {
 
-  headsetsList: any;
-  newHeadset: vrHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false};
+  headsetsList: vrHeadset[] = [];
+  newHeadset: vrHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false, isInEditMode: false};
 
   isUserAddingNewVRHeadset: boolean = false;
 
@@ -27,11 +27,11 @@ export class VrHeadsetsOperatorComponent {
   }
       
   ngOnInit(): void {
-    this.loadVRHeadsets();
+    this.getVRHeadsetsFromService();
   }
 
   onEdit(item : any){
-    item.isEdit = true;
+    item.isInEditMode = true;
   }
 
   updateVRHeadset(headset: any): void {
@@ -41,7 +41,7 @@ export class VrHeadsetsOperatorComponent {
       (response) => {
         console.log('Headset updated successfully', response);
         // Optionally, you can refresh the headset list or update the UI
-        this.loadVRHeadsets();
+        this.getVRHeadsetsFromService();
       },
       (error) => {
         console.error('Error updating headset', error);
@@ -56,7 +56,7 @@ export class VrHeadsetsOperatorComponent {
         response => {
           console.log('VR Headset deleted:', response);
           // Remove the deleted headset from the list in the UI
-          this.headsetsList = this.headsetsList.filter((h: { _id: string | undefined; }) => h._id !== headset._id);
+          this.headsetsList = this.headsetsList.filter((h: vrHeadset) => h._id !== headset._id);        
         },
         error => {
           console.error('Error deleting VR Headset:', error);
@@ -65,7 +65,7 @@ export class VrHeadsetsOperatorComponent {
     }
   }
 
-  loadVRHeadsets(): void {
+  getVRHeadsetsFromService(): void {
     // Get VRHeadsets from vrHeadsetService (FromMongoDB)
     this.vrHeadsetService.getVRHeadsets().subscribe(
       (data) => {
@@ -83,7 +83,7 @@ export class VrHeadsetsOperatorComponent {
     this.vrHeadsetService.addVRHeadset(this.newHeadset).subscribe(
       data => {
         this.headsetsList.push(data);
-        this.newHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false}; // Reset the form
+        this.newHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false, isInEditMode: false}; // Reset the form
       },
       error => console.error('Error adding VR headset', error)
     );
