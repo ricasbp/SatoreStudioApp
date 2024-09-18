@@ -10,23 +10,34 @@ export class VRHeadsetService {
 
   private expressURL = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) { }
+  headsetsList: any;
+
+  constructor(private http: HttpClient) { 
+  }  
+
+  ngOnInit(){
+    this.headsetsList =  this.getVRHeadsetsFromServer();
+  }
 
   getVRHeadsets(): Observable<any> {
-    return this.http.get<any>(`${this.expressURL}/`);
+    return this.headsetsList;
   }
 
-  addVRHeadset(vrInfo: vrHeadset): Observable<vrHeadset> {
-    return this.http.post<vrHeadset>(`${this.expressURL}/vrheadsets`, vrInfo);
+  getVRHeadsetsFromServer(){ // TOREVIEW: Maybe rename it to Retrieve because this is not exactly a get method.
+    this.headsetsList == this.http.get<any>(`${this.expressURL}/`);
+  }
+
+  addVRHeadset(headset: vrHeadset): Observable<vrHeadset> {
+    return this.http.post<vrHeadset>(`${this.expressURL}/vrheadsets`, headset);;
   }
   
-  updateVRHeadset(headset: any): Observable<any> {
-    return this.http.put<any>(`${this.expressURL}/vrheadsets/${headset._id}`, headset);
+  updateVRHeadset(headset: vrHeadset): Observable<vrHeadset> {
+    return this.http.put<vrHeadset>(`${this.expressURL}/vrheadsets/${headset._id}`, headset);
   }
 
-  deleteVRHeadset(headsetId: string): Observable<any> {
+  deleteVRHeadset(headsetId: string): Observable<vrHeadset> {
     console.log("headsetId= " + headsetId);
-    return this.http.delete<any>(`${this.expressURL}/vrheadsets/${headsetId}`);
+    return this.http.delete<vrHeadset>(`${this.expressURL}/vrheadsets/${headsetId}`);
   }
   
 

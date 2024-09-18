@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'director-mode',
-    component: DirectorModeComponent
+    component: DirectorModeComponent  
   }
 ];
 

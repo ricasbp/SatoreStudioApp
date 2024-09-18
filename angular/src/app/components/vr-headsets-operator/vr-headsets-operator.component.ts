@@ -27,7 +27,7 @@ export class VrHeadsetsOperatorComponent {
   }
       
   ngOnInit(): void {
-    this.loadVRHeadsets();
+    this.getVRHeadsetsFromVRService();
   }
 
   onEdit(item : any){
@@ -41,7 +41,7 @@ export class VrHeadsetsOperatorComponent {
       (response) => {
         console.log('Headset updated successfully', response);
         // Optionally, you can refresh the headset list or update the UI
-        this.loadVRHeadsets();
+        this.getVRHeadsetsFromVRService();
       },
       (error) => {
         console.error('Error updating headset', error);
@@ -65,7 +65,7 @@ export class VrHeadsetsOperatorComponent {
     }
   }
 
-  loadVRHeadsets(): void {
+  getVRHeadsetsFromVRService(): void {
     // Get VRHeadsets from vrHeadsetService (FromMongoDB)
     this.vrHeadsetService.getVRHeadsets().subscribe(
       (data) => {
