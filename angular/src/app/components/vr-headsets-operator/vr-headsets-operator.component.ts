@@ -30,6 +30,11 @@ export class VrHeadsetsOperatorComponent {
     this.getVRHeadsetsFromService();
   }
 
+  getVRHeadsetsFromService(): void {
+    this.headsetsList = this.vrHeadsetService.getVRHeadsets();
+    console.log('VR Headsets in Component:', this.headsetsList);
+  }
+
   onEdit(item : any){
     item.isInEditMode = true;
   }
@@ -56,7 +61,7 @@ export class VrHeadsetsOperatorComponent {
         response => {
           console.log('VR Headset deleted:', response);
           // Remove the deleted headset from the list in the UI
-          this.headsetsList = this.headsetsList.filter((h: vrHeadset) => h._id !== headset._id);        
+          this.headsetsList = this.headsetsList.filter((h: vrHeadset) => h._id !== headset._id);
         },
         error => {
           console.error('Error deleting VR Headset:', error);
@@ -65,18 +70,6 @@ export class VrHeadsetsOperatorComponent {
     }
   }
 
-  getVRHeadsetsFromService(): void {
-    // Get VRHeadsets from vrHeadsetService (FromMongoDB)
-    this.vrHeadsetService.getVRHeadsets().subscribe(
-      (data) => {
-        this.headsetsList = data;
-        console.log('VR Headsets:', this.headsetsList);
-      },
-      (error) => {
-        console.error('Error retrieving VR headsets', error);
-      }
-    );
-  }
 
   addVRHeadset() {
     console.log('Submitting new headset:', this.newHeadset);

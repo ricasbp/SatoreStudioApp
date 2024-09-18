@@ -26,7 +26,11 @@ export class VrHeadsetsDirectorComponent {
   }
       
   ngOnInit(): void {
-    this.loadVRHeadsets();
+    this.getVRHeadsetsFromService();
+  }
+
+  getVRHeadsetsFromService(): void {
+    this.headsetsList = this.vrHeadsetService.getVRHeadsets();
   }
 
   onEdit(item : any){
@@ -70,7 +74,7 @@ export class VrHeadsetsDirectorComponent {
       (response) => {
         console.log('Headset updated successfully', response);
         // Optionally, you can refresh the headset list or update the UI
-        this.loadVRHeadsets();
+        this.getVRHeadsetsFromService();
       },
       (error) => {
         console.error('Error updating headset', error);
@@ -92,19 +96,6 @@ export class VrHeadsetsDirectorComponent {
         }
       );
     }
-  }
-
-  loadVRHeadsets(): void {
-    // Get VRHeadsets from vrHeadsetService (FromMongoDB)
-    this.vrHeadsetService.getVRHeadsets().subscribe(
-      (data) => {
-        this.headsetsList = data;
-        console.log('VR Headsets:', this.headsetsList);
-      },
-      (error) => {
-        console.error('Error retrieving VR headsets', error);
-      }
-    );
   }
 
   addVRHeadset() {

@@ -9,11 +9,26 @@ import { vrHeadset } from '../../vrHeadset';
 export class VRHeadsetService {
 
   private expressURL = 'http://localhost:3000';
+  headsetsList: vrHeadset[] = [];
 
   constructor(private http: HttpClient) { }
 
-  getVRHeadsets(): Observable<any> {
-    return this.http.get<any>(`${this.expressURL}/`);
+  // Review: This should be done in a OnInit method
+  getVRHeadsets(): vrHeadset[]  {
+    this.getVRHeadsetsfromServer();
+    return this.headsetsList;
+  }
+
+  getVRHeadsetsfromServer(): void {
+    this.http.get<vrHeadset[]>(`${this.expressURL}/`).subscribe(
+      (data: vrHeadset[]) => {
+        this.headsetsList = data;  // Assign the server response to the local list
+        console.log('VR Headsets in Service:', this.headsetsList);
+      },
+      (error) => {
+        console.error('Error fetching VR headsets from server:', error);
+      }
+    );
   }
 
   addVRHeadset(vrInfo: vrHeadset): Observable<vrHeadset> {
@@ -28,6 +43,5 @@ export class VRHeadsetService {
     console.log("headsetId= " + headsetId);
     return this.http.delete<any>(`${this.expressURL}/vrheadsets/${headsetId}`);
   }
-  
 
 }
