@@ -240,6 +240,7 @@ app.get('/events', (req, res) => {
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
+
   res.flushHeaders(); // flush the headers to establish SSE with client
 
   const sendEvent = () => {
