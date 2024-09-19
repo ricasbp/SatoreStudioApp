@@ -8,7 +8,8 @@ import { vrHeadset } from '../../vrHeadset';
 })
 export class VRHeadsetService {
 
-  private expressURL = 'http://localhost:3000';
+  private expressURL = 'https://33bf-95-94-97-38.ngrok-free.app';
+  
   headsetsList: vrHeadset[] = [];
 
   constructor(private http: HttpClient) { }
@@ -20,7 +21,12 @@ export class VRHeadsetService {
   }
 
   getVRHeadsetsfromServer(): void {
-    this.http.get<vrHeadset[]>(`${this.expressURL}/`).subscribe(
+    this.http.get<vrHeadset[]>(`${this.expressURL}/`, { // Header to ignore Ngrok warning, and make Angular able to make request to Express.
+      headers: {
+        "ngrok-skip-browser-warning": "69420",
+      },
+    }
+    ).subscribe(
       (data: vrHeadset[]) => {
         this.headsetsList = data;  // Assign the server response to the local list
         console.log('VR Headsets in Service:', this.headsetsList);
