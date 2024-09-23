@@ -1,0 +1,244 @@
+[33mcommit c433204867794c29be6f9e159fb55380656d64bb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Thu Sep 19 15:38:51 2024 +0100
+
+    Feat: Ngrok opening for back-End and Front-End + Skipping Ngrok Security Check
+
+[33mcommit bbb14654afaa10e7163272980008ad1725dfbeef[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Wed Sep 18 19:02:09 2024 +0100
+
+    Feat: Added VRService HeadsetList
+
+[33mcommit 99030b64c7d1ced7cd1016d6603bc80df62de7b2[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Wed Sep 18 18:13:33 2024 +0100
+
+    Feat: Cleaned Up Code. headsetsList is now a VrHeadset Array.
+
+[33mcommit 1074aaa8953a41f597038b9a5853826a727a06b9[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Fri Sep 13 16:24:13 2024 +0100
+
+    Express Feat: Added Client IP from Unreal
+
+[33mcommit d4b5953cbbc50d72ecf18a424d8cb10cbf75af93[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Thu Sep 12 18:26:59 2024 +0100
+
+    Feat: fixed director mode css
+
+[33mcommit f82ec2f9e3ea0add4b64c4e6e6bcecc6ba8063d1[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Thu Sep 12 15:43:00 2024 +0100
+
+    Feat: Completed Grid Layout for Director Mode
+
+[33mcommit 6959bf02ab34e6d7bc0882ece69e521c99b4eeaf[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Wed Sep 11 23:15:07 2024 +0100
+
+    Feat: Sucessfully transformed osc and toggle-experience commponents into imports
+
+[33mcommit 7cc04b4d7e93b13265445d94ab07a3018e1a32ff[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Wed Sep 11 15:49:52 2024 +0100
+
+    Feat: Director Mode VR List CSS improved
+
+[33mcommit 5c15b968877685970425cbdac2fde816007050f3[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Wed Sep 11 13:29:13 2024 +0100
+
+    Clean Code Architecture v2
+
+[33mcommit f9e4025b51fe233648658f4dbd00c3d22c5c3661[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Wed Sep 11 13:06:37 2024 +0100
+
+    Clean Code Architecture.
+
+[33mcommit 737f4c0cf904d8beb392059367bc73b3203c34c1[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Wed Sep 11 12:18:54 2024 +0100
+
+    Feat: Fixed Executable
+
+[33mcommit cb481f930fa8d0956c98307bedacd5eb8cfdab64[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Sat Aug 31 00:59:39 2024 +0100
+
+    Removed Bootstrap
+
+[33mcommit ef642d4758a5cbe829d3a0f35d27e57523312778[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Sat Aug 31 00:34:37 2024 +0100
+
+    Feat: Added Director and Operator CSS logic + Changed overall text style in Style.css + added Bootstrap
+
+[33mcommit c2e0975086321b8a39f0dbfa59124c36057283c5[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Fri Aug 30 19:49:18 2024 +0100
+
+    feat: Added Director and Operator Routes
+
+[33mcommit 8862839b936053a2e86cb87e0f41846dd9d04318[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Sun Aug 25 21:14:03 2024 +0100
+
+    fix: Cleaned up code in VRHeadsetService
+
+[33mcommit 5c2ff3bc81ce2462bf7e87045273a415bce7a62a[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Wed Aug 21 17:04:03 2024 +0100
+
+    Improvement: Added VRHeadset logic
+
+[33mcommit e716d33065df0230941423d8fa9cd59a1a60559a[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Wed Aug 21 15:53:47 2024 +0100
+
+    Multiple Features: Added Add button + Added Directing Switch Buttons and logic
+
+[33mcommit 1bcc79eb2d4c4c4fe5c59ac6725ac4ca258b4a8d[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Wed Aug 21 14:13:15 2024 +0100
+
+    Update: Refactored components name
+
+[33mcommit 8f0ca2fb6a76d06477c5ecca38d3a2ebfc67bbf1[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Mon Aug 19 17:42:24 2024 +0100
+
+    Cleaned Up UI and removed uncessary components. Fixed bug on adding new VR Headsets
+
+[33mcommit c0066c0d5bb5688ed85e8718cb801f342320d4ea[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Sat Aug 17 01:14:19 2024 +0100
+
+    feat: Added Delete and Update feature. Fixed UI bug: Click not working on specific part of buttons.
+
+[33mcommit b90eba858779cc229234be6f1b458e1f34c51076[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Thu Aug 8 17:39:47 2024 +0100
+
+    Cleaned up some code in Express.js
+
+[33mcommit 25eaee395d6dccf3b065c93eb8b99e0caae01c47[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Thu Aug 8 16:11:43 2024 +0100
+
+    feat: added batch file to run Angular, Express and MongoDB at the same time, in windows
+
+[33mcommit 4a371569f2fd3d6474c10b2e73c3e6bca8370132[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Wed Jul 10 16:16:08 2024 +0100
+
+    Feat: DOM Event auto-update. Express Console Improved.
+
+[33mcommit e5b84f4ea1a234c16fbe4514572b82409964f398[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Tue Jul 9 17:55:52 2024 +0100
+
+    feat: Added animation on boot-up
+
+[33mcommit 02f5bd6eab0ecd1279663a1a9cb4e2344ef477f3[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Thu Jul 4 17:04:56 2024 +0100
+
+    feat: Added add button. Added Enum Status. Added CSS color based on Enum.
+
+[33mcommit 7196aca90f83d5e072a2954bbfde288553e63bc0[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Mon Jul 1 19:02:10 2024 +0100
+
+    feat: added MongoDB retrieval and addition of VrHeadsets
+
+[33mcommit ef8c5664a32fe4dc2f847d0151c5a288c6eda7df[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Thu Jun 27 17:59:42 2024 +0100
+
+    feat: Added MongoDB Connection
+
+[33mcommit 2bf223123ec0388a457135a858a47c948100dfdb[m
+Merge: bf615a2d 3e1945db
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Tue Jun 25 19:00:36 2024 +0100
+
+    Merge branch 'main' of github.com:ricasbp/SatoreApp
+
+[33mcommit bf615a2da0bb1de2ffe65200bba24061222fe4b1[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Tue Jun 25 19:00:16 2024 +0100
+
+    Feat: UI buttons to the right
+
+[33mcommit 3e1945db93af268f97482220d76723d4cdb0e17a[m
+Author: ricasbp <59062659+ricasbp@users.noreply.github.com>
+Date:   Tue Jun 18 18:36:04 2024 +0100
+
+    Create README.md
+
+[33mcommit 2417c4117cf368395add9c3edb7fdef985fa8f06[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Mon Jun 10 16:39:07 2024 +0100
+
+    Added Ipad and Android PWA
+
+[33mcommit a6cdf7c2dd03e1868d43c96b04e12ec0373013aa[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Mon Jun 10 13:53:59 2024 +0100
+
+    Improved Code Readbility, Only 1 UDP package, Removed TCP Code
+
+[33mcommit 67f3733a2cf7cb4e91ec9f4d2eb0f4264d3b8ff0[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Wed May 29 14:49:38 2024 +0100
+
+    feat: added osc.js libray UDP code. Not able to use TCP version yet
+
+[33mcommit b59130b069568733e64ea0ff96d0aeabaafeed67[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Mon May 27 16:51:32 2024 +0100
+
+    MVP: Improved UI + Receiving OSC packages + Sending 5 UDP packages
+
+[33mcommit cc52be4dc300fe2d1ce56c75cc0f88e0c74c1944[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Fri May 24 17:36:27 2024 +0100
+
+    Updated vr-custom Css
+
+[33mcommit 269db92d549cfb77f65ac4d667d311bb416b4f42[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Wed May 22 22:39:58 2024 +0100
+
+    UI: improved buttons look
+
+[33mcommit dff89836afc4b3cb2de49250cd5ae88b3cf6cc94[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Tue May 21 18:15:01 2024 +0100
+
+    feat CSS: Centered flex-containers
+
+[33mcommit 9cc95a5ffb0c57d2838a098e2f982d90c64bfd4f[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Tue May 21 00:56:07 2024 +0100
+
+    Cleaning project
+
+[33mcommit 360d3cc51514acac55c6fc34dadc2e8cd7eaa86b[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Tue May 21 00:55:48 2024 +0100
+
+    Cleaning project v3
+
+[33mcommit b233c0e1a4f251f69f08bd6bde34be6ccb41ba89[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Tue May 21 00:54:58 2024 +0100
+
+    Cleaning project v2
+
+[33mcommit adf74b327d7ef1bf52a112e50e8c5007d82627b9[m
+Author: ricasbp <ricardobaltazarpedro@hotmail.com>
+Date:   Tue May 21 00:

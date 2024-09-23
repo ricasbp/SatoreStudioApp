@@ -15,7 +15,7 @@ export class SseService {
         "ngrok-skip-browser-warning": "69420",
       },
     }
-    const sse = new EventSource("https://33bf-95-94-97-38.ngrok-free.app/events");
+    const sse = new EventSource("https://d376-95-94-97-38.ngrok-free.app/events");
     sse.addEventListener('message', (event: MessageEvent) => {
       this.eventsService.next(JSON.parse(event.data));
     });

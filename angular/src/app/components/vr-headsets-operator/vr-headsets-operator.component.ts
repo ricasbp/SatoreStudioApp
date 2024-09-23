@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { vrHeadset } from 'src/vrHeadset';
 import { SseService } from 'src/app/services/sse-services/sse-services';
-import { tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { VRHeadsetService } from '../../services/vrheadset-service.service';
 
 @Component({
@@ -23,17 +23,33 @@ export class VrHeadsetsOperatorComponent {
   imagePathAddButton: string = 'assets/image/add_button.png';
 
 
+  vrHeadsetsFromService: Observable<vrHeadset[]> = this.vrHeadsetService.getVRHeadsets();
+
+  /* 
+  Important aspect of Angular. You can manipulate easily data with .pipe().
+  This website expalins the concept well: https://www.rxjs-fruits.com/subscribe-next
+
+  vrHeadsetsFromService: Observable<vrHeadset[]> = this.vrHeadsetService.getVRHeadsets().pipe(
+    map((data) => {
+      return {...data,banana:true}
+    })
+  )
+  */
+
   constructor(private vrHeadsetService: VRHeadsetService) {
   }
-      
+
+
+  /*    
   ngOnInit(): void {
     this.getVRHeadsetsFromService();
   }
-
-  getVRHeadsetsFromService(): void {
-    this.headsetsList = this.vrHeadsetService.getVRHeadsets();
-    console.log('VR Headsets in Component:', this.headsetsList);
+  
+  getVRHeadsetsFromService(): Observable<vrHeadset[]> {
+    return this.vrHeadsetService.getVRHeadsets();
+    // console.log('VR Headsets in Component:', this.headsetsList);
   }
+  */
 
   onEdit(item : any){
     item.isInEditMode = true;
@@ -46,7 +62,7 @@ export class VrHeadsetsOperatorComponent {
       (response) => {
         console.log('Headset updated successfully', response);
         // Optionally, you can refresh the headset list or update the UI
-        this.getVRHeadsetsFromService();
+        // this.getVRHeadsetsFromService();
       },
       (error) => {
         console.error('Error updating headset', error);

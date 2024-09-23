@@ -8,25 +8,28 @@ import { vrHeadset } from '../../vrHeadset';
 })
 export class VRHeadsetService {
 
-  private expressURL = 'https://33bf-95-94-97-38.ngrok-free.app';
-  
-  headsetsList: vrHeadset[] = [];
+  private expressURL = 'https://3f05-95-94-97-38.ngrok-free.app';
 
-  constructor(private http: HttpClient) { }
-
-  // Review: This should be done in a OnInit method
-  getVRHeadsets(): vrHeadset[]  {
-    this.getVRHeadsetsfromServer();
-    return this.headsetsList;
+  constructor(private http: HttpClient) {
   }
 
-  getVRHeadsetsfromServer(): void {
-    this.http.get<vrHeadset[]>(`${this.expressURL}/`, { // Header to ignore Ngrok warning, and make Angular able to make request to Express.
-      headers: {
+  getVRHeadsets(): Observable<vrHeadset[]>   {
+    return this.getVRHeadsetsfromServer();
+    /*
+    this.getVRHeadsetsfromServer(); // Este método é assyncrono, entao ele antes de conseguir returnar a lista a tempo.
+    return this.headsetsList;
+    */ 
+  }
+
+  getVRHeadsetsfromServer(): Observable<vrHeadset[]> {
+    return this.http.get<vrHeadset[]>(`${this.expressURL}/`, { 
+      headers: { // Header to ignore Ngrok warning, and make Angular able to make HTTP request to Express.
         "ngrok-skip-browser-warning": "69420",
       },
     }
-    ).subscribe(
+    )
+    /*
+    .subscribe(
       (data: vrHeadset[]) => {
         this.headsetsList = data;  // Assign the server response to the local list
         console.log('VR Headsets in Service:', this.headsetsList);
@@ -34,7 +37,8 @@ export class VRHeadsetService {
       (error) => {
         console.error('Error fetching VR headsets from server:', error);
       }
-    );
+    ); 
+    */
   }
 
   addVRHeadset(vrInfo: vrHeadset): Observable<vrHeadset> {

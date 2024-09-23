@@ -24,7 +24,8 @@ export class VrHeadsetsDirectorComponent {
 
   constructor(private vrHeadsetService: VRHeadsetService) {
   }
-      
+
+  /*
   ngOnInit(): void {
     this.getVRHeadsetsFromService();
   }
@@ -32,6 +33,7 @@ export class VrHeadsetsDirectorComponent {
   getVRHeadsetsFromService(): void {
     this.headsetsList = this.vrHeadsetService.getVRHeadsets();
   }
+  */
 
   onEdit(item : any){
     item.isInEditMode = true;
@@ -66,7 +68,7 @@ export class VrHeadsetsDirectorComponent {
         console.log(`${headset.name} is now in directing mode.`);
     });
   }
-
+/*
   updateVRHeadset(headset: any): void {
     console.log(headset)
     // Update VRHeadset from vrHeadsetService (FromMongoDB)
@@ -81,7 +83,7 @@ export class VrHeadsetsDirectorComponent {
       }
     );
   }
-
+*/
   deleteVRHeadset(headset: vrHeadset): void {
     console.log(headset);
     if (confirm(`Are you sure you want to delete the VR Headset: ${headset.name}?`)) {
