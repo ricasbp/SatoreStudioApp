@@ -39,18 +39,6 @@ export class VrHeadsetsOperatorComponent {
   constructor(private vrHeadsetService: VRHeadsetService) {
   }
 
-
-  /*    
-  ngOnInit(): void {
-    this.getVRHeadsetsFromService();
-  }
-  
-  getVRHeadsetsFromService(): Observable<vrHeadset[]> {
-    return this.vrHeadsetService.getVRHeadsets();
-    // console.log('VR Headsets in Component:', this.headsetsList);
-  }
-  */
-
   onEdit(item : any){
     item.isInEditMode = true;
   }
@@ -85,7 +73,6 @@ export class VrHeadsetsOperatorComponent {
       );
     }
   }
-
 
   addVRHeadset() {
     console.log('Submitting new headset:', this.newHeadset);
