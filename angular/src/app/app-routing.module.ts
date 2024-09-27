@@ -6,7 +6,11 @@ import { DirectorModeComponent } from './components/director-mode/director-mode.
 import { OperatorModeComponent } from './components/operator-mode/operator-mode.component';
 
 const routes: Routes = [
-  //TODO: Redirct default route ('') to OperatorMode 
+  {
+    path: '',
+    redirectTo: 'operator-mode',
+    pathMatch: 'full'  // Ensure it only redirects on an exact match of the path
+  },
   {
     path: 'operator-mode',
     component: OperatorModeComponent
