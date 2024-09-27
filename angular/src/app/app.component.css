@@ -2,8 +2,11 @@ div{
     padding-top: 25px;
 }
 
-.navbar-nav {
+ul.navbar-nav {
+    display: flex;
     flex-direction: row;     /* Ensure items are in a row */
+    background-color: #ffffff;
+    margin-top: 0;
 }
 
 /*
