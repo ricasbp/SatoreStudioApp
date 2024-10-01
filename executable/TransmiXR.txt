@@ -1,16 +1,30 @@
 @echo off
 
-REM Navigate to the Angular project directory
-cd /d "C:\Users\tmart\Desktop\Dissertacao\SatoreApp\angular\dist\tour-of-heroes"
+:: Minimize the window if not already minimized
+if not "%Minimized%"=="" goto :Minimized
+set Minimized=True
+start /min cmd /C "%~dpnx0"
+goto :EOF
 
-REM Start the Angular application in a new command prompt window
-start cmd /k "http-server"
+:Minimized
+
+REM Navigate to the Angular project directory
+cd /d "C:\Users\tmart\Desktop\Dissertacao\SatoreApp\angular"
+
+REM Start the Angular application in a minimized command prompt window with a custom title
+start /min cmd /k "title Angular Front-End & ng serve"
 
 REM Navigate to the Express server directory
 cd /d "C:\Users\tmart\Desktop\Dissertacao\SatoreApp\express"
 
-REM Start the Express server in a new command prompt window
-start cmd /k "npm start"
+REM Start the Express server in a minimized command prompt window with a custom title
+start /min cmd /k "title Express Back-End & npm start"
+
+REM Navigate to the Angular project directory
+cd /d "C:\Users\tmart\Desktop\Dissertacao\SatoreApp"
+
+REM Run ngrok without minimizing the terminal and with a custom title
+start cmd /k "title Ngrok & ngrok start --all"
 
 REM Pause the terminal after execution
 pause
