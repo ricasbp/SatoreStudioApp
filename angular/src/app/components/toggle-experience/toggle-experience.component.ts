@@ -7,11 +7,14 @@ import { Component } from '@angular/core';
 })
 export class ToggleExperienceComponent {
 
-  imagePathPlay: string = 'assets/images/play_button.png';
-  imagePathStop: string = 'assets/images/stop_button.png';
+  imagePathPlay: string = 'assets/images/play_button.png';  
+  imagePathPlayGrey: string = 'assets/images/play_button_grey.png';
 
-  imagePathPlayGrey: string = '';
+  imagePathStop: string = 'assets/images/stop_button.png';
   imagePathStopGrey: string = 'assets/images/stop_button_grey.png';
+
+  
+  isExperienceActive: boolean = false; 
 
 
   sendOSC(action: string) {
@@ -20,6 +23,9 @@ export class ToggleExperienceComponent {
 
     if(action == 'Stop'){
       url = "http://localhost:3000/StopExperience";
+      this.isExperienceActive = false;
+    }else{
+      this.isExperienceActive = true;
     }
     
     const data = { action: action };
