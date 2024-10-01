@@ -8,9 +8,12 @@ import { vrHeadset } from '../../vrHeadset';
 })
 export class VRHeadsetService {
 
-  private expressURL = 'https://3f05-95-94-97-38.ngrok-free.app';
+  expressURL = 'https://3f05-95-94-97-38.ngrok-free.app';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
+
+  setExpressIp(ip: string): void {
+      this.expressURL = `${ip}`;
   }
 
   getVRHeadsets(): Observable<vrHeadset[]>   {

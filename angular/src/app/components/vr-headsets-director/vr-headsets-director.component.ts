@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { vrHeadset } from 'src/vrHeadset';
 import { SseService } from 'src/app/services/sse-services/sse-services';
 import { tap } from 'rxjs';
@@ -22,7 +22,10 @@ export class VrHeadsetsDirectorComponent {
   imagePathSettings: string = 'assets/images/settings_button.png';
   imagePathAddButton: string = 'assets/image/add_button.png';
 
+
+
   constructor(private vrHeadsetService: VRHeadsetService) {
+
   }
 
   /*

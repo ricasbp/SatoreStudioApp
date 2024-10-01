@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { vrHeadset } from 'src/vrHeadset';
 import { SseService } from 'src/app/services/sse-services/sse-services';
 import { map, Observable, tap } from 'rxjs';
@@ -26,17 +26,21 @@ export class VrHeadsetsOperatorComponent {
   vrHeadsetsFromService: Observable<vrHeadset[]> = this.vrHeadsetService.getVRHeadsets();
 
   /* 
-  Important aspect of Angular. You can manipulate easily data with .pipe().
-  This website expalins the concept well: https://www.rxjs-fruits.com/subscribe-next
+    Important aspect of Angular. You can manipulate easily data with .pipe().
+    This website expalins the concept well: https://www.rxjs-fruits.com/subscribe-next
 
-  vrHeadsetsFromService: Observable<vrHeadset[]> = this.vrHeadsetService.getVRHeadsets().pipe(
-    map((data) => {
-      return {...data,banana:true}
-    })
-  )
+    vrHeadsetsFromService: Observable<vrHeadset[]> = 
+      this.vrHeadsetService.getVRHeadsets().pipe(
+        map((data) => {
+          return {...data,banana:true}
+        })
+      )
   */
 
+  @Input() expressIp: any = ''; 
+
   constructor(private vrHeadsetService: VRHeadsetService) {
+    vrHeadsetService.setExpressIp(this.expressIp);
   }
 
   onEdit(item : any){
