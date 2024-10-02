@@ -8,7 +8,7 @@ import { vrHeadset } from '../../vrHeadset';
 })
 export class VRHeadsetService {
 
-  expressURL = 'https://3f05-95-94-97-38.ngrok-free.app';
+  expressURL = 'https://a6ab-95-94-97-38.ngrok-free.app';
 
   constructor(private http: HttpClient) {}
 
