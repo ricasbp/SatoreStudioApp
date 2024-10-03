@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { vrHeadset } from 'src/vrHeadset';
 import { SseService } from 'src/app/services/sse-services/sse-services';
 import { map, Observable, tap } from 'rxjs';
@@ -37,10 +37,8 @@ export class VrHeadsetsOperatorComponent {
       )
   */
 
-  @Input() expressIp: any = ''; 
 
   constructor(private vrHeadsetService: VRHeadsetService) {
-    vrHeadsetService.setExpressIp(this.expressIp);
   }
 
   onEdit(item : any){

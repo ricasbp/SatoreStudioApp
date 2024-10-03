@@ -8,15 +8,15 @@ import { OperatorModeComponent } from './components/operator-mode/operator-mode.
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'operator-mode/:userInput',
+    redirectTo: 'operator-mode',
     pathMatch: 'full'  // Ensure it only redirects on an exact match of the path
   },
   {
-    path: 'operator-mode/:userInput',
+    path: 'operator-mode',
     component: OperatorModeComponent
   },
   {
-    path: 'director-mode/:userInput',
+    path: 'director-mode',
     component: DirectorModeComponent
   }
 ];

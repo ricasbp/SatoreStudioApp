@@ -2,18 +2,27 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { vrHeadset } from '../../vrHeadset'; 
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VRHeadsetService {
 
-  expressURL = 'https://a6ab-95-94-97-38.ngrok-free.app';
+  expressUrl = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
+    this.setExpressUrl(localStorageService);
+  }
 
-  setExpressIp(ip: string): void {
-      this.expressURL = `${ip}`;
+  private setExpressUrl(localStorageService: LocalStorageService){
+    this.expressUrl = this.localStorageService.getItem('expressIP') ?? "NoIp";  // Use the nullish coalescing operator (??) to provide a fallback in case of null
+    if (this.expressUrl === "NoIp") {
+      console.error('No IP Received from LocalStorage');
+    }
+
+    console.log("VrHeadset-Services connected to backend at: " + this.expressUrl);
+
   }
 
   getVRHeadsets(): Observable<vrHeadset[]>   {
@@ -25,7 +34,7 @@ export class VRHeadsetService {
   }
 
   getVRHeadsetsfromServer(): Observable<vrHeadset[]> {
-    return this.http.get<vrHeadset[]>(`${this.expressURL}/`, { 
+    return this.http.get<vrHeadset[]>(`${this.expressUrl}/`, { 
       headers: { // Header to ignore Ngrok warning, and make Angular able to make HTTP request to Express.
         "ngrok-skip-browser-warning": "69420",
       },
@@ -45,16 +54,16 @@ export class VRHeadsetService {
   }
 
   addVRHeadset(vrInfo: vrHeadset): Observable<vrHeadset> {
-    return this.http.post<vrHeadset>(`${this.expressURL}/vrheadsets`, vrInfo);
+    return this.http.post<vrHeadset>(`${this.expressUrl}/vrheadsets`, vrInfo);
   }
   
   updateVRHeadset(headset: any): Observable<any> {
-    return this.http.put<any>(`${this.expressURL}/vrheadsets/${headset._id}`, headset);
+    return this.http.put<any>(`${this.expressUrl}/vrheadsets/${headset._id}`, headset);
   }
 
   deleteVRHeadset(headsetId: string): Observable<any> {
     console.log("headsetId= " + headsetId);
-    return this.http.delete<any>(`${this.expressURL}/vrheadsets/${headsetId}`);
+    return this.http.delete<any>(`${this.expressUrl}/vrheadsets/${headsetId}`);
   }
 
 }

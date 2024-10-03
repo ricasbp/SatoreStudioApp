@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angula
 import { SseService } from 'src/app/services/sse-services/sse-services';
 import { tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { LocalStorageService } from './services/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -22,16 +23,20 @@ export class AppComponent {
       this.cdRef.detectChanges();
   }))
 
-  constructor(protected readonly sseService: SseService, private cdRef: ChangeDetectorRef, private router: Router) {
+  constructor(protected readonly sseService: SseService, private cdRef: ChangeDetectorRef, private router: Router, private localStorageService: LocalStorageService) {
     
-    // Use prompt to get user input
-    this.userInputExpressIP = prompt("Please enter the IP address of the BackEnd.") || 'DefaultIP';   
-    
-    
-    // Display the input in the console
-    console.log("IP adress of the BackEnd by the user:", this.userInputExpressIP);
+    // Step 1: Check if localStorage has an IP address stored
+  const storedIP = this.localStorageService.getItem('expressIP'); // Use appropriate method from your service
 
-    this.router.navigate([`/operator-mode`, this.userInputExpressIP]);
+  // Step 2: If not stored, prompt the user for an IP and store it in localStorage
+  if (!storedIP) {
+    const userInput = prompt("Please enter the IP address of the BackEnd.") || 'NoIPInserted';
+    this.localStorageService.setItem('expressIP', userInput); // Store the new IP in localStorage
+    this.userInputExpressIP = userInput;
+  } else {
+    // Use the stored IP
+    this.userInputExpressIP = storedIP;
+  }
   }
   
   ngOnInit(): void {
