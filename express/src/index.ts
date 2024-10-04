@@ -71,7 +71,9 @@ const vrHeadsetSchema = new mongoose.Schema({
     enum: ['offline', 'online', 'ready', 'error', 'running experience'], 
     required: true 
   },
-  directingMode: { type: Boolean, required: true, default: false } 
+  directingMode: { type: Boolean},
+  isInEditMode: { type: Boolean},
+
 }, { collection: 'VRHeadsets' });
 
 // Create a model based on the schema
@@ -271,21 +273,25 @@ const oscServer = new OSCServer(oscServerPort, oscServerIp, () => {
 
 // Handle incoming OSC messages
 oscServer.on('message', (msg, rinfo) => {
-    console.log(`Received OSC message: ${msg}`);
-    console.log(`Received OSC from: ${rinfo.address}`);
+  console.log(`Received OSC message: ${msg}`);
+  console.log(`Received OSC from: ${rinfo.address}`);
 
-    const data = {
-      message: msg,
-      timestamp: new Date().toISOString(),
-    };
-    
-    const formattedData = `data: ${JSON.stringify(data)}\n\n`;
-    clients.forEach(client => client.write(formattedData));
+  // Extract the message from the first element of the tuple
+  const messageContent = msg[0];  // Assuming the first element is the message
+  const status = messageContent.replace(/\//g, '');  // Remove all forward slashes
 
-    // Process the message as needed
-    // oscServer.close();
+  const data = {
+    status: status,
+    ipAddress: rinfo.address,
+    timestamp: new Date().toISOString(),
+  };
+  
+  const formattedData = `data: ${JSON.stringify(data)}\n\n`;
+  clients.forEach(client => client.write(formattedData));
+
+  // Process the message as needed.
+  // oscServer.close();
 });
-
 
 // ------------------------------
 // Others

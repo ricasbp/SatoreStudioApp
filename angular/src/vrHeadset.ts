@@ -3,7 +3,7 @@ export interface vrHeadset{
     ipAddress: string;
     port: string;
     name: string;
-    status: 'offline' | 'online' | 'ready' | 'error' | 'running experience';
+    status: 'offline' | 'online' | 'ready' | 'error' | 'experience-running';
     directingMode: boolean; 
     isInEditMode: boolean;
 }

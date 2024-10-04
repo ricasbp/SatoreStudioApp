@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { map, Observable, tap } from 'rxjs';
+
 import { vrHeadset } from 'src/vrHeadset';
 import { SseService } from 'src/app/services/sse-services/sse-services';
-import { map, Observable, tap } from 'rxjs';
 import { VRHeadsetService } from '../../services/vrheadset-service.service';
 
 @Component({
@@ -39,20 +40,23 @@ export class VrHeadsetsOperatorComponent {
 
 
   constructor(private vrHeadsetService: VRHeadsetService) {
+    this.loadVRHeadsetsIntoObservable();
   }
 
-  onEdit(item : any){
+  loadVRHeadsetsIntoObservable(): void {
+    this.vrHeadsetsFromService = this.vrHeadsetService.getVRHeadsets();
+  }
+
+  onEditingVRHeadsetHTML(item : any){
     item.isInEditMode = true;
   }
 
-  updateVRHeadset(headset: any): void {
-    console.log(headset)
+  updateVRHeadset(headset: vrHeadset): void {
     // Update VRHeadset from vrHeadsetService (FromMongoDB)
     this.vrHeadsetService.updateVRHeadset(headset).subscribe(
       (response) => {
         console.log('Headset updated successfully', response);
-        // Optionally, you can refresh the headset list or update the UI
-        // this.getVRHeadsetsFromService();
+        this.loadVRHeadsetsIntoObservable(); // Refresh the list after a successful update
       },
       (error) => {
         console.error('Error updating headset', error);

@@ -25,7 +25,7 @@ export class SseService {
     if (this.expressUrl === "NoIp") {
       console.error('No IP Received from LocalStorage');
     }
-    console.log("Sse-Services connected to backend at: " + this.expressUrl);
+    // console.log("Sse-Services connected to backend at: " + this.expressUrl);
   }
 
   private setEventSource(){
@@ -33,7 +33,7 @@ export class SseService {
     customEventSource(`${this.expressUrl}/events`)
     .subscribe({
       next: (data) => {
-        console.log('Received data', data)
+        // console.log('Sse-Services received data', data)
         this.eventsService.next(data)
       },
       
@@ -41,7 +41,5 @@ export class SseService {
       complete: () => console.log('Stream completed'),
     }); //TO FIX: Not good practice. Should not have things inside subscribe
   }
-  
-
 } 
 

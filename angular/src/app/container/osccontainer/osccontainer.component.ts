@@ -1,7 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
-import { tap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 
 import { SseService } from 'src/app/services/sse-services/sse-services';
+import { VRHeadsetService } from 'src/app/services/vrheadset-service.service';
+import { vrHeadset } from 'src/vrHeadset';
 
 
 @Component({
@@ -14,17 +16,54 @@ export class OSCContainerComponent {
   @Input() current: any;
   title = 'angular-tour-of-heroes';
   random = 1;
+
+  vrHeadsetsFromService: Observable<vrHeadset[]> = this.vrHeadsetService.getVRHeadsets();
   
   // Refresh the DOM if receives value from event.
-  // Build Here VR Connection Logic.
+  // Subscription to the SSE service, listening for incoming events
   data$ = this.sseService.events$.pipe(
-    tap((value) => {
-      console.log(value);
-      this.cdRef.detectChanges();
-  }))
+    switchMap((receivedData) => { // Michael Bug Fix: Swapped tap with switchMap 
+      // console.log("OscContainter received data", receivedData);
 
-  constructor(protected readonly sseService: SseService, private cdRef: ChangeDetectorRef) {
+      // Get the vrHeadsetsFromService observable (assuming it's an observable) and map over it
+      return this.vrHeadsetsFromService.pipe(
+        switchMap((headsets: vrHeadset[]) => {
+          // Find the VR headset by IP address
+          // Const is better approach vs let. Since its immutable.
+          const headset: vrHeadset | undefined = headsets.find(h => h.ipAddress === receivedData.ipAddress);
+
+          console.log("Found in the MongoDB VRHeadset with IP = " + headset?.ipAddress);
+          
+          if (headset) {
+            if (receivedData.status === 'online') {
+              return this.vrHeadsetService.updateVRHeadset({...headset,status: "online"});
+            } else if (receivedData.status === 'ready') {
+              return this.vrHeadsetService.updateVRHeadset({...headset,status: "experience-running"});
+            }
+            return this.vrHeadsetService.updateVRHeadset({...headset,status: "error"});
+          }else{
+            throw new Error("No headset found");
+          }
+
+
+        })
+      ) // .subscribe();  Michael Bug Fix: This was incorrect. Doesn't make sense two subscribes.
+    })
+  );
+
+  constructor(protected readonly sseService: SseService, private cdRef: ChangeDetectorRef, private vrHeadsetService: VRHeadsetService) {
+    this.loadVRHeadsetsIntoObservable();
+    //this.setSseServiceListener();
   }
+  
+  //setSseServiceListener() {
+  //  throw new Error('Method not implemented.');
+  //}
+  
+  loadVRHeadsetsIntoObservable(): void {
+    this.vrHeadsetsFromService = this.vrHeadsetService.getVRHeadsets();
+  }
+
   
   ngOnInit(): void {
   }

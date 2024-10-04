@@ -57,8 +57,12 @@ export class VRHeadsetService {
     return this.http.post<vrHeadset>(`${this.expressUrl}/vrheadsets`, vrInfo);
   }
   
-  updateVRHeadset(headset: any): Observable<any> {
-    return this.http.put<any>(`${this.expressUrl}/vrheadsets/${headset._id}`, headset);
+  updateVRHeadset(headset: vrHeadset): Observable<vrHeadset> {
+    console.log("VrHeadsetService is updating VRheadset:", headset)
+    // console.log("VrHeadsetService: VRheadset type is:", typeof headset);
+
+    console.log("Url: ", `${this.expressUrl}/vrheadsets/${headset._id}`)
+    return this.http.put<vrHeadset>(`${this.expressUrl}/vrheadsets/${headset._id}`, headset);
   }
 
   deleteVRHeadset(headsetId: string): Observable<any> {
