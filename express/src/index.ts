@@ -64,7 +64,6 @@ mongoose.connection.on('disconnected', () => {
 const vrHeadsetSchema = new mongoose.Schema({
   id: { type: Number, required: false },
   ipAddress: { type: String, required: true },
-  port: { type: String, required: true },
   name: { type: String, required: true },
   status: { 
     type: String, 
