@@ -24,7 +24,7 @@
         </div>
 
         <div class="vrinfo1" *ngIf="headset.isInEditMode">
-            <div  class="name">
+            <div class="name">
                 <input type="text" [(ngModel)]="headset.name">
             </div>
             <div class="ipAddress">
@@ -66,7 +66,7 @@
                 <label for="ipAddress">IP Address:</label>
                 <input type="text" id="ipAddress" [(ngModel)]="newHeadset.ipAddress" name="ipAddress" required>
                
-                <label for="name">Name:</label>
+                <label for="name">Device Name:</label>
                 <input type="text" id="name" [(ngModel)]="newHeadset.name" name="name" required>
                     
                 </div>
