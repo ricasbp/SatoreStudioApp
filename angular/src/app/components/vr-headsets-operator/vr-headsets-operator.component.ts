@@ -53,10 +53,12 @@ export class VrHeadsetsOperatorComponent {
 
   updateVRHeadset(headset: vrHeadset): void {
     // Update VRHeadset from vrHeadsetService (FromMongoDB)
+    headset.isInEditMode = false;
     this.vrHeadsetService.updateVRHeadset(headset).subscribe(
       (response) => {
         console.log('Headset updated successfully', response);
         this.loadVRHeadsetsIntoObservable(); // Refresh the list after a successful update
+        //TO FIX: Observable should do automatically the load.
       },
       (error) => {
         console.error('Error updating headset', error);
@@ -65,13 +67,14 @@ export class VrHeadsetsOperatorComponent {
   }
 
   deleteVRHeadset(headset: vrHeadset): void {
+    headset.isInEditMode = false;
     console.log(headset);
     if (confirm(`Are you sure you want to delete the VR Headset: ${headset.name}?`)) {
       this.vrHeadsetService.deleteVRHeadset(headset._id!).subscribe(
         response => {
           console.log('VR Headset deleted:', response);
-          // Remove the deleted headset from the list in the UI
-          this.headsetsList = this.headsetsList.filter((h: vrHeadset) => h._id !== headset._id);
+          this.loadVRHeadsetsIntoObservable(); // Refresh the list after a successful update
+          //TO FIX: Observable should do automatically the load.
         },
         error => {
           console.error('Error deleting VR Headset:', error);
@@ -83,9 +86,10 @@ export class VrHeadsetsOperatorComponent {
   addVRHeadset() {
     console.log('Submitting new headset:', this.newHeadset);
     this.vrHeadsetService.addVRHeadset(this.newHeadset).subscribe(
-      data => {
-        this.headsetsList.push(data);
-        this.newHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false, isInEditMode: false}; // Reset the form
+      (response) => {
+        console.log('Headset updated successfully', response);
+        this.loadVRHeadsetsIntoObservable(); // Refresh the list after a successful update
+        //TO FIX: Observable should do automatically the load.
       },
       error => console.error('Error adding VR headset', error)
     );
