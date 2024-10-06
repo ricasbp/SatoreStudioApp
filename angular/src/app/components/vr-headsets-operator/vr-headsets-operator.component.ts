@@ -13,7 +13,7 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
 export class VrHeadsetsOperatorComponent {
 
   headsetsList: vrHeadset[] = [];
-  newHeadset: vrHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false, isInEditMode: false};
+  newHeadset: vrHeadset = { _id: '', ipAddress: '', name: '', status: 'offline', directingMode: false, isInEditMode: false};
 
   isUserAddingNewVRHeadset: boolean = false;
 
@@ -107,7 +107,7 @@ export class VrHeadsetsOperatorComponent {
   
   sendDownloadAssetsOSC(headset: vrHeadset) {
     const url = "http://localhost:3000/DownloadAssets";
-    const data = { ipAddress: headset.ipAddress,  port: headset.port};
+    const data = { ipAddress: headset.ipAddress};
 
     fetch(url, {
       method: 'POST', // or 'PUT'

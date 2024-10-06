@@ -35,7 +35,7 @@ export class OSCContainerComponent {
           console.log("Found in the MongoDB VRHeadset with IP = " + headset?.ipAddress);
           
 
-          // TOFIX: Should use a builder for this headset. 
+          // TO_FIX: Should use a builder for this headset. 
           // https://refactoring.guru/design-patterns/builder/typescript/example
           if (headset) {
             if (receivedData.status === 'online') {

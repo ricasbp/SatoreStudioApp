@@ -12,7 +12,7 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
 export class VrHeadsetsDirectorComponent {
 
   headsetsList: vrHeadset[] = [];
-  newHeadset: vrHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false, isInEditMode: false};
+  newHeadset: vrHeadset = { _id: '', ipAddress: '',  name: '', status: 'offline', directingMode: false, isInEditMode: false};
 
   isUserAddingNewVRHeadset: boolean = false;
 
@@ -108,7 +108,7 @@ export class VrHeadsetsDirectorComponent {
     this.vrHeadsetService.addVRHeadset(this.newHeadset).subscribe(
       data => {
         this.headsetsList.push(data);
-        this.newHeadset = { _id: '', ipAddress: '', port: '', name: '', status: 'offline', directingMode: false, isInEditMode: false}; // Reset the form
+        this.newHeadset = { _id: '', ipAddress: '', name: '', status: 'offline', directingMode: false, isInEditMode: false}; // Reset the form
       },
       error => console.error('Error adding VR headset', error)
     );
@@ -126,7 +126,7 @@ export class VrHeadsetsDirectorComponent {
   
   sendDownloadAssetsOSC(headset: vrHeadset) {
     const url = "http://localhost:3000/DownloadAssets";
-    const data = { ipAddress: headset.ipAddress,  port: headset.port};
+    const data = { ipAddress: headset.ipAddress};
 
     fetch(url, {
       method: 'POST', // or 'PUT'

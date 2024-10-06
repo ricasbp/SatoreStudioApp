@@ -23,26 +23,27 @@
             <img [src]="headset.status === 'offline' || headset.status === 'error'? imagePathQuest3Grey : imagePathQuest3" alt="MetaQuest3">
         </div>
 
-        
-
-        <div class="vrinfo1">
-            <div *ngIf="headset.isInEditMode" class="name">
+        <div class="vrinfo1" *ngIf="headset.isInEditMode">
+            <div  class="name">
                 <input type="text" [(ngModel)]="headset.name">
             </div>
-            <div *ngIf="!headset.isInEditMode" class="name">
+            <div class="ipAddress">
+                <input type="text" [(ngModel)]="headset.ipAddress">
+            </div>
+        </div>
+
+        <div class="vrinfo1" *ngIf="!headset.isInEditMode">
+            <div class="name">
                 <span>{{ headset.name }}</span>
                 <span class="status">{{ headset.status }}</span>
             </div>
-
-            <div *ngIf="headset.isInEditMode" class="ipAddress">
-                <input type="text" [(ngModel)]="headset.ipAddress">
-                <input type="text" [(ngModel)]="headset.port">
+            <div class="ipAddress">
+                <span>{{ headset.ipAddress }}</span>
             </div>
-            <div *ngIf="!headset.isInEditMode" class="ipAddress">
-                <span>{{ headset.ipAddress }}:{{ headset.port }}</span>
-            </div>
-
         </div>
+
+           
+
 
         
         <button *ngIf="headset.isInEditMode" class="image-container-button" (click)="updateVRHeadset(headset)">
@@ -64,9 +65,6 @@
                     
                 <label for="ipAddress">IP Address:</label>
                 <input type="text" id="ipAddress" [(ngModel)]="newHeadset.ipAddress" name="ipAddress" required>
-                
-                <label for="port">Port:</label>
-                <input type="text" id="port" [(ngModel)]="newHeadset.port" name="port" required>
                
                 <label for="name">Name:</label>
                 <input type="text" id="name" [(ngModel)]="newHeadset.name" name="name" required>
