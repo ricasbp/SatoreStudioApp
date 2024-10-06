@@ -99,7 +99,7 @@ app.get('/', async (req, res) => {
 app.post('/vrheadsets', async (req, res) => {
   try {
     if (req.body._id === "") {
-      delete req.body._id;  // Remove _id if it's an empty string
+      delete req.body._id;  // Remove _id to be able to insert in MongoDB.
     }
     console.log("Adding new VR Headset! It's info is: " );
     console.log(req.body);
