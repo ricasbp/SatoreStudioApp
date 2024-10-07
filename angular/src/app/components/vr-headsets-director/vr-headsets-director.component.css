@@ -82,15 +82,17 @@
   .headsets li:nth-child(6) {
     animation-delay: 2.5s; /* 2.5 seconds delay */
   }
-
-
-  
-  /* 
+ /* 
     CSS for the Status Text
   */
+
+  div.name{
+    width: 200px; /*Make sure status is inline*/
+  }
   
   .headsets .status{
     margin-left: 8%;
+    width: 200px;
   }
   
   .headsets .online-class .status{
@@ -118,11 +120,14 @@
   }
   
   .headsets .running-experience-class .status{
-    color: rgb(102, 0, 255);
+    color: #289900;
     font-weight: bold;
   }
   
-  
+  .headsets li.running-experience-class {
+    background-color: #D0FFD7; 
+  }
+
   /* 
     CSS for the Upload Button
   */

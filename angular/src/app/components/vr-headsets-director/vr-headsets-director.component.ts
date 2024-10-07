@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { vrHeadset } from 'src/vrHeadset';
 import { SseService } from 'src/app/services/sse-services/sse-services';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { VRHeadsetService } from '../../services/vrheadset-service.service';
 
 @Component({
@@ -10,9 +10,8 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
   styleUrls: ['./vr-headsets-director.component.css']
 })
 export class VrHeadsetsDirectorComponent {
-
   headsetsList: vrHeadset[] = [];
-  newHeadset: vrHeadset = { _id: '', ipAddress: '',  name: '', status: 'offline', directingMode: false, isInEditMode: false};
+  newHeadset: vrHeadset = { _id: '', ipAddress: '', name: '', status: 'offline', directingMode: false, isInEditMode: false};
 
   isUserAddingNewVRHeadset: boolean = false;
 
@@ -23,23 +22,23 @@ export class VrHeadsetsDirectorComponent {
   imagePathAddButton: string = 'assets/image/add_button.png';
 
 
+  vrHeadsetsFromService: Observable<vrHeadset[]> = this.vrHeadsetService.getVRHeadsets();
 
-  constructor(private vrHeadsetService: VRHeadsetService) {
+  /* 
+    Important aspect of Angular. You can manipulate easily data with .pipe().
+    This website expalins the concept well: https://www.rxjs-fruits.com/subscribe-next
 
-  }
-
-  /*
-  ngOnInit(): void {
-    this.getVRHeadsetsFromService();
-  }
-
-  getVRHeadsetsFromService(): void {
-    this.headsetsList = this.vrHeadsetService.getVRHeadsets();
-  }
+    vrHeadsetsFromService: Observable<vrHeadset[]> = 
+      this.vrHeadsetService.getVRHeadsets().pipe(
+        map((data) => {
+          return {...data,banana:true}
+        })
+      )
   */
 
-  onEdit(item : any){
-    item.isInEditMode = true;
+
+  constructor(private vrHeadsetService: VRHeadsetService) {
+    this.loadVRHeadsetsIntoObservable();
   }
 
   activateDirectorMode(headset: vrHeadset): void {
@@ -58,7 +57,7 @@ export class VrHeadsetsDirectorComponent {
         // Similarly, an API call to deactivate directing mode could be made:
         // this.vrService.deactivateDirectingMode(headset.id).subscribe();
     }
-}
+  }
 
   activateDirectorModeOnAll(event: Event): void {
     const isChecked = (event.target as HTMLInputElement).checked;
@@ -66,35 +65,44 @@ export class VrHeadsetsDirectorComponent {
     // Toggle directingMode for all headsets based on master switch's state
     this.headsetsList.forEach((headset: {
       name: any; directingMode: boolean; 
-}) => {
-        headset.directingMode = isChecked;
-        console.log(`${headset.name} is now in directing mode.`);
-    });
+      }) => {
+              headset.directingMode = isChecked;
+              console.log(`${headset.name} is now in directing mode.`);
+          });
   }
-/*
-  updateVRHeadset(headset: any): void {
-    console.log(headset)
+
+  loadVRHeadsetsIntoObservable(): void {
+    this.vrHeadsetsFromService = this.vrHeadsetService.getVRHeadsets();
+  }
+
+  onEditingVRHeadsetHTML(item : any){
+    item.isInEditMode = true;
+  }
+
+  updateVRHeadset(headset: vrHeadset): void {
     // Update VRHeadset from vrHeadsetService (FromMongoDB)
+    headset.isInEditMode = false;
     this.vrHeadsetService.updateVRHeadset(headset).subscribe(
       (response) => {
         console.log('Headset updated successfully', response);
-        // Optionally, you can refresh the headset list or update the UI
-        this.getVRHeadsetsFromService();
+        this.loadVRHeadsetsIntoObservable(); // Refresh the list after a successful update
+        //TO FIX: Observable should do automatically the load.
       },
       (error) => {
         console.error('Error updating headset', error);
       }
     );
   }
-*/
+
   deleteVRHeadset(headset: vrHeadset): void {
+    headset.isInEditMode = false;
     console.log(headset);
     if (confirm(`Are you sure you want to delete the VR Headset: ${headset.name}?`)) {
       this.vrHeadsetService.deleteVRHeadset(headset._id!).subscribe(
         response => {
           console.log('VR Headset deleted:', response);
-          // Remove the deleted headset from the list in the UI
-          this.headsetsList = this.headsetsList.filter((h: vrHeadset) => h._id !== headset._id);        
+          this.loadVRHeadsetsIntoObservable(); // Refresh the list after a successful update
+          //TO FIX: Observable should do automatically the load.
         },
         error => {
           console.error('Error deleting VR Headset:', error);
@@ -106,9 +114,10 @@ export class VrHeadsetsDirectorComponent {
   addVRHeadset() {
     console.log('Submitting new headset:', this.newHeadset);
     this.vrHeadsetService.addVRHeadset(this.newHeadset).subscribe(
-      data => {
-        this.headsetsList.push(data);
-        this.newHeadset = { _id: '', ipAddress: '', name: '', status: 'offline', directingMode: false, isInEditMode: false}; // Reset the form
+      (response) => {
+        console.log('Headset updated successfully', response);
+        this.loadVRHeadsetsIntoObservable(); // Refresh the list after a successful update
+        //TO FIX: Observable should do automatically the load.
       },
       error => console.error('Error adding VR headset', error)
     );
@@ -120,7 +129,7 @@ export class VrHeadsetsDirectorComponent {
       'online-class': status === 'online',
       'ready-class': status === 'ready',
       'error-class': status === 'error',
-      'running-experience-class': status === 'running experience'
+      'running-experience-class': status === 'experience running'
     };
   }
   
