@@ -4,9 +4,11 @@
 
 
 h1 {
-    color: #369;
+    color: rgb(18, 18, 18);
     font-family: Inter;
     font-size: 250%;
+    text-align: center;
+    padding-top: 1%;
   }
 h2, h3 {
     color: #444;
