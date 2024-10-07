@@ -7,7 +7,8 @@
     justify-content: center;
 
     list-style-type: none; /* remove bullet from li*/
-
+    
+    padding-top: 20px;
 }
 
 /* Same code from vr-info.component.css .image-container-button */
@@ -35,6 +36,7 @@
 .toggleButtons img {
   width: 100px; /* Set a fixed width for the buttons */
   height: 100px; /* Set a fixed height for the buttons */
+
 
   /* CSS Center Guide*/
   display: block;
