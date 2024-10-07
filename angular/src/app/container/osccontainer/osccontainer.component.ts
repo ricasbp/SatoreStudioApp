@@ -29,7 +29,7 @@ export class OSCContainerComponent {
       return this.vrHeadsetsFromService.pipe(
         switchMap((headsets: vrHeadset[]) => {
           // Find the VR headset by IP address
-          // Const is better approach vs let. Since its immutable.
+          // Const is better approach vs let, Since const its immutable.
           const headset: vrHeadset | undefined = headsets.find(h => h.ipAddress === receivedData.ipAddress);
 
           console.log("Found in the MongoDB VRHeadset with IP = " + headset?.ipAddress);
@@ -41,7 +41,7 @@ export class OSCContainerComponent {
             if (receivedData.status === 'online') {
               return this.vrHeadsetService.updateVRHeadset({...headset,status: "online"});   
             } else if (receivedData.status === 'ready') {
-              return this.vrHeadsetService.updateVRHeadset({...headset,status: "experience-running"});
+              return this.vrHeadsetService.updateVRHeadset({...headset,status: "experience running"});
             }
             return this.vrHeadsetService.updateVRHeadset({...headset,status: "error"});
           }else{

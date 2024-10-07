@@ -67,7 +67,7 @@ const vrHeadsetSchema = new mongoose.Schema({
   name: { type: String, required: true },
   status: { 
     type: String, 
-    enum: ['offline', 'online', 'ready', 'error', 'running experience'], 
+    enum: ['offline', 'online', 'ready', 'error', 'experience running'], 
     required: true 
   },
   directingMode: { type: Boolean},

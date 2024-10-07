@@ -101,7 +101,7 @@ export class VrHeadsetsOperatorComponent {
       'online-class': status === 'online',
       'ready-class': status === 'ready',
       'error-class': status === 'error',
-      'running-experience-class': status === 'running experience'
+      'running-experience-class': status === 'experience running'
     };
   }
   

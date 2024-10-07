@@ -28,6 +28,9 @@
     animation-delay: 0s; /* No delay for the first item */
     animation-fill-mode: forwards; /* Keep the end state */
   }
+
+
+
   
   /* KeyFrames Animation */
   @keyframes vrFadeIn{
@@ -71,9 +74,14 @@
   /* 
     CSS for the Status Text
   */
+
+  div.name{
+    width: 200px; /*Make sure status is inline*/
+  }
   
   .headsets .status{
     margin-left: 8%;
+    width: 200px;
   }
   
   .headsets .online-class .status{
@@ -96,11 +104,14 @@
   }
   
   .headsets .running-experience-class .status{
-    color: rgb(102, 0, 255);
+    color: #289900;
     font-weight: bold;
   }
   
-  
+  .headsets li.running-experience-class {
+    background-color: #D0FFD7; 
+  }
+
   /* 
     CSS for the Settings Button
   */
