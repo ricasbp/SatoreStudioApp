@@ -4,7 +4,7 @@
     padding: 0;
 
     display: grid; /* Grid is flexbox but in 2d */
-    grid-template-columns:  400px 400px; /* Two clumns, each with X px */
+    grid-template-columns: 550px 550px; /* Two clumns, each with X px */
     column-gap: 20px;
     row-gap: 20px;
   }
@@ -20,8 +20,8 @@
     
 
     /* Set width and height */
-    width: 400px;
-    height: 300px;
+    width: 550px;
+    height: 250px;
 
     display: grid; /* Grid is flexbox but in 2d */
     grid-template-columns:  140px 120px; /* Two clumns, each with X px */
@@ -265,7 +265,6 @@
   
    /* The switch - the box around the slider */
    .switch {
-    margin-left: auto;  /* Push button to the far-right */
     margin-right: 3%;
     box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* right, bottom, blur, color and alpha*/
     border-radius: 25px;

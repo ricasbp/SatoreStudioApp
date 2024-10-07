@@ -1,7 +1,4 @@
 
-<h1>Operator VR List Management</h1>
-
-
 <ul class="headsets">
     <li *ngFor="let headset of (vrHeadsetsFromService | async)" [ngClass]="getStatusClass(headset.status)">
         <!--
@@ -93,12 +90,11 @@
             [src]="imagePathAdd" 
             alt="Click here to add a new VRHeadset to the DataBase.">
         
+            <p>Sync All:</p>
+            <!-- Master switch to control all others -->
+            <label class="switch" >
+                <input type="checkbox" (change)="activateDirectorModeOnAll($event)">
+                <span class="slider round"></span>
+            </label>
     </div>
-
-    <p>Sync All:</p>
-    <!-- Master switch to control all others -->
-    <label class="switch" >
-        <input type="checkbox" (change)="activateDirectorModeOnAll($event)">
-        <span class="slider round"></span>
-    </label>
 </div>
