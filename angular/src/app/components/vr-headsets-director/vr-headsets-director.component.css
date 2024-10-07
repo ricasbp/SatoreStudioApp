@@ -7,8 +7,7 @@
     grid-template-columns:  400px 400px; /* Two clumns, each with X px */
     column-gap: 20px;
     row-gap: 20px;
-
-    }
+  }
   
   
   .headsets li {
@@ -25,7 +24,7 @@
     height: 300px;
 
     display: grid; /* Grid is flexbox but in 2d */
-    grid-template-columns:  120px 110px; /* Two clumns, each with X px */
+    grid-template-columns:  140px 120px; /* Two clumns, each with X px */
 
     /*The align-self and align-items properties control alignment on the block axis.*/
     align-items: end; 
@@ -100,11 +99,6 @@
     font-weight: bold;
   }
 
-  .headsets li.online-class {
-    background-color: #C3FFC5;
-  }
-  
-  
   .headsets .offline-class{
     color: #868686;
   }
@@ -226,6 +220,11 @@
 
     justify-self: end;
     margin: 10px;
+  }
+
+  .image-container-vr img{
+    width: 100px;
+    height: 65px;
   }
 
   
