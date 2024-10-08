@@ -16,8 +16,8 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json()); // Parse JSON bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
-
-const port = 3000
+const oscExpressPort = 3000
+const vrHeadsetPort = 8001 // Defined in Unreal Engine OSCReceiver
 
 
 // ------------------------------
@@ -159,60 +159,76 @@ app.delete('/vrheadsets/:id', async (req, res) => {
 });
 
 
-// Receives Angular command to retrieve the correct assets, from the server, for the specific VR specified with the IP.
-// Requirment: JSON body is not empty, and has VR_IP and port.
-app.post('/DownloadAssets', (req, res) => {
-  console.log(req.body);
-  // Extract ipAddress and port from the request body
-  const { ipAddress, port } = req.body;
+// Receives Angular command to start the experience for all online VR headsets.
+app.post('/StartExperience', async (req, res) => {
+  try {
+    console.log(req.body);
 
-  if (!req.body || !ipAddress || !port) {
-      return res.status(400).send("Missing pacakge, ipAddress, or port in request body");
+    // Find all VR headsets that are online
+    const onlineHeadsets = await VRHeadset.find({ status: 'online' });
+
+    if (onlineHeadsets.length === 0) {
+      return res.status(404).send("No headsets are online");
+    }
+
+    // Send the start message to all online headsets and update their status
+    for (let headset of onlineHeadsets) {
+      console.log(`Sending start message to headset: ${headset.ipAddress}:${vrHeadsetPort}`);
+
+      // Use the extracted ipAddress and port
+      const client = new Client(headset.ipAddress, vrHeadsetPort);
+      client.send(new Message("/start"), () => {
+        client.close();
+      });
+
+      // Update the status of the headset to 'experience running'
+      headset.status = 'experience running';
+      await headset.save();  // Save the updated status in the database
+
+      // TODO: Update DOM how???
+    }
+    res.json({ message: "Messages sent and status updated to 'experience running'" }); // Send JSON response
+
+  } catch (error) {
+    console.error("Error starting experience: ", error);
+    res.status(500).send("An error occurred while starting the experience");
   }
-
-  // Use the extracted ipAddress and port
-  const client = new Client(req.body.ipAddress, req.body.port);
-  client.send(new Message("/DownloadAssets"), () => {
-      client.close();
-  });
-  res.json({ message: "Hello, the message was sent" }); // Send JSON response
 });
 
-// Receives Angular command to start the experience for the specific VR specified with the IP.
-// Requirment: JSON body is not empty, and has VR_IP and port.
-app.post('/StartExperience', (req, res) => {
-  console.log(req.body);
-  // Extract ipAddress and port from the request body
-  const { ipAddress, port } = req.body;
+// Receives Angular command to start the experience for all online VR headsets.
+app.post('/StopExperience', async (req, res) => {
+  try {
+    console.log(req.body);
 
-  if (!req.body || !ipAddress || !port) {
-      return res.status(400).send("Missing ipAddress or port in request body");
+    // Find all VR headsets that are running the experience
+    const onlineHeadsets = await VRHeadset.find({ status: 'experience running' });
+
+    if (onlineHeadsets.length === 0) {
+      return res.status(404).send("No headsets are online");
+    }
+
+    // Send the start message to all online headsets and update their status
+    for (let headset of onlineHeadsets) {
+      console.log(`Sending start message to headset: ${headset.ipAddress}:${vrHeadsetPort}`);
+
+      // Use the extracted ipAddress and port
+      const client = new Client(headset.ipAddress, vrHeadsetPort);
+      client.send(new Message("/stop"), () => {
+        client.close();
+      });
+
+      // Update the status of the headset to online
+      headset.status = 'online';
+      await headset.save();  // Save the updated status in the database
+
+      // TODO: Update DOM how???
+    }
+    res.json({ message: "Messages sent and status updated to 'experience running'" }); // Send JSON response
+
+  } catch (error) {
+    console.error("Error starting experience: ", error);
+    res.status(500).send("An error occurred while starting the experience");
   }
-
-  // Use the extracted ipAddress and port
-  const client = new Client(req.body.ipAddress, req.body.port);
-  client.send(new Message("/StartExperience"), () => {
-      client.close();
-  });
-  res.json({ message: "Hello, the message was sent" }); // Send JSON response
-});
-
-// Stop Experience
-app.post('/StopExperience', (req, res) => {
-  console.log(req.body);
-  // Extract ipAddress and port from the request body
-  const { ipAddress, port } = req.body;
-
-  if (!req.body || !ipAddress || !port) {
-      return res.status(400).send("Missing ipAddress or port in request body");
-  }
-
-  // Use the extracted ipAddress and port
-  const client = new Client(req.body.ipAddress, req.body.port);
-  client.send(new Message("/StopExperience"), () => {
-      client.close();
-  });
-  res.json({ message: "Hello, the message was sent" }); // Send JSON response
 });
 
 
@@ -297,7 +313,7 @@ oscServer.on('message', (msg, rinfo) => {
 // ------------------------------
 
 // Start the Express server
-app.listen(port, () => {
-  console.log(`Express server is running on http://localhost:${port}`);
+app.listen(oscExpressPort, () => {
+  console.log(`Express server is running on http://localhost:${oscExpressPort}`);
 });
 
