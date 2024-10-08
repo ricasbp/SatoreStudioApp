@@ -1,7 +1,7 @@
 /* HeroesComponent's private CSS styles */
 .headsets {
-    margin: 2%;
-    list-style-type: none;
+    margin-left: 2%;
+    list-style-type: none;  /* no bullet points */
     padding: 0;
     max-width: 1000px; /* Ensure the container doesn't get bigger then 1200px */
   }
