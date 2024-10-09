@@ -1,11 +1,11 @@
 <h1>Start the experience: </h1>
 
 <ul class="toggleButtons">
-        <li (click)="sendOSC('Stop')">
+        <li (click)="sendOSCCommandToAllOnlineVRHeadsets('Stop')">
                 <img [src]="isExperienceActive ? imagePathStop : imagePathStopGrey" 
                  alt="Click here to Stop the experience to all executing VRHeadsets.">
         </li>
-        <li (click)="sendOSC('Play')">
+        <li (click)="sendOSCCommandToAllOnlineVRHeadsets('Play')">
                 <img [src]="isExperienceActive ? imagePathPlayGrey : imagePathPlay" 
                 alt="Click here to Start the experience to all ready VRHeadsets.">
         </li>

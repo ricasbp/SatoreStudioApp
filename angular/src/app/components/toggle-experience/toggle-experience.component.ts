@@ -13,18 +13,17 @@ export class ToggleExperienceComponent {
   imagePathStop: string = 'assets/images/stop_button.png';
   imagePathStopGrey: string = 'assets/images/stop_button_grey.png';
 
-  
   isExperienceActive: boolean = false; 
 
-
-  sendOSC(action: string) {
+  sendOSCCommandToAllOnlineVRHeadsets(action: string) {
     console.log(`Action: ${action}`);
-    let url = "http://localhost:3000/StartExperience";
+    let url = "";
 
     if(action == 'Stop'){
       url = "http://localhost:3000/StopExperience";
       this.isExperienceActive = false;
     }else{
+      url = "http://localhost:3000/StartExperience";
       this.isExperienceActive = true;
     }
     

@@ -3,7 +3,7 @@
 
 
 <ul class="headsets">
-    <li *ngFor="let headset of (vrHeadsetsFromService | async)" [ngClass]="getStatusClass(headset.status)">
+    <li *ngFor="let headset of (vrHeadsetsFromService | async)" [ngClass]="getVRHeadsetStatusClass(headset.status)">
         <!--
             Subscribe ou Async fazem "execute" no Observable.
             Async faz tudo por mim. Faz Subscribe e o Unsubscribe quando o component vai desaparecer.
