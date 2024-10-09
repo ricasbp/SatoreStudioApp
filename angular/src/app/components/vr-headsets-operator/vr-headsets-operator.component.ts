@@ -38,16 +38,16 @@ export class VrHeadsetsOperatorComponent {
       )
   */
 
-
   constructor(private vrHeadsetService: VRHeadsetService) {
     this.loadVRHeadsetsIntoObservable();
   }
+
 
   loadVRHeadsetsIntoObservable(): void {
     this.vrHeadsetsFromService = this.vrHeadsetService.getVRHeadsets();
   }
 
-  onEditingVRHeadsetHTML(item : any){
+  onEditingHTMLOfVRHeadset(item : any){
     item.isInEditMode = true;
   }
 
