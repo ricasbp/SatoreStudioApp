@@ -75,7 +75,7 @@ export class VrHeadsetsDirectorComponent {
     this.vrHeadsetsFromService = this.vrHeadsetService.getVRHeadsets();
   }
 
-  onEditingVRHeadsetHTML(item : any){
+  onEditingHTMLOfVRHeadset(item : any){
     item.isInEditMode = true;
   }
 
@@ -123,7 +123,7 @@ export class VrHeadsetsDirectorComponent {
     );
   }
 
-  getStatusClass(status: string): { [key: string]: boolean } {
+  getVRHeadsetStatusClass(status: string): { [key: string]: boolean } {
     return {
       'offline-class': status === 'offline',
       'online-class': status === 'online',
@@ -131,26 +131,6 @@ export class VrHeadsetsDirectorComponent {
       'error-class': status === 'error',
       'running-experience-class': status === 'experience running'
     };
-  }
-  
-  sendDownloadAssetsOSC(headset: vrHeadset) {
-    const url = "http://localhost:3000/DownloadAssets";
-    const data = { ipAddress: headset.ipAddress};
-
-    fetch(url, {
-      method: 'POST', // or 'PUT'
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success! :', data);
-    })
-    .catch((error) => {
-      console.error('Error! :', error);
-    });
   }
 
 }
