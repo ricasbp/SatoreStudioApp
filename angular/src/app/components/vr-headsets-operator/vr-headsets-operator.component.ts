@@ -23,7 +23,6 @@ export class VrHeadsetsOperatorComponent {
   imagePathSettings: string = 'assets/images/settings_button.png';
   imagePathAddButton: string = 'assets/image/add_button.png';
 
-
   vrHeadsetsFromService: Observable<vrHeadset[]> = this.vrHeadsetService.getVRHeadsets();
 
   /* 

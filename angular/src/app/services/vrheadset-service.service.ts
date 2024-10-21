@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { vrHeadset } from '../../vrHeadset'; 
 import { LocalStorageService } from './local-storage.service';
 
@@ -10,6 +10,14 @@ import { LocalStorageService } from './local-storage.service';
 export class VRHeadsetService {
 
   expressUrl = '';
+
+  
+  private headsetsListSubject = new BehaviorSubject<vrHeadset[]>([]) // guardar estado de forma assincrona
+  headsetsList$ : Observable<vrHeadset[]> = this.headsetsListSubject.asObservable(); 
+  
+  // Converter o nosso subject para observable.
+  // BehaviorSubject serve para escrever.
+  // Observable para ler.
 
   constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
     this.setExpressUrl(localStorageService);
@@ -53,8 +61,8 @@ export class VRHeadsetService {
     */
   }
 
-  addVRHeadset(vrInfo: vrHeadset): Observable<vrHeadset> {
-    return this.http.post<vrHeadset>(`${this.expressUrl}/vrheadsets`, vrInfo);
+  addVRHeadset(vrInfo: vrHeadset): Observable<vrHeadset[]> { // TO_FIX: Devolve Void
+    return this.http.post<vrHeadset[]>(`${this.expressUrl}/vrheadsets`, vrInfo);
   }
   
   updateVRHeadset(headset: vrHeadset): Observable<vrHeadset> {

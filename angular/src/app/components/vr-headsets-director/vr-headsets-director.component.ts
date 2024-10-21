@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { vrHeadset } from 'src/vrHeadset';
 import { SseService } from 'src/app/services/sse-services/sse-services';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { VRHeadsetService } from '../../services/vrheadset-service.service';
 
 @Component({
@@ -9,8 +9,7 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
   templateUrl: './vr-headsets-director.component.html',
   styleUrls: ['./vr-headsets-director.component.css']
 })
-export class VrHeadsetsDirectorComponent {
-  headsetsList: vrHeadset[] = [];
+export class VrHeadsetsDirectorComponent implements OnInit{
   newHeadset: vrHeadset = { _id: '', ipAddress: '', name: '', status: 'offline', directingMode: false, isInEditMode: false};
 
   isUserAddingNewVRHeadset: boolean = false;
@@ -21,8 +20,9 @@ export class VrHeadsetsDirectorComponent {
   imagePathSettings: string = 'assets/images/settings_button.png';
   imagePathAddButton: string = 'assets/image/add_button.png';
 
+  // headsetsList: vrHeadset[] = [];
+  // vrHeadsetsFromService$: Observable<vrHeadset[]> = this.vrHeadsetService.getVRHeadsets();
 
-  vrHeadsetsFromService: Observable<vrHeadset[]> = this.vrHeadsetService.getVRHeadsets();
 
   /* 
     Important aspect of Angular. You can manipulate easily data with .pipe().
@@ -36,16 +36,23 @@ export class VrHeadsetsDirectorComponent {
       )
   */
 
+  ngOnInit(){
+    this.vrHeadsetService.getVRHeadsets().subscribe(
+      (vrHeadsetArray) => {
+        this.headsetsListSubject.next(vrHeadsetArray);
+      },
+      error => console.error('Error getting VR headset', error)
+    );
+  }
 
   constructor(private vrHeadsetService: VRHeadsetService) {
     this.loadVRHeadsetsIntoObservable();
   }
 
   activateDirectorMode(headset: vrHeadset): void {
-    // Toggle the directingMode for the given headset
     headset.directingMode = !headset.directingMode;
+    this.updateVRHeadsetAndRefreshDOM(headset)
 
-    // You can add additional logic here if needed
     if (headset.directingMode) {
         // Logic when directing mode is turned ON
         console.log(`${headset.name} is now in directing mode.`);
@@ -61,31 +68,26 @@ export class VrHeadsetsDirectorComponent {
 
   activateDirectorModeOnAll(event: Event): void {
     const isChecked = (event.target as HTMLInputElement).checked;
-    
-    // Toggle directingMode for all headsets based on master switch's state
-    this.headsetsList.forEach((headset: {
-      name: any; directingMode: boolean; 
-      }) => {
-              headset.directingMode = isChecked;
-              console.log(`${headset.name} is now in directing mode.`);
-          });
+
+    this.vrHeadsetsFromService$.pipe(
+      tap((headsets) => { // Anonymous function, hedasets is the value from observable
+        headsets.forEach((headset: vrHeadset) => {
+          // Set directingMode explicitly to match the checkbox state
+          if (headset.directingMode !== isChecked) {
+            this.activateDirectorMode(headset);
+          }
+        })
+      })
+    ).subscribe();
   }
 
-  loadVRHeadsetsIntoObservable(): void {
-    this.vrHeadsetsFromService = this.vrHeadsetService.getVRHeadsets();
-  }
-
-  onEditingHTMLOfVRHeadset(item : any){
-    item.isInEditMode = true;
-  }
-
-  updateVRHeadset(headset: vrHeadset): void {
+  updateVRHeadsetAndRefreshDOM(headset: vrHeadset): void {
     // Update VRHeadset from vrHeadsetService (FromMongoDB)
     headset.isInEditMode = false;
     this.vrHeadsetService.updateVRHeadset(headset).subscribe(
       (response) => {
         console.log('Headset updated successfully', response);
-        this.loadVRHeadsetsIntoObservable(); // Refresh the list after a successful update
+        this.loadVRHeadsetsIntoObservable(); // Refresh the DOM list after a successful update
         //TO FIX: Observable should do automatically the load.
       },
       (error) => {
@@ -93,6 +95,15 @@ export class VrHeadsetsDirectorComponent {
       }
     );
   }
+
+  loadVRHeadsetsIntoObservable(): void {
+    this.vrHeadsetsFromService$ = this.vrHeadsetService.getVRHeadsets();
+  }
+
+  onEditingHTMLOfVRHeadset(item : any){
+    item.isInEditMode = true;
+  }
+
 
   deleteVRHeadset(headset: vrHeadset): void {
     headset.isInEditMode = false;
@@ -114,10 +125,9 @@ export class VrHeadsetsDirectorComponent {
   addVRHeadset() {
     console.log('Submitting new headset:', this.newHeadset);
     this.vrHeadsetService.addVRHeadset(this.newHeadset).subscribe(
-      (response) => {
-        console.log('Headset updated successfully', response);
-        this.loadVRHeadsetsIntoObservable(); // Refresh the list after a successful update
-        //TO FIX: Observable should do automatically the load.
+      (vrHeadsetArray) => {
+        console.log('Headset updated successfully', vrHeadsetArray);
+        this.headsetsListSubject.next(vrHeadsetArray);
       },
       error => console.error('Error adding VR headset', error)
     );

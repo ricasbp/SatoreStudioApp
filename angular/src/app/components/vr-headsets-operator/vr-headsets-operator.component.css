@@ -28,9 +28,6 @@
     animation-delay: 0s; /* No delay for the first item */
     animation-fill-mode: forwards; /* Keep the end state */
   }
-
-
-
   
   /* KeyFrames Animation */
   @keyframes vrFadeIn{
@@ -40,9 +37,7 @@
     100% {
       opacity: 100%;
     }
-  }
-  
-  
+  } 
   
   /* TODO: This should be done dinamically*/
   /* Here is a good tutorial: https://www.youtube.com/watch?v=l_sRhY3uRYQ&ab_channel=CSSDevandUX */

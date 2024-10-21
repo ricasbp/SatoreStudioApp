@@ -1,6 +1,6 @@
 
 <ul class="headsets">
-    <li *ngFor="let headset of (vrHeadsetsFromService | async)" [ngClass]="getVRHeadsetStatusClass(headset.status)">
+    <li *ngFor="let headset of (headsetsList$ | async)" [ngClass]="getVRHeadsetStatusClass(headset.status)">
         <!--
             Subscribe ou Async fazem "execute" no Observable.
             Async faz tudo por mim. Faz Subscribe e o Unsubscribe quando o component vai desaparecer.
@@ -50,7 +50,7 @@
             <span class="slider round"></span>
         </label>  
 
-        <button *ngIf="headset.isInEditMode" class="image-container-button" (click)="updateVRHeadset(headset)">
+        <button *ngIf="headset.isInEditMode" class="image-container-button" (click)="updateVRHeadsetAndRefreshDOM(headset)">
             Confirm
         </button>
         <button *ngIf="headset.isInEditMode" class="image-container-button" (click)="deleteVRHeadset(headset)">
