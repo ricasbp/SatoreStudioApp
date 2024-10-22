@@ -287,19 +287,29 @@ const oscServer = new OSCServer(oscServerPort, oscServerIp, () => {
 });
 
 // Handle incoming OSC messages
-oscServer.on('message', (msg, rinfo) => {
-  console.log(`Received OSC message: ${msg}`);
-  console.log(`Received OSC from: ${rinfo.address}`);
 
+oscServer.on('message', (msg) => {
   // Extract the message from the first element of the tuple
-  const messageContent = msg[0];  // Assuming the first element is the message
+  const messageContent = msg[0];
+  const msgIpAddress = msg[1];
+
+  // Check if msg ois corrects
+  if (!messageContent) {
+    console.error("Osc msg doesn't have content.");
+  }
+  if ( !msgIpAddress) {
+    console.error("Osc msg doesn't have IPadress.");
+  }
+
   const status = messageContent.replace(/\//g, '');  // Remove all forward slashes
 
   const data = {
+    ipAddress: msgIpAddress,
     status: status,
-    ipAddress: rinfo.address,
     timestamp: new Date().toISOString(),
   };
+
+  console.log(data)
   
   const formattedData = `data: ${JSON.stringify(data)}\n\n`;
   clients.forEach(client => client.write(formattedData));
