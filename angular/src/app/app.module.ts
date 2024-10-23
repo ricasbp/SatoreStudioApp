@@ -10,7 +10,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { DirectorModeModule } from './components/director-mode/director-mode.module';
-import { OperatorModeModule } from './components/operator-mode/operator-mode.module';
 
 
 @NgModule({
@@ -19,7 +18,6 @@ import { OperatorModeModule } from './components/operator-mode/operator-mode.mod
   ],
   imports: [
     DirectorModeModule,
-    OperatorModeModule,
     
     BrowserModule,
     HttpClientModule,
