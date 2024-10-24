@@ -128,6 +128,7 @@ app.put('/vrheadsets/:id', async (req, res) => {
     if (!updatedHeadset) {
       return res.status(404).json({ message: 'VR Headset not found' });
     }
+    console.log("Updated VRHeadset!");
 
     res.status(200).json(updatedHeadset);
   } catch (error) {
@@ -209,7 +210,7 @@ app.post('/StopExperience', async (req, res) => {
 
     // Send the start message to all online headsets and update their status
     for (let headset of onlineHeadsets) {
-      console.log(`Sending start message to headset: ${headset.ipAddress}:${vrHeadsetPort}`);
+      console.log(`Sending stop message to headset: ${headset.ipAddress}:${vrHeadsetPort}`);
 
       // Use the extracted ipAddress and port
       const client = new Client(headset.ipAddress, vrHeadsetPort);

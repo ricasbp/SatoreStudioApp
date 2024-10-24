@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { map } from 'rxjs';
+import { VRHeadsetService } from 'src/app/services/vrheadset-service.service';
 
 @Component({
   selector: 'app-toggle-experience',
@@ -13,7 +15,26 @@ export class ToggleExperienceComponent {
   imagePathStop: string = 'assets/images/stop_button.png';
   imagePathStopGrey: string = 'assets/images/stop_button_grey.png';
 
-  isExperienceActive: boolean = false; 
+  isExperienceActive: boolean = false;  
+
+  headsetsList$ =  this.vrHeadsetService.headsetsList$
+
+  constructor(private vrHeadsetService: VRHeadsetService) {
+    
+  }
+
+  sendOSCCommandToAllOnlineVRHeadsets2(): void {
+    // Check in list what are all the headsets that are online
+    this.headsetsList$.pipe(
+        map((headsets) => headsets.filter((headset) => headset.status === 'online')) // Filter online headsets
+      ).subscribe((onlineHeadsets) => {
+        onlineHeadsets.forEach((headset) => {
+          headset.status = 'experience running'; // Change status to running
+          this.vrHeadsetService.updateVRHeadset(headset); // make an updateVRHeadset in all headsets that are online into experience running
+        });
+      });
+      // HOW TO DO THIS: Ask the service to send command to express to send OSCCommand to start or stop experience to all online devices.
+  }
 
   sendOSCCommandToAllOnlineVRHeadsets(action: string) {
     console.log(`Action: ${action}`);

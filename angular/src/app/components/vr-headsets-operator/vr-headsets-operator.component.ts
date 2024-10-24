@@ -12,7 +12,6 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
 })
 export class VrHeadsetsOperatorComponent {
 
-  headsetsList: vrHeadset[] = [];
   newHeadset: vrHeadset = { _id: '', ipAddress: '', name: '', status: 'offline', directingMode: false, isInEditMode: false};
 
   isUserAddingNewVRHeadset: boolean = false;
@@ -23,75 +22,35 @@ export class VrHeadsetsOperatorComponent {
   imagePathSettings: string = 'assets/images/settings_button.png';
   imagePathAddButton: string = 'assets/image/add_button.png';
 
-
-  vrHeadsetsFromService: Observable<vrHeadset[]> = this.vrHeadsetService.getVRHeadsets();
-
-  /* 
-    Important aspect of Angular. You can manipulate easily data with .pipe().
-    This website expalins the concept well: https://www.rxjs-fruits.com/subscribe-next
-
-    vrHeadsetsFromService: Observable<vrHeadset[]> = 
-      this.vrHeadsetService.getVRHeadsets().pipe(
-        map((data) => {
-          return {...data,banana:true}
-        })
-      )
-  */
+  headsetsList$ =  this.vrHeadsetService.headsetsList$
 
   constructor(private vrHeadsetService: VRHeadsetService) {
-    this.loadVRHeadsetsIntoObservable();
-  }
-
-  loadVRHeadsetsIntoObservable(): void {
-    this.vrHeadsetsFromService = this.vrHeadsetService.getVRHeadsets();
   }
 
   onEditingHTMLOfVRHeadset(item : any){
     item.isInEditMode = true;
   }
 
+  
   updateVRHeadset(headset: vrHeadset): void {
-    // Update VRHeadset from vrHeadsetService (FromMongoDB)
     headset.isInEditMode = false;
-    this.vrHeadsetService.updateVRHeadset(headset).subscribe(
-      (response) => {
-        console.log('Headset updated successfully', response);
-        this.loadVRHeadsetsIntoObservable(); // Refresh the list after a successful update
-        //TO FIX: Observable should do automatically the load.
-      },
-      (error) => {
-        console.error('Error updating headset', error);
-      }
-    );
+    this.vrHeadsetService.updateVRHeadset(headset);
+    console.log("Updatting new headset:", this.newHeadset);
   }
+
 
   deleteVRHeadset(headset: vrHeadset): void {
     headset.isInEditMode = false;
     console.log(headset);
     if (confirm(`Are you sure you want to delete the VR Headset: ${headset.name}?`)) {
-      this.vrHeadsetService.deleteVRHeadset(headset._id!).subscribe(
-        response => {
-          console.log('VR Headset deleted:', response);
-          this.loadVRHeadsetsIntoObservable(); // Refresh the list after a successful update
-          //TO FIX: Observable should do automatically the load.
-        },
-        error => {
-          console.error('Error deleting VR Headset:', error);
-        }
-      );
+      this.vrHeadsetService.deleteVRHeadset(headset._id!)
     }
   }
 
+
   addVRHeadset() {
     console.log('Submitting new headset:', this.newHeadset);
-    this.vrHeadsetService.addVRHeadset(this.newHeadset).subscribe(
-      (response) => {
-        console.log('Headset updated successfully', response);
-        this.loadVRHeadsetsIntoObservable(); // Refresh the list after a successful update
-        //TO FIX: Observable should do automatically the load.
-      },
-      error => console.error('Error adding VR headset', error)
-    );
+    this.vrHeadsetService.addVRHeadset(this.newHeadset)
   }
 
   getVRHeadsetStatusClass(status: string): { [key: string]: boolean } {

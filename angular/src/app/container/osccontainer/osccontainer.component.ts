@@ -17,21 +17,20 @@ export class OSCContainerComponent {
   title = 'angular-tour-of-heroes';
   random = 1;
 
-  vrHeadsetsFromService: Observable<vrHeadset[]> = this.vrHeadsetService.getVRHeadsets();
+  vrHeadsetsFromService: Observable<vrHeadset[]> = this.vrHeadsetService.headsetsList$
   
-  // Refresh the DOM if receives value from event.
   // Subscription to the SSE service, listening for incoming events
   data$ = this.sseService.events$.pipe(
     switchMap((receivedData) => { // Michael Bug Fix: Swapped tap with switchMap 
-      // console.log("OscContainter received data", receivedData);
+      console.log("OscContainter received data", receivedData);
 
       // Get the vrHeadsetsFromService observable (assuming it's an observable) and map over it
       return this.vrHeadsetsFromService.pipe(
-        switchMap((headsets: vrHeadset[]) => {
+        tap((headsets: vrHeadset[]) => {
+
           // Find the VR headset by IP address
           // Const is better approach vs let, Since const its immutable.
           const headset: vrHeadset | undefined = headsets.find(h => h.ipAddress === receivedData.ipAddress);
-
           console.log("Found in the MongoDB VRHeadset with IP = " + headset?.ipAddress);
           
 
@@ -55,16 +54,6 @@ export class OSCContainerComponent {
   );
 
   constructor(protected readonly sseService: SseService, private cdRef: ChangeDetectorRef, private vrHeadsetService: VRHeadsetService) {
-    this.loadVRHeadsetsIntoObservable();
-    //this.setSseServiceListener();
-  }
-  
-  //setSseServiceListener() {
-  //  throw new Error('Method not implemented.');
-  //}
-  
-  loadVRHeadsetsIntoObservable(): void {
-    this.vrHeadsetsFromService = this.vrHeadsetService.getVRHeadsets();
   }
 
   
