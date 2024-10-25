@@ -27,13 +27,13 @@ export class ToggleExperienceComponent {
     // Check in list what are all the headsets that are online
     this.headsetsList$.pipe(
         map((headsets) => headsets.filter((headset) => headset.status === 'online')) // Filter online headsets
-      ).subscribe((onlineHeadsets) => {
-        onlineHeadsets.forEach((headset) => {
+      ).subscribe((onlineHeadsets) => { // subscribe: This is where you consume the observable.
+        onlineHeadsets.forEach((headset) => { // OnlineHeadsets is the filtered list
           headset.status = 'experience running'; // Change status to running
-          this.vrHeadsetService.updateVRHeadset(headset); // make an updateVRHeadset in all headsets that are online into experience running
+          this.vrHeadsetService.updateVRHeadset(headset); // Make  an updateVRHeadset in all headsets that are online into experience running
         });
       });
-      // HOW TO DO THIS: Ask the service to send command to express to send OSCCommand to start or stop experience to all online devices.
+      // HOW TO DO THIS: Ask the service to send message to express, so express sends OSCCommands to start or stop experience to all online devices.
   }
 
   sendOSCCommandToAllOnlineVRHeadsets(action: string) {

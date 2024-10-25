@@ -8,6 +8,9 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root'
 })
 export class VRHeadsetService {
+  updateHeadsetStatus(id: any, arg1: string) {
+    throw new Error('Method not implemented.');
+  }
 
   expressUrl = '';
 
@@ -63,7 +66,6 @@ export class VRHeadsetService {
   updateVRHeadset(headset: vrHeadset): void {
     console.log("VrHeadsetService is updating VRheadset:", headset)
 
-    console.log("Url: ", `${this.expressUrl}/vrheadsets/${headset._id}`)
     this.http.put<vrHeadset>(`${this.expressUrl}/vrheadsets/${headset._id}`, headset).subscribe({
       next: () => {
         // Re-fetch the updated list of headsets from the server

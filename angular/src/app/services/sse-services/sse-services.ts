@@ -33,7 +33,7 @@ export class SseService {
     customEventSource(`${this.expressUrl}/events`)
     .subscribe({
       next: (data) => {
-        // console.log('Sse-Services received data', data)
+        console.log('Sse-Services received data: ', data)
         this.eventsService.next(data)
       },
       
