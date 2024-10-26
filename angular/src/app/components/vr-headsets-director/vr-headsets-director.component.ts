@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { vrHeadset } from 'src/vrHeadset';
 import { SseService } from 'src/app/services/sse-services/sse-services';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, take, tap } from 'rxjs';
 import { VRHeadsetService } from '../../services/vrheadset-service.service';
 
 @Component({
@@ -25,32 +25,48 @@ export class VrHeadsetsDirectorComponent{
   constructor(private vrHeadsetService: VRHeadsetService) {
   }
 
-  
   onEditingHTMLOfVRHeadset(item : any){
     item.isInEditMode = true;
   }
 
-  activateDirectorMode(headset: vrHeadset): void {
-    headset.directingMode = !headset.directingMode;
-
-    if (headset.directingMode) {
-        // Logic when directing mode is turned ON
+  switchDirectorModeState(headset: vrHeadset): void {
+    if (!headset.directingMode) {
+        headset.directingMode = true;
+        this.vrHeadsetService.updateVRHeadset({...headset, directingMode: true});
         console.log(`${headset.name} is now in directing mode.`);
     } else {
-        // Logic when directing mode is turned OFF
+        headset.directingMode = false;
+        this.vrHeadsetService.updateVRHeadset({...headset, directingMode: false});
         console.log(`${headset.name} has exited directing mode.`);
     }
   }
 
-  activateDirectorModeOnAll(event: Event): void {
+  switchDirectorModeStateOnAll(event: Event): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+
+    console.log("Im here ")
+
+    this.headsetsList$.pipe(
+      take(1),
+      tap((headsets) => {
+        headsets.forEach((headset: vrHeadset) => {
+
+          console.log("Im here for " , headset.ipAddress)
+
+          if (headset.directingMode !== isChecked) { // If the headset's directing mode does not match the master button state
+            this.switchDirectorModeState(headset);
+          }
+
+        })
+      })
+    ).subscribe()
   }
 
   updateVRHeadset(headset: vrHeadset): void {
     headset.isInEditMode = false;
     this.vrHeadsetService.updateVRHeadset(headset);
-    console.log("Updatting new headset:", this.newHeadset);
+    console.log("Updating new headset:", this.newHeadset);
   }
-
 
   deleteVRHeadset(headset: vrHeadset): void {
     headset.isInEditMode = false;
