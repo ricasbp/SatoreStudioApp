@@ -45,7 +45,7 @@
             <input 
                 type="checkbox" 
                 [checked]="headset.directingMode" 
-                (change)="activateDirectorMode(headset)"
+                (change)="switchDirectorModeState(headset)"
             >
             <span class="slider round"></span>
         </label>  
@@ -93,7 +93,7 @@
             <p>Sync All:</p>
             <!-- Master switch to control all others -->
             <label class="switch" >
-                <input type="checkbox" (change)="activateDirectorModeOnAll($event)">
+                <input type="checkbox" (change)="switchDirectorModeStateOnAll($event)">
                 <span class="slider round"></span>
             </label>
     </div>

@@ -112,23 +112,49 @@ app.post('/vrheadsets', async (req, res) => {
   }
 });
 
-// Endpoint to update an existing VRHeadset
+// Endpoint to update an existing VRHeadset, and send corresponding OSC message
 app.put('/vrheadsets/:id', async (req, res) => {
-  console.log();
-  console.log(`Updating VR Headset...`);
-
   try {
     const headsetId = req.params.id;
+    const oldHeadset = await VRHeadset.findById(headsetId);
+
+    if (!oldHeadset) {
+      // Handle the case where the VR headset is not found
+      return res.status(404).json({ message: "VR Headset not found." });
+    }
+
     console.log(`Updating VR Headset with ID: ${headsetId}`);
-    console.log("New data: ", req.body);
+    console.log("New data: ", oldHeadset);
 
     // Find the VR headset by ID and update it with the new data
     const updatedHeadset = await VRHeadset.findByIdAndUpdate(headsetId, req.body, { new: true });
 
+    // Bug fix para nao enviar commandos sempre: 
+    //    If updatedHeadset e igual a headset antigo, nao queremos fazer nada
     if (!updatedHeadset) {
-      return res.status(404).json({ message: 'VR Headset not found' });
+      return res.status(404).json({ message: 'Not able to update the VR Headset.' });
     }
     console.log("Updated VRHeadset!");
+
+    // Start OSC Command
+    // If express receives Headset with "Running", and was "Online"
+    if(oldHeadset.status == "online" && updatedHeadset.status == "experience running"){
+          //  Send to correct device, OSC command: "Start"
+          const client = new Client(updatedHeadset.ipAddress, vrHeadsetPort);
+          client.send(new Message("/start"), () => {
+            client.close();
+          });
+    }
+
+    // Stop OSC Command
+    // If express receives Headset with "Online", and was "Running"
+    if(oldHeadset.status == "experience running" && updatedHeadset.status == "online"){
+      //  Send to correct device, OSC command: "Start"
+      const client = new Client(updatedHeadset.ipAddress, vrHeadsetPort);
+      client.send(new Message("/stop"), () => {
+        client.close();
+      });
+    }
 
     res.status(200).json(updatedHeadset);
   } catch (error) {
@@ -156,79 +182,6 @@ app.delete('/vrheadsets/:id', async (req, res) => {
   } catch (error) {
     const err = error as Error;  // Assert that error is of type 'Error'
     res.status(400).json({ message: 'Error deleting VR headset', error: err.message });
-  }
-});
-
-
-// Receives Angular command to start the experience for all online VR headsets.
-app.post('/StartExperience', async (req, res) => {
-  try {
-    console.log(req.body);
-
-    // Find all VR headsets that are online
-    const onlineHeadsets = await VRHeadset.find({ status: 'online' });
-
-    if (onlineHeadsets.length === 0) {
-      return res.status(404).send("No headsets are online");
-    }
-
-    // Send the start message to all online headsets and update their status
-    for (let headset of onlineHeadsets) {
-      console.log(`Sending start message to headset: ${headset.ipAddress}:${vrHeadsetPort}`);
-
-      // Use the extracted ipAddress and port
-      const client = new Client(headset.ipAddress, vrHeadsetPort);
-      client.send(new Message("/start"), () => {
-        client.close();
-      });
-
-      // Update the status of the headset to 'experience running'
-      headset.status = 'experience running';
-      await headset.save();  // Save the updated status in the database
-
-      // TODO: Update DOM how???
-    }
-    res.json({ message: "Messages sent and status updated to 'experience running'" }); // Send JSON response
-
-  } catch (error) {
-    console.error("Error starting experience: ", error);
-    res.status(500).send("An error occurred while starting the experience");
-  }
-});
-
-// Receives Angular command to start the experience for all online VR headsets.
-app.post('/StopExperience', async (req, res) => {
-  try {
-    console.log(req.body);
-
-    // Find all VR headsets that are running the experience
-    const onlineHeadsets = await VRHeadset.find({ status: 'experience running' });
-
-    if (onlineHeadsets.length === 0) {
-      return res.status(404).send("No headsets are online");
-    }
-
-    // Send the start message to all online headsets and update their status
-    for (let headset of onlineHeadsets) {
-      console.log(`Sending stop message to headset: ${headset.ipAddress}:${vrHeadsetPort}`);
-
-      // Use the extracted ipAddress and port
-      const client = new Client(headset.ipAddress, vrHeadsetPort);
-      client.send(new Message("/stop"), () => {
-        client.close();
-      });
-
-      // Update the status of the headset to online
-      headset.status = 'online';
-      await headset.save();  // Save the updated status in the database
-
-      // TODO: Update DOM how???
-    }
-    res.json({ message: "Messages sent and status updated to 'experience running'" }); // Send JSON response
-
-  } catch (error) {
-    console.error("Error starting experience: ", error);
-    res.status(500).send("An error occurred while starting the experience");
   }
 });
 

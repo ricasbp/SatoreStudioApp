@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 import { VRHeadsetService } from 'src/app/services/vrheadset-service.service';
 
 @Component({
@@ -23,46 +23,30 @@ export class ToggleExperienceComponent {
     
   }
 
-  sendOSCCommandToAllOnlineVRHeadsets2(): void {
-    // Check in list what are all the headsets that are online
-    this.headsetsList$.pipe(
-        map((headsets) => headsets.filter((headset) => headset.status === 'online')) // Filter online headsets
-      ).subscribe((onlineHeadsets) => { // subscribe: This is where you consume the observable.
-        onlineHeadsets.forEach((headset) => { // OnlineHeadsets is the filtered list
-          headset.status = 'experience running'; // Change status to running
-          this.vrHeadsetService.updateVRHeadset(headset); // Make  an updateVRHeadset in all headsets that are online into experience running
+  requestExpressToSendOSCCommandToAllOnlineVRHeadsets(action: string): void {
+    if(action == 'StartExperience'){
+      this.isExperienceActive = true
+
+      this.headsetsList$.pipe(
+        map((headsets) => headsets.filter((headset) => headset.status === 'online')),
+        take(1) // Only subscribe one time
+        ).subscribe((onlineHeadsets) => {
+          onlineHeadsets.forEach((headset) => {
+            this.vrHeadsetService.updateVRHeadset({...headset, status: "experience running"});
+          });
         });
-      });
-      // HOW TO DO THIS: Ask the service to send message to express, so express sends OSCCommands to start or stop experience to all online devices.
-  }
-
-  sendOSCCommandToAllOnlineVRHeadsets(action: string) {
-    console.log(`Action: ${action}`);
-    let url = "";
-
-    if(action == 'Stop'){
-      url = "http://localhost:3000/StopExperience";
-      this.isExperienceActive = false;
-    }else{
-      url = "http://localhost:3000/StartExperience";
-      this.isExperienceActive = true;
     }
-    
-    const data = { action: action };
+    if(action == 'StopExperienceRunning'){
+      this.isExperienceActive = false
 
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
+      this.headsetsList$.pipe(
+        map((headsets) => headsets.filter((headset) => headset.status === 'experience running')),
+        take(1) // Only subscribe one time
+        ).subscribe((onlineHeadsets) => {
+          onlineHeadsets.forEach((headset) => {
+            this.vrHeadsetService.updateVRHeadset({...headset, status: "online"});
+          });
+        });
+    }
   }
 }

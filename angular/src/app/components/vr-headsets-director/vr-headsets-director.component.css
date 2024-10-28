@@ -37,7 +37,7 @@
   
     /* Fade-In Animation */
     opacity: 0; /* Ensure the items are initially invisible */
-    animation: vrFadeIn 1.5s ease-in-out forwards; /* Duration and easing function */
+    animation: vrFadeIn 1s ease-in-out forwards; /* Duration and easing function */
     animation-delay: 0s; /* No delay for the first item */
     animation-fill-mode: forwards; /* Keep the end state */
   }
