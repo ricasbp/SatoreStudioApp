@@ -1,0 +1,76 @@
+.toggleButtons {
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+
+    /*Code to make all flex-containers centered*/
+    display: flex; /* Use flexbox for layout */
+    justify-content: center;
+
+    list-style-type: none; /* remove bullet from li*/
+
+}
+
+/* Same code from vr-info.component.css .image-container-button */
+.toggleButtons li {
+  background-color: #ffffff; /* Background color for the list items */
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: 10px;
+
+  cursor: pointer; /* Change cursor to pointer on hover */
+
+  box-shadow: 0px 4px 5px rgb(0, 0, 0, 25%); /* right, bottom, blur, color and alpha*/
+}
+
+.toggleButtons button {
+  background: none; /* Remove default button background */
+  border: none; /* Remove default button border */
+  padding: 0; /* Remove default button padding */
+
+  /* CSS Center Guide*/
+  display: block;
+  margin: auto;  
+}
+
+.toggleButtons img {
+  width: 100px; /* Set a fixed width for the buttons */
+  height: 100px; /* Set a fixed height for the buttons */
+
+
+  /* CSS Center Guide*/
+  display: block;
+  margin: auto;  
+}
+
+
+.toggleButtons li:last-child {
+    margin-right: 0; /* Remove the margin from the last item */
+}
+  
+
+/* Interaction Colors */
+.toggleButtons li:hover {
+  background-color: #BCBCBC;
+}
+
+.toggleButtons li:active {
+  background-color: #525252;
+}
+
+
+.toggleButtons li.selected {
+  background-color: black;
+  color: rgb(255, 0, 0);
+  
+}
+
+.toggleButtons li.selected:hover {
+  background-color: #505050;
+  color: white;
+}
+
+.toggleButtons li.selected:active {
+  background-color: black;
+  color: white;
+}
+  

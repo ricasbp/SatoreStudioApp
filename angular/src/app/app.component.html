@@ -1,0 +1,16 @@
+<nav>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <img class= "satoreStudio" [src]="imagePathLogo" alt="Satore Logo"/>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a routerLink= 'operator-mode' > Operator Mode </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a routerLink= 'director-mode' > Director Mode </a>
+        </li>
+    </ul>
+</nav>
+
+
+<router-outlet></router-outlet>

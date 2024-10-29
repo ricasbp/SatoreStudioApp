@@ -1,0 +1,12 @@
+<h1>Start the experience: </h1>
+
+<ul class="toggleButtons">
+        <li (click)="requestExpressToSendOSCCommandToAllOnlineVRHeadsets('StopExperienceRunning')">
+                <img [src]="isExperienceActive ? imagePathStop : imagePathStopGrey" 
+                 alt="Click here to Stop the experience to all executing VRHeadsets.">
+        </li>
+        <li (click)="requestExpressToSendOSCCommandToAllOnlineVRHeadsets('StartExperience')">
+                <img [src]="isExperienceActive ? imagePathPlayGrey : imagePathPlay" 
+                alt="Click here to Start the experience to all ready VRHeadsets.">
+        </li>
+</ul>
