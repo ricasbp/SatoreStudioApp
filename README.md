@@ -5,8 +5,8 @@ This thesis supports the TransmiXR project, developing an XR experience at Sator
 ![SatoreUI](https://github.com/ricasbp/SatoreStudioApp/assets/59062659/51f73e95-7ea9-4267-8cda-e2adcf5f85b5)
 
 
-# Architechture
+# Architecture
 
 Here is the underlying architecture of the full-stack application.
 
-![applicationArchitecture7](https://github.com/user-attachments/assets/146697e1-d38f-49a2-a3b4-272710aa1f55)
+![applicationArchitecture8](https://github.com/user-attachments/assets/38229021-4e64-4bd4-b563-8a90560d839c)
