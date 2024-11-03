@@ -78,6 +78,7 @@ export class VrHeadsetsDirectorComponent{
 
   addVRHeadset() {
     console.log('Submitting new headset:', this.newHeadset);
+    this.isUserAddingNewVRHeadset = false;
     this.vrHeadsetService.addVRHeadset(this.newHeadset)
   }
 
