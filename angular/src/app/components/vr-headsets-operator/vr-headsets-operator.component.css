@@ -286,3 +286,11 @@
     display: flex;
     align-items: center; /* Align items vertically centered */
   }
+
+  /* 
+      CSS Forms
+  */
+
+  label{
+    margin: 20px;
+  }
