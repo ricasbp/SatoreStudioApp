@@ -10,14 +10,3 @@ This thesis supports the <a href="https://transmixr.eu/"> TransmiXR project  </a
 Here is the underlying architecture of the full-stack application.
 
 ![applicationArchitecture8](https://github.com/user-attachments/assets/38229021-4e64-4bd4-b563-8a90560d839c)
-
-
-
-<div style="margin-bottom: 55px;">
-  <span style="display: inline-block;">
-    <img src="https://github.com/devicons/devicon/blob/master/icons/angular/angular-original.svg" title="angular" alt="angular" width="40" height="40"/> &nbsp; 
-    <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="html" alt="html" width="40" height="40"/> &nbsp; 
-    <img src="https://github.com/devicons/devicon/blob/master/icons/mongodb/mongodb-original.svg" title="noSQL" alt="noSQL" width="40" height="40"/> &nbsp; 
-    <a href="https://github.com/ricasbp/SatoreStudioApp"> SatoreStudioApp  </a>
-  </span>: VR device fleet management Angular application for PC, IOS, and Android.
-</div>
