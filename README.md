@@ -1,8 +1,9 @@
 # Abstract
 
-This thesis supports the TransmiXR project, developing an XR experience at Satore Studio where participants interact with an AI avatar, "Isaac," in a mixed-reality setting. A key contribution is this application for managing multiple XR devices, allowing real-time control, synchronization, and personalized content delivery for immersive, narrative-driven experiences.
+This thesis supports the <a href="https://transmixr.eu/"> TransmiXR project  </a>, developing an XR experience at Satore Studio where participants interact with an AI avatar, "Isaac," in a mixed-reality setting. A key contribution is this application for managing multiple XR devices, allowing real-time control, synchronization, and personalized content delivery for immersive, narrative-driven experiences.
 
-![SatoreUI](https://github.com/ricasbp/SatoreStudioApp/assets/59062659/51f73e95-7ea9-4267-8cda-e2adcf5f85b5)
+
+![UX_ExperienceRunningGreen_Fix](https://github.com/user-attachments/assets/ac00394d-220b-4bdc-b221-aa09bcbf9259)
 
 
 # Architecture
