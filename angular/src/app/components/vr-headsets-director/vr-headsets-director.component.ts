@@ -10,7 +10,7 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
   styleUrls: ['./vr-headsets-director.component.css']
 })
 export class VrHeadsetsDirectorComponent{
-  newHeadset: vrHeadset = { _id: '', ipAddress: '', name: '', status: 'offline', directingMode: false, isInEditMode: false};
+  newHeadset: vrHeadset = { _id: '', ipAddress: '', name: '', status: 'offline', synchedMode: false, isInEditMode: false};
 
   isUserAddingNewVRHeadset: boolean = false;
 
@@ -29,19 +29,19 @@ export class VrHeadsetsDirectorComponent{
     item.isInEditMode = true;
   }
 
-  switchDirectorModeState(headset: vrHeadset): void {
-    if (!headset.directingMode) {
-        headset.directingMode = true;
-        this.vrHeadsetService.updateVRHeadset({...headset, directingMode: true});
-        console.log(`${headset.name} is now in directing mode.`);
+  switchSynchedModeState(headset: vrHeadset): void {
+    if (!headset.synchedMode) {
+        headset.synchedMode = true;
+        this.vrHeadsetService.updateVRHeadset({...headset, synchedMode: true, status: 'ready (synched)'});
+        console.log(`${headset.name} is now in synched mode.`);
     } else {
-        headset.directingMode = false;
-        this.vrHeadsetService.updateVRHeadset({...headset, directingMode: false});
-        console.log(`${headset.name} has exited directing mode.`);
+        headset.synchedMode = false;
+        this.vrHeadsetService.updateVRHeadset({...headset, synchedMode: false, status: 'online'});
+        console.log(`${headset.name} has exited synched mode.`);
     }
   }
 
-  switchDirectorModeStateOnAll(event: Event): void {
+  switchSynchedModeStateOnAll(event: Event): void {
     const isChecked = (event.target as HTMLInputElement).checked;
 
     console.log("Im here ")
@@ -53,14 +53,15 @@ export class VrHeadsetsDirectorComponent{
 
           console.log("Im here for " , headset.ipAddress)
 
-          if (headset.directingMode !== isChecked) { // If the headset's directing mode does not match the master button state
-            this.switchDirectorModeState(headset);
+          if (headset.synchedMode !== isChecked) { // If the headset's directing mode does not match the master button state
+            this.switchSynchedModeState(headset);
           }
 
         })
       })
     ).subscribe()
   }
+  
 
   updateVRHeadset(headset: vrHeadset): void {
     headset.isInEditMode = false;
@@ -86,7 +87,7 @@ export class VrHeadsetsDirectorComponent{
     return {
       'offline-class': status === 'offline',
       'online-class': status === 'online',
-      'ready-class': status === 'ready',
+      'ready-class': status === 'ready (synched)',
       'error-class': status === 'error',
       'running-experience-class': status === 'experience running'
     };

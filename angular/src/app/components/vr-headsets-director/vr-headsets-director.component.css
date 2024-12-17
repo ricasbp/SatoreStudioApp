@@ -111,6 +111,11 @@
   }
 
   
+  .headsets li.ready-class {
+    background-color: #FFBE00 ;
+  }
+  
+
   .headsets .ready-class .status{
     color: rgb(255, 106, 0); 
     font-weight: bold;

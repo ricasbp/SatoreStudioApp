@@ -41,6 +41,27 @@
             </div>
         </div>
 
+        <div class="switchText">
+            Sync: 
+        </div>
+        
+        <!-- Rounded switch to toggle sync mode -->
+        <div *ngIf="!headset.isInEditMode && headset.status !== 'offline'" class="switch">
+            
+            
+            
+            <label>
+                <input 
+                    type="checkbox" 
+                    [checked]="headset.synchedMode" 
+                    (change)="switchSynchedModeState(headset)">
+                <span class="slider round"></span>
+            </label>  
+            
+        </div>
+       
+
+
         <button *ngIf="headset.isInEditMode" class="image-container-button" (click)="updateVRHeadset(headset)">
             Confirm
         </button>

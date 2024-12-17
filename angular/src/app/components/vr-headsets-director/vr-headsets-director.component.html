@@ -44,8 +44,8 @@
         <label *ngIf="!headset.isInEditMode && headset.status !== 'offline'" class="switch">
             <input 
                 type="checkbox" 
-                [checked]="headset.directingMode" 
-                (change)="switchDirectorModeState(headset)"
+                [checked]="headset.synchedMode" 
+                (change)="switchSynchedModeState(headset)"
             >
             <span class="slider round"></span>
         </label>  
@@ -95,7 +95,7 @@
             <p>Sync All:</p>
             <!-- Master switch to control all others -->
             <label class="switch" >
-                <input type="checkbox" (change)="switchDirectorModeStateOnAll($event)">
+                <input type="checkbox" (change)="switchSynchedModeStateOnAll($event)">
                 <span class="slider round"></span>
             </label>
     </div>
