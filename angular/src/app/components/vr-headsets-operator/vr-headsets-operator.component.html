@@ -53,8 +53,11 @@
             <label>
                 <input 
                     type="checkbox" 
-                    [checked]="headset.synchedMode" 
-                    (change)="switchSynchedModeState(headset)">
+                    [checked]="headset.status === 'ready (Assets Uploaded)' 
+                        || headset.status === 'uploading...' 
+                        || headset.status === 'all devices ready'
+                        || headset.status === 'experience running'" 
+                    (change)="clickedSwitchToSync(headset)">
                 <span class="slider round"></span>
             </label>  
             

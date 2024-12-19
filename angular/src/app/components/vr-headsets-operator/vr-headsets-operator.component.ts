@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { map, Observable, take, tap } from 'rxjs';
+import { delay, map, Observable, of, take, tap, timer } from 'rxjs';
 
 import { vrHeadset } from 'src/vrHeadset';
 import { SseService } from 'src/app/services/sse-services/sse-services';
@@ -12,7 +12,7 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
 })
 export class VrHeadsetsOperatorComponent {
 
-  newHeadset: vrHeadset = { _id: '', ipAddress: '', name: '', status: 'offline', synchedMode: false, isInEditMode: false};
+  newHeadset: vrHeadset = { _id: '', ipAddress: '', name: '', status: 'offline',  isInEditMode: false};
 
   isUserAddingNewVRHeadset: boolean = false;
 
@@ -31,47 +31,54 @@ export class VrHeadsetsOperatorComponent {
     item.isInEditMode = true;
   }
 
+  clickedSwitchToSync(headset: vrHeadset): void {
 
-  switchSynchedModeState(headset: vrHeadset): void {
-    if (!headset.synchedMode) {
-        headset.synchedMode = true;
-        this.vrHeadsetService.updateVRHeadset({...headset, synchedMode: true, status: 'ready (synched)'});
+    if(headset.status == "ready (Assets Uploaded)"){
+      this.vrHeadsetService.updateVRHeadset({...headset, status: 'online'});
+      console.log(`${headset.name} has exited synced mode.`);
+
+    }else if(headset.status == "online"){
+      this.vrHeadsetService.updateVRHeadset({...headset, status: 'uploading...'});
+
+      // Sleep 3 seconds using RxJS timer/delay
+      of(null).pipe(
+        delay(3000) // delay of 3000ms = 3 seconds
+      ).subscribe(() => {
+        this.vrHeadsetService.updateVRHeadset({ ...headset, status: 'ready (Assets Uploaded)' });
         console.log(`${headset.name} is now in synced mode.`);
-    } else {
-        headset.synchedMode = false;
-        this.vrHeadsetService.updateVRHeadset({...headset, synchedMode: false, status: 'online'});
-        console.log(`${headset.name} has exited synced mode.`);
-    }
-  }
-
-  switchSynchedModeStateOnAll(event: Event): void {
-    const isChecked = (event.target as HTMLInputElement).checked;
-
-    console.log("Im here ")
-
-    this.headsetsList$.pipe(
-      take(1),
-      tap((headsets) => {
-        headsets.forEach((headset: vrHeadset) => {
-
-          console.log("Im here for " , headset.ipAddress)
-
-          if (headset.synchedMode !== isChecked) { // If the headset's directing mode does not match the master button state
-            this.switchSynchedModeState(headset);
-          }
-
-        })
-      })
-    ).subscribe()
-  }
   
+        // Sleep for 1 seconds
+        timer(1000).subscribe(() => {
+          console.log('Slept for 1 seconds.');
+        });
+
+        // Check if all VR headsets are in the 'ready (Assets Uploaded)' or 'offline' state
+        this.headsetsList$.subscribe((headsets) => {
+          const allReady = headsets.every(h => h.status === 'ready (Assets Uploaded)' || h.status === 'offline');
+  
+          if (allReady) { 
+            
+            // Change only the ready headsets to 'all devices ready' status
+            headsets.forEach(h => {
+              if (h.status === 'ready (Assets Uploaded)') {
+                this.vrHeadsetService.updateVRHeadset({ ...h, status: 'all devices ready' });
+              }
+            });
+            console.log("All devices are now set to 'all devices ready' status.");
+          } else {
+            console.log("Not all headsets are ready yet.");
+          }
+        });
+      });
+    } 
+  }
+
   
   updateVRHeadset(headset: vrHeadset): void {
     headset.isInEditMode = false;
     this.vrHeadsetService.updateVRHeadset(headset);
     console.log("Updatting new headset:", this.newHeadset);
   }
-
 
   deleteVRHeadset(headset: vrHeadset): void {
     headset.isInEditMode = false;
@@ -80,7 +87,6 @@ export class VrHeadsetsOperatorComponent {
       this.vrHeadsetService.deleteVRHeadset(headset._id!)
     }
   }
-
 
   addVRHeadset() {
     console.log('Submitting new headset:', this.newHeadset);
@@ -92,9 +98,11 @@ export class VrHeadsetsOperatorComponent {
     return {
       'offline-class': status === 'offline',
       'online-class': status === 'online',
-      'error-class': status === 'error',
-      'ready-class': status === 'ready (synched)',
-      'running-experience-class': status === 'experience running'
+      'uploading-class': status === 'uploading...',
+      'running-experience-class': status === 'experience running',
+      'allReady-class': status === 'all devices ready',
+      'ready-class': status === 'ready (Assets Uploaded)',
+      'error-class': status === 'error'
     };
   }
 

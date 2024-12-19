@@ -10,7 +10,7 @@ import { VRHeadsetService } from '../../services/vrheadset-service.service';
   styleUrls: ['./vr-headsets-director.component.css']
 })
 export class VrHeadsetsDirectorComponent{
-  newHeadset: vrHeadset = { _id: '', ipAddress: '', name: '', status: 'offline', synchedMode: false, isInEditMode: false};
+  newHeadset: vrHeadset = { _id: '', ipAddress: '', name: '', status: 'offline', isInEditMode: false};
 
   isUserAddingNewVRHeadset: boolean = false;
 
@@ -30,17 +30,10 @@ export class VrHeadsetsDirectorComponent{
   }
 
   switchSynchedModeState(headset: vrHeadset): void {
-    if (!headset.synchedMode) {
-        headset.synchedMode = true;
-        this.vrHeadsetService.updateVRHeadset({...headset, synchedMode: true, status: 'ready (synched)'});
-        console.log(`${headset.name} is now in synched mode.`);
-    } else {
-        headset.synchedMode = false;
-        this.vrHeadsetService.updateVRHeadset({...headset, synchedMode: false, status: 'online'});
-        console.log(`${headset.name} has exited synched mode.`);
-    }
+    // TODO
   }
 
+  /*
   switchSynchedModeStateOnAll(event: Event): void {
     const isChecked = (event.target as HTMLInputElement).checked;
 
@@ -61,6 +54,7 @@ export class VrHeadsetsDirectorComponent{
       })
     ).subscribe()
   }
+    */
   
 
   updateVRHeadset(headset: vrHeadset): void {

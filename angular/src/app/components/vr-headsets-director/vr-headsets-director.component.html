@@ -40,7 +40,7 @@
             <img [src]="imagePathSettings" alt="Click here to edit this VrHeadset">
         </button>
 
-        <!-- Rounded switch -->
+        <!-- Rounded switch to toggle sync mode
         <label *ngIf="!headset.isInEditMode && headset.status !== 'offline'" class="switch">
             <input 
                 type="checkbox" 
@@ -48,7 +48,7 @@
                 (change)="switchSynchedModeState(headset)"
             >
             <span class="slider round"></span>
-        </label>  
+        </label>   -->
 
         <button *ngIf="headset.isInEditMode" class="image-container-button" (click)="updateVRHeadset(headset)">
             Confirm
@@ -93,10 +93,10 @@
             alt="Click here to add a new VRHeadset to the DataBase.">
         
             <p>Sync All:</p>
-            <!-- Master switch to control all others -->
+            <!-- Master switch to control all others
             <label class="switch" >
                 <input type="checkbox" (change)="switchSynchedModeStateOnAll($event)">
                 <span class="slider round"></span>
-            </label>
+            </label> -->
     </div>
 </div>

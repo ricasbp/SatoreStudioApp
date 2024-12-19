@@ -67,10 +67,9 @@ const vrHeadsetSchema = new mongoose.Schema({
   name: { type: String, required: true },
   status: { 
     type: String, 
-    enum: ['offline', 'online', 'ready (synched)', 'error', 'experience running'], 
+    enum: ['offline', 'online', 'uploading...', 'ready (Assets Uploaded)', 'all devices ready', 'experience running', 'error'], 
     required: true 
   },
-  synchedMode: { type: Boolean},
   isInEditMode: { type: Boolean},
 
 }, { collection: 'VRHeadsets' });
@@ -138,7 +137,7 @@ app.put('/vrheadsets/:id', async (req, res) => {
 
     // Start OSC Command
     // If express receives Headset with "Running", and was "Online"
-    if(oldHeadset.status == "online" && updatedHeadset.status == "experience running"){
+    if(oldHeadset.status == "all devices ready" && updatedHeadset.status == "experience running"){
           //  Send to correct device, OSC command: "Start"
           const client = new Client(updatedHeadset.ipAddress, vrHeadsetPort);
           client.send(new Message("/start"), () => {
@@ -148,7 +147,7 @@ app.put('/vrheadsets/:id', async (req, res) => {
 
     // Stop OSC Command
     // If express receives Headset with "Online", and was "Running"
-    if(oldHeadset.status == "experience running" && updatedHeadset.status == "online"){
+    if(oldHeadset.status == "experience running" && updatedHeadset.status == "all devices ready"){
       //  Send to correct device, OSC command: "Start"
       const client = new Client(updatedHeadset.ipAddress, vrHeadsetPort);
       client.send(new Message("/stop"), () => {

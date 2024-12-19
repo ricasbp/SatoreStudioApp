@@ -29,7 +29,7 @@ export class ToggleExperienceComponent {
 
       this.headsetsList$.pipe(
         map((headsets) => 
-          headsets.filter((headset) => headset.status === 'online' || headset.status === 'ready (synched)')
+          headsets.filter((headset) => headset.status === 'all devices ready')
         ),
 
         take(1) // Only subscribe one time

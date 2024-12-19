@@ -52,7 +52,7 @@
   }
   
   .headsets li:nth-child(2) {
-    animation-delay: 0.5s; /* 0.5 seconds delay */
+    animation-delay: 0.25s; /* 0.5 seconds delay */
   }
   
   .headsets li:nth-child(3) {
@@ -89,30 +89,48 @@
     font-weight: bold;
   }
   
+  /* Offline */
   .headsets .offline-class{
     color: #868686;
   }
-
     
   .headsets li.offline-class {
     background-color: #efefef;
     box-shadow: 0px 0px 0px; 
   }
-  
-  .headsets .ready-class .status{
+
+  /* Uploading */
+  .headsets .uploading-class .status{
     color: rgb(255, 106, 0); 
     font-weight: bold;
   }
 
-  .headsets li.ready-class {
+  .headsets li.uploading-class {
     background-color: #FFBE00 ;
   }
-  
-  .headsets .error-class .status{
-    color: rgb(255, 0, 0);
+
+  /* Ready */
+  .headsets .ready-class .status{
+    color: rgb(0, 0, 0); 
     font-weight: bold;
   }
+
+  .headsets li.ready-class {
+    background-color: #D0FFD7 ;
+  }
   
+  /* All Ready */
+  .headsets .allReady-class .status{
+    color: rgb(0, 0, 0); 
+    font-weight: bold;
+  }
+
+  .headsets li.allReady-class {
+    background-color: #62ff00 ;
+  }
+  
+
+  /* running */
   .headsets .running-experience-class .status{
     color: #289900;
     font-weight: bold;
@@ -120,6 +138,12 @@
   
   .headsets li.running-experience-class {
     background-color: #D0FFD7; 
+  }
+
+  /* Error */
+  .headsets .error-class .status{
+    color: rgb(255, 0, 0);
+    font-weight: bold;
   }
 
 
