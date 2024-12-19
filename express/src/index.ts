@@ -147,10 +147,19 @@ app.put('/vrheadsets/:id', async (req, res) => {
 
     // Stop OSC Command
     // If express receives Headset with "Online", and was "Running"
-    if(oldHeadset.status == "experience running" && updatedHeadset.status == "all devices ready"){
-      //  Send to correct device, OSC command: "Start"
+    if(oldHeadset.status == "experience running" && updatedHeadset.status == "online"){
+      //  Send to correct device, OSC command: "Stop"
       const client = new Client(updatedHeadset.ipAddress, vrHeadsetPort);
       client.send(new Message("/stop"), () => {
+        client.close();
+      });
+    }
+    
+    // Synced OSC Command
+    if(oldHeadset.status == "uploading..." && updatedHeadset.status == "ready (Assets Uploaded)"){
+      //  Send to correct device, OSC command: "Synced"
+      const client = new Client(updatedHeadset.ipAddress, vrHeadsetPort);
+      client.send(new Message("/synced"), () => {
         client.close();
       });
     }

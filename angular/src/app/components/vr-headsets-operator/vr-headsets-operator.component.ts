@@ -70,16 +70,9 @@ export class VrHeadsetsOperatorComponent {
           }
         });
       });
-    }else if (headset.status == "all devices ready") {
-      // Change all headsets with 'all devices ready' status to 'online'
-      this.headsetsList$.subscribe((headsets) => {
-        headsets.forEach(h => {
-          if (h.status === 'all devices ready') {
-            this.vrHeadsetService.updateVRHeadset({ ...h, status: 'online' });
-            console.log(`${h.name} is now online.`);
-          }
-        });
-      });
+    }else if(headset.status == "all devices ready"){
+      this.vrHeadsetService.updateVRHeadset({...headset, status: 'online'});
+      console.log(`${headset.name} has exited synced mode.`);
     }
   }
 
